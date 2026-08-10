@@ -1,0 +1,41 @@
+VL STUDY ABROAD CONSULTANTS - LICENSING & CREDITS
+=================================================
+Last reviewed: 10 August 2026
+
+WEBSITE CONTENT
+  (c) VL Study Abroad Consultants. All rights reserved.
+  The text, layout, and design of this website belong to VL Study Abroad
+  Consultants. The footer shows an automatic copyright year.
+
+BRAND ASSETS (your property)
+  assets/logo-trim.png, logo-white.png, logo-mark.png
+  assets/favicon.ico, favicon-16.png, favicon-32.png, apple-touch-icon.png
+  assets/og-image.jpg, assets/hero-scene.jpg
+  These are built from your own VL logo / poster and belong to you.
+
+FONTS  (free for commercial use)
+  Playfair Display - SIL Open Font License 1.1
+  Inter            - SIL Open Font License 1.1
+  Loaded from Google Fonts (fonts.google.com). No licence fee, no attribution required.
+
+STOCK PHOTOS - Unsplash License (free for commercial & personal use,
+no permission or attribution required):  https://unsplash.com/license
+  Home "Ready to Start" band   https://images.unsplash.com/photo-1541339907198-e08756dedf3f
+  About framed photo           https://images.unsplash.com/photo-1571260899304-425eee4c7efc
+  About page header            https://images.unsplash.com/photo-1523240795612-9a054b0db644
+  Services page header         https://images.unsplash.com/photo-1576495199011-eb94736d05d6
+  Destinations page header     https://images.unsplash.com/photo-1431274172761-fca41d930114
+  Contact page header          https://images.unsplash.com/photo-1521791136064-7986c2920216
+  (Attribution is optional under the Unsplash License but always appreciated.)
+
+** PLEASE VERIFY: FLAG PHOTOS **
+  assets/france.jpg, assets/italy.jpg
+  These were provided by you. A national flag design is public domain, but a
+  specific PHOTOGRAPH of a flag is owned by the photographer. If you are not
+  sure these two photos are free to use commercially, replace them with a
+  free-licence image (e.g. Unsplash, Pexels, or Wikimedia Commons) or your own
+  photo. We can swap them for you on request.
+
+SUMMARY
+  Everything on this site is cleared for commercial use EXCEPT the two flag
+  photos above, whose source should be confirmed by you.
