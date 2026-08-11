@@ -57,24 +57,47 @@
   );
   document.querySelectorAll('[data-count]').forEach(el => statIO.observe(el));
 
-  // contact form (front-end demo — opens mail/WhatsApp)
-  const form = document.getElementById('contactForm');
-  if (form) {
-    form.addEventListener('submit', (e) => {
+  // Forms -> email via Web3Forms (no server needed). Handles the enquiry form
+  // and the review form. Submissions are emailed to your inbox.
+  document.querySelectorAll('.js-web3form').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const d = new FormData(form);
-      const msg =
-        `New enquiry from VL website%0A%0AName: ${encodeURIComponent(d.get('name') || '')}` +
-        `%0AEmail: ${encodeURIComponent(d.get('email') || '')}` +
-        `%0APhone: ${encodeURIComponent(d.get('phone') || '')}` +
-        `%0ADestination: ${encodeURIComponent(d.get('destination') || '')}` +
-        `%0AMessage: ${encodeURIComponent(d.get('message') || '')}`;
-      window.open(`https://wa.me/923215208625?text=${msg}`, '_blank');
-      const ok = document.getElementById('formOk');
-      if (ok) ok.style.display = 'block';
-      form.reset();
+      const okEl = form.querySelector('[data-ok]');
+      const errEl = form.querySelector('[data-err]');
+      const btn = form.querySelector('button[type="submit"]');
+      if (okEl) okEl.style.display = 'none';
+      if (errEl) errEl.style.display = 'none';
+
+      const key = form.querySelector('input[name="access_key"]');
+      if (!key || key.value.indexOf('YOUR_WEB3FORMS') === 0) {
+        if (errEl) { errEl.textContent = 'd47f64d3-edf8-4190-b321-c7753b983282'; errEl.style.display = 'block'; }
+        return;
+      }
+
+      const original = btn ? btn.innerHTML : '';
+      if (btn) { btn.disabled = true; btn.innerHTML = 'Sending…'; }
+      try {
+        const data = Object.fromEntries(new FormData(form).entries());
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data)
+        });
+        const json = await res.json();
+        if (json.success) {
+          if (okEl) { okEl.style.display = 'block'; okEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+          form.reset();
+        } else if (errEl) {
+          errEl.textContent = json.message || 'Something went wrong. Please try again.';
+          errEl.style.display = 'block';
+        }
+      } catch (err) {
+        if (errEl) errEl.style.display = 'block';
+      } finally {
+        if (btn) { btn.disabled = false; btn.innerHTML = original; }
+      }
     });
-  }
+  });
 
   // footer year
   const y = document.getElementById('year');

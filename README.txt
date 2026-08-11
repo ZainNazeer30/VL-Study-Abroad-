@@ -18,7 +18,7 @@ FOLDERS
 
 EDITING YOUR DETAILS
   - Phone / WhatsApp: search the files for 923215208625 and replace.
-  - Email: search for ranakashan4466@gmail.com and replace.
+  - Email: search for vlstudy.online@gmail.com and replace.
   - Text: open any .html file and edit the words between the tags.
   - Colours: change the values at the top of css/style.css (:root section).
 
@@ -46,9 +46,46 @@ SEO ADDED
   NOTE: testimonials are sample placeholders — replace with real client
   names/photos/quotes before adding review stars, to stay within Google's rules.
 
-CONTACT FORM
-  The form opens WhatsApp with the enquiry pre-filled (no server needed).
-  To also receive emails, connect a free service like Formspree.
+FORMS (ENQUIRY + REVIEWS) - ONE-TIME SETUP TO RECEIVE EMAILS
+  The Student Enquiry form (Contact page) and the "Share Your Experience"
+  review form (Home page) email submissions straight to you using Web3Forms
+  (free, no server needed). To switch them on:
+
+  1. Go to  https://web3forms.com  and enter  vlstudy.online@gmail.com
+     You will receive an "Access Key" (a long code) by email.
+  2. In BOTH files below, find  YOUR_WEB3FORMS_ACCESS_KEY  and replace it with
+     that code (keep the quotes around it):
+        - contact.html   (Student Enquiry form)
+        - index.html     (Share Your Experience form)
+  3. Save/upload to GitHub -> Vercel redeploys -> the forms are live.
+  Send yourself a test message to confirm it arrives (check spam the first time).
+  Free plan allows 250 submissions/month.
+
+REVIEWS - HOW NEW ONES GO ON THE SITE
+  A submitted review is EMAILED to you (it does NOT appear automatically), so
+  nothing inappropriate can go live on its own. To publish a review you like,
+  add a card in index.html by copying an existing testimonial block and editing
+  the text, the initial letter in <span class="avatar">, the name and the city:
+      <div class="quote-card reveal">
+        <div class="mark">"</div>
+        <p>THE REVIEW TEXT GOES HERE</p>
+        <div class="stars">*****</div>
+        <div class="quote-who"><span class="avatar">A</span><div><b>Name</b><span>City / Programme</span></div></div>
+      </div>
+  (Or just send me the review and I'll add it for you.)
+
+  To show a real PHOTO instead of the letter initial, put an image in the circle:
+      <span class="avatar"><img src="assets/student1.jpg" alt="Student name"></span>
+
+UNIVERSITIES LIST (Destinations page) - EASY TO UPDATE
+  The list of universities + scholarships lives in  js/universities.js
+  Open that file: each university is one { ... } block with plain fields
+  (name, city, fields, scholarship, status, intake, deadline, link).
+  - To add one: copy a block, paste it, edit the text.
+  - To mark closed: set  status: "closed"  (or "soon" for closing soon).
+  - Save/upload to GitHub -> Vercel updates the site.
+  Full instructions are written at the top of that file. Only facts and your
+  own wording are used (no logos or copied text), so there is no copyright risk.
 
 PUBLISHING (free options)
   - Netlify: drag this whole folder onto app.netlify.com/drop
