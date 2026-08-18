@@ -91,6 +91,22 @@ PUBLISHING (free options)
   - Netlify: drag this whole folder onto app.netlify.com/drop
   - GitHub Pages, Vercel, or any web host also work.
 
+TOP CONTACT BAR - ADD YOUR SOCIAL LINKS
+  The bar above the menu has Facebook, Instagram and LinkedIn icons whose
+  links are placeholders (href="#"). Open any .html file, search for
+  aria-label="Facebook" (and Instagram, LinkedIn) and replace the # with your
+  real profile URLs. WhatsApp is already wired to your number.
+
+BLOG
+  Articles live in blog.html. To add or edit an article, copy an <article>
+  block inside blog.html and change the heading/text; the homepage "Latest
+  From Our Blog" cards (in index.html) link to each article via #id anchors.
+
+REVIEWS WITH PHOTOS
+  To show a real photo instead of the initial letter in a testimonial, use:
+    <span class="avatar"><img src="assets/student1.jpg" alt="Name"></span>
+  (Put the photo in the assets folder first.)
+
 COPYRIGHT & LICENCES
   See LICENSES.txt for a full breakdown. In short: your logo/brand, the fonts
   (open licence) and all stock photos (Unsplash licence) are cleared for

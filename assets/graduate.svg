@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 620" width="460" height="620">
+  <defs>
+    <linearGradient id="gown" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b3a7a"/><stop offset="1" stop-color="#0a1836"/>
+    </linearGradient>
+    <linearGradient id="stole" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e4c980"/><stop offset="1" stop-color="#c9a24b"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2c6a0"/><stop offset="1" stop-color="#e6b088"/>
+    </linearGradient>
+  </defs>
+
+  <!-- gown / shoulders -->
+  <path d="M70 620 C70 470 140 415 230 415 C320 415 390 470 390 620 Z" fill="url(#gown)"/>
+  <!-- gown neckline V -->
+  <path d="M185 430 L230 505 L275 430 Z" fill="#0a1836"/>
+  <!-- stoles (gold) -->
+  <path d="M198 428 C196 500 196 560 190 620 L150 620 C158 545 168 470 176 424 Z" fill="url(#stole)"/>
+  <path d="M262 428 C264 500 264 560 270 620 L310 620 C302 545 292 470 284 424 Z" fill="url(#stole)"/>
+  <path d="M198 428 L262 428 L258 452 L202 452 Z" fill="url(#stole)"/>
+  <!-- neck -->
+  <path d="M205 388 h50 v34 q-25 26 -50 0 Z" fill="#e0a97e"/>
+  <!-- hair back -->
+  <path d="M138 300 C138 210 175 168 230 168 C285 168 322 210 322 300 C322 380 306 430 292 470 L280 452 C300 380 292 300 292 300 L168 300 C168 300 160 380 180 452 L168 470 C154 430 138 380 138 300 Z" fill="#3a2a22"/>
+  <!-- face -->
+  <ellipse cx="230" cy="300" rx="74" ry="82" fill="url(#skin)"/>
+  <!-- ears -->
+  <circle cx="158" cy="304" r="13" fill="#e6b088"/><circle cx="302" cy="304" r="13" fill="#e6b088"/>
+  <!-- hair front / fringe -->
+  <path d="M156 296 C150 218 196 182 230 182 C264 182 310 218 304 296 C300 250 280 232 230 232 C180 232 160 250 156 296 Z" fill="#4a3529"/>
+  <path d="M156 300 C152 262 150 300 150 336 C148 300 150 280 156 300 Z" fill="#4a3529"/>
+  <!-- eyebrows -->
+  <path d="M188 288 q22 -12 42 -2" stroke="#3a2a22" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M230 286 q20 -10 42 2" stroke="#3a2a22" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- eyes -->
+  <ellipse cx="202" cy="308" rx="9" ry="10" fill="#2a221d"/>
+  <ellipse cx="258" cy="308" rx="9" ry="10" fill="#2a221d"/>
+  <circle cx="205" cy="305" r="3" fill="#fff" opacity=".85"/>
+  <circle cx="261" cy="305" r="3" fill="#fff" opacity=".85"/>
+  <!-- nose -->
+  <path d="M230 316 l-6 20 q6 6 12 0" stroke="#d99a72" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- cheeks -->
+  <circle cx="186" cy="336" r="12" fill="#ec9f86" opacity=".45"/>
+  <circle cx="274" cy="336" r="12" fill="#ec9f86" opacity=".45"/>
+  <!-- smile -->
+  <path d="M204 350 q26 26 52 0" stroke="#b0654a" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <path d="M210 353 q20 14 40 0 q-20 8 -40 0 Z" fill="#fff"/>
+
+  <!-- graduation cap -->
+  <path d="M150 232 C150 200 310 200 310 232 L310 214 C300 236 160 236 150 214 Z" fill="#0a1836"/>
+  <path d="M230 176 L360 214 L230 252 L100 214 Z" fill="#0a1836"/>
+  <path d="M230 200 L300 222 L230 244 L160 222 Z" fill="#12285c"/>
+  <!-- button + tassel -->
+  <circle cx="230" cy="214" r="9" fill="#e4c980"/>
+  <path d="M230 214 L318 214 L318 300" stroke="#e4c980" stroke-width="4" fill="none"/>
+  <path d="M318 300 l-8 30 M318 300 l8 30 M318 300 l0 32" stroke="#e4c980" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="318" cy="300" r="8" fill="#c9a24b"/>
+</svg>

@@ -70,7 +70,7 @@
 
       const key = form.querySelector('input[name="access_key"]');
       if (!key || key.value.indexOf('YOUR_WEB3FORMS') === 0) {
-        if (errEl) { errEl.textContent = 'd47f64d3-edf8-4190-b321-c7753b983282'; errEl.style.display = 'block'; }
+        if (errEl) { errEl.textContent = 'Form not configured yet: add your Web3Forms access key (see README).'; errEl.style.display = 'block'; }
         return;
       }
 
@@ -102,4 +102,32 @@
   // footer year
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
+
+  // ---- Advanced UI: preloader, scroll progress, back-to-top ----
+  const loader = document.getElementById('vlLoader');
+  if (loader) {
+    const hideLoader = () => { loader.classList.add('hide'); setTimeout(() => loader.remove(), 700); };
+    window.addEventListener('load', hideLoader);
+    setTimeout(hideLoader, 3500); // safety net
+  }
+
+  const bar = document.createElement('div');
+  bar.id = 'vlProgress';
+  document.body.appendChild(bar);
+
+  const toTop = document.createElement('button');
+  toTop.id = 'vlTop';
+  toTop.setAttribute('aria-label', 'Back to top');
+  toTop.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+  document.body.appendChild(toTop);
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const onScrollUI = () => {
+    const st = window.scrollY || document.documentElement.scrollTop;
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    bar.style.width = (h > 0 ? (st / h) * 100 : 0) + '%';
+    toTop.classList.toggle('show', st > 500);
+  };
+  onScrollUI();
+  window.addEventListener('scroll', onScrollUI, { passive: true });
 })();
