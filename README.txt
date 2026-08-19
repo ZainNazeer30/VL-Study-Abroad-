@@ -22,12 +22,12 @@ EDITING YOUR DETAILS
   - Text: open any .html file and edit the words between the tags.
   - Colours: change the values at the top of css/style.css (:root section).
 
-*** IMPORTANT — SET YOUR DOMAIN (for SEO) ***
-  The SEO tags, sitemap and social sharing use a placeholder domain:
-      https://www.vlstudyabroad.com
-  After you buy your real domain, find-and-replace that placeholder with your
-  real address in ALL .html files, plus sitemap.xml and robots.txt.
-  Then submit sitemap.xml in Google Search Console (search.google.com/search-console).
+DOMAIN (for SEO) — DONE
+  The SEO tags, sitemap and social sharing now use your live domain:
+      https://vlstudy.online
+  Next: submit sitemap.xml in Google Search Console
+  (search.google.com/search-console) so Google indexes the site.
+  Sitemap URL to submit:  https://vlstudy.online/sitemap.xml
 
 PHOTOS
   - The hero scene, flags, logo and social image live in assets/ (bundled).
