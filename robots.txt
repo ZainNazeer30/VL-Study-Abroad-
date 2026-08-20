@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vlstudy.online/sitemap.xml
+Sitemap: https://www.vlstudy.online/sitemap.xml

@@ -24,10 +24,10 @@ EDITING YOUR DETAILS
 
 DOMAIN (for SEO) — DONE
   The SEO tags, sitemap and social sharing now use your live domain:
-      https://vlstudy.online
+      https://www.vlstudy.online
   Next: submit sitemap.xml in Google Search Console
   (search.google.com/search-console) so Google indexes the site.
-  Sitemap URL to submit:  https://vlstudy.online/sitemap.xml
+  Sitemap URL to submit:  https://www.vlstudy.online/sitemap.xml
 
 PHOTOS
   - The hero scene, flags, logo and social image live in assets/ (bundled).
