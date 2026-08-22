@@ -4,15 +4,40 @@ import Faq from '../components/Faq'
 import { inputClass, Container } from '../components/ui'
 import { COUNTRIES } from '../data/countries'
 import { IMAGES } from '../data/images'
+import { POST_BY_SLUG } from '../data/blog'
 import { submitForm } from '../lib/submitForm'
-import { useSeo } from '../hooks/useSeo'
+import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
 import { Link } from 'react-router-dom'
+
+// The two guides linked at the bottom of each country page. Sending a reader from the country
+// page to the detailed visa guide, and the guide back here, is what turns eight separate pages
+// into a site: readers stay longer, and search engines can see which pages belong together.
+const COUNTRY_GUIDES = {
+  italy: ['italy-student-visa-from-pakistan', 'hec-ibcc-mofa-attestation-order', 'cost-of-studying-in-italy-and-france'],
+  france: ['france-student-visa-from-pakistan', 'fully-funded-scholarships-for-pakistani-students', 'study-without-ielts'],
+}
 
 export default function Country({ which }) {
   const c = COUNTRIES[which]
+  const path = `/${which}`
+  const guides = (COUNTRY_GUIDES[which] || []).map((slug) => POST_BY_SLUG[slug]).filter(Boolean)
+
   useSeo(
-    `Study in ${c.name} from Pakistan, Scholarships and Visa Guide`,
-    `${c.heroText} We check fully funded scholarship options first, then handle admissions, HEC and IBCC attestation, and the student visa with you.`
+    `Study in ${c.name} from Pakistan`,
+    c.metaDescription,
+    {
+      path,
+      image: IMAGES[c.heroKey]?.src,
+      jsonLd: graph(
+        {
+          '@type': 'WebPage',
+          name: `Study in ${c.name} from Pakistan`,
+          url: absolute(path),
+          about: { '@type': 'Country', name: c.name },
+        },
+        c.faqs?.length ? faqSchema(c.faqs) : null
+      ),
+    }
   )
   const [form, setForm] = useState({ name: '', phone: '', program: '' })
   const [sent, setSent] = useState(false)
@@ -42,7 +67,7 @@ export default function Country({ which }) {
             </Link>
           </div>
           <div className="rounded-[18px] overflow-hidden h-[190px] lg:h-[340px] lg:flex-1">
-            <Img image={IMAGES[c.heroKey]} loading="eager" className="w-full h-full" />
+            <Img image={IMAGES[c.heroKey]} loading="eager" fetchPriority="high" className="w-full h-full" />
           </div>
         </Container>
       </section>
@@ -214,6 +239,34 @@ export default function Country({ which }) {
         <Container className="lg:max-w-3xl">
           <h2 className="font-display font-semibold text-[21px] sm:text-[26px] text-navy m-0 mb-3.5">{c.name} questions</h2>
           <Faq items={c.faqs} />
+        </Container>
+      </section>
+
+      {/* Guides for this country */}
+      <section className="px-5 sm:px-8 lg:px-12 pt-8 lg:pt-14 pb-1.5">
+        <Container className="lg:max-w-3xl">
+          <h2 className="font-display font-semibold text-[21px] sm:text-[26px] text-navy m-0 mb-3.5">
+            Read before you apply to {c.name}
+          </h2>
+          <div className="grid sm:grid-cols-3 gap-3.5">
+            {guides.map((g) => (
+              <Link
+                key={g.slug}
+                to={`/blog/${g.slug}`}
+                className="flex flex-col rounded-[14px] border border-line bg-white overflow-hidden"
+              >
+                <div className="h-[100px]">
+                  <Img image={IMAGES[g.image]} className="w-full h-full" />
+                </div>
+                <div className="p-3.5">
+                  <div className="text-[10.5px] font-semibold tracking-[0.08em] uppercase text-royal mb-1">
+                    {g.category} · {g.read} min
+                  </div>
+                  <div className="font-display font-semibold text-[14px] text-navy leading-snug">{g.title}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </Container>
       </section>
 

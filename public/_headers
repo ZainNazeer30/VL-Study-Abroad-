@@ -1,0 +1,22 @@
+# Caching rules for Netlify. Vercel reads the equivalent block in vercel.json instead.
+#
+# The photos and the built JavaScript never change without changing their file name, so they can
+# be cached for a year. The HTML must never be cached, or a visitor would keep seeing yesterday's
+# version of the site after you deploy a fix.
+
+/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN

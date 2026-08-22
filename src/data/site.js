@@ -6,7 +6,7 @@ export const BRAND = {
   suffix: 'Consultants',
   fullName: 'VL Study Abroad Consultants',
   blurb:
-    'For more than five years we have helped students find their place at universities across Italy and France, from the first conversation to the day they arrive.',
+    'For more than three years we have helped students find their place at universities across Italy and France, from the first conversation to the day they arrive.',
 }
 
 export const CONTACT = {
@@ -33,15 +33,17 @@ export const FORMS = {
   endpoint: '',
 }
 
+// The top menu. "Apply" is deliberately not in this list: the Apply Now button sits beside the
+// menu on every screen size, so listing it twice only makes the desktop bar more crowded.
 export const NAV_ITEMS = [
   { label: 'Home', to: '/' },
   { label: 'Study in Italy', to: '/italy' },
   { label: 'Study in France', to: '/france' },
   { label: 'Universities', to: '/universities' },
   { label: 'Scholarships', to: '/scholarships' },
+  { label: 'Guides', to: '/blog' },
   { label: 'About Us', to: '/about' },
   { label: 'Contact', to: '/contact' },
-  { label: 'Apply', to: '/apply' },
 ]
 
 export const FOOTER_LINKS = {
@@ -51,12 +53,22 @@ export const FOOTER_LINKS = {
     { label: 'Study in France', to: '/france' },
     { label: 'Universities', to: '/universities' },
     { label: 'Scholarships', to: '/scholarships' },
+    { label: 'Guides and answers', to: '/blog' },
   ],
   company: [
     { label: 'About Us', to: '/about' },
     { label: 'Success Stories', to: '/about' },
     { label: 'Contact Us', to: '/contact' },
     { label: 'Application Form', to: '/apply' },
+  ],
+  // The most useful guides, linked from every page. Search engines follow links to decide what
+  // matters on a site, so the pages you most want to rank belong in the footer, not buried.
+  guides: [
+    { label: 'Applying from Pakistan', to: '/blog/apply-to-italy-and-france-from-pakistan' },
+    { label: 'HEC, IBCC and MOFA order', to: '/blog/hec-ibcc-mofa-attestation-order' },
+    { label: 'Fully funded scholarships', to: '/blog/fully-funded-scholarships-for-pakistani-students' },
+    { label: 'Italy student visa', to: '/blog/italy-student-visa-from-pakistan' },
+    { label: 'France student visa', to: '/blog/france-student-visa-from-pakistan' },
   ],
 }
 

@@ -6,6 +6,8 @@ export const COUNTRIES = {
     name: 'Italy',
     flag: '🇮🇹',
     badge: { bg: 'bg-green-soft', fg: 'text-green' },
+    metaDescription:
+      'Study in Italy from Pakistan: low tuition public universities, fully funded DSU scholarships, IBCC and HEC attestation, and the student visa from Islamabad.',
     heroKey: 'italyHero',
     lifeKey: 'italyLife',
     heroTitle: 'Study in Italy without the huge price tag',
@@ -90,6 +92,8 @@ export const COUNTRIES = {
     name: 'France',
     flag: '🇫🇷',
     badge: { bg: 'bg-royal-soft', fg: 'text-royal' },
+    metaDescription:
+      'Study in France from Pakistan: Campus France, English taught degrees, the Eiffel Excellence scholarship and full student visa support from Islamabad.',
     heroKey: 'franceHero',
     lifeKey: 'franceLife',
     heroTitle: 'Study in France and open doors worldwide',

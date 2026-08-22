@@ -1,4 +1,8 @@
+# What crawlers are allowed to read. Everything, which is what you want: there is nothing on
+# this site that should be hidden from search, and a blocked page cannot rank.
 User-agent: *
 Allow: /
 
+# Where the full list of pages lives. This line is the single most useful thing in the file,
+# because it is how a crawler finds every article without having to guess.
 Sitemap: https://www.vlstudy.online/sitemap.xml

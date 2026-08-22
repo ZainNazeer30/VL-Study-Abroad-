@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Img from '../components/Img'
 import { inputClass, Container } from '../components/ui'
 import { UNIVERSITIES, SUBJECTS } from '../data/universities'
 import { STATUS } from '../data/site'
-import { useSeo } from '../hooks/useSeo'
+import { IMAGES } from '../data/images'
+import { useSeo, graph, absolute } from '../hooks/useSeo'
 
 const selectClass = 'flex-1 min-w-0 px-3 py-3 rounded-[11px] border border-field text-[13px] bg-white text-ink outline-none focus:border-royal'
 
@@ -26,8 +28,21 @@ function matchIntake(u, intake) {
 
 export default function Universities() {
   useSeo(
-    'Universities in Italy and France for Pakistani Students',
-    'Search partner universities in Italy and France by country, degree level, subject, tuition and intake, including Bologna, Politecnico di Milano, Sorbonne and Sciences Po. Admission guidance for students applying from Pakistan.'
+    'Universities in Italy and France',
+    'Search universities in Italy and France by country, level, subject, tuition and intake, with admission guidance for students applying from Pakistan.',
+    {
+      path: '/universities',
+      image: IMAGES.universitiesHero.src,
+      jsonLd: graph(
+        {
+          '@type': 'CollectionPage',
+          name: 'Universities in Italy and France',
+          url: absolute('/universities'),
+          description:
+            'Universities in Italy and France that Pakistani students can apply to, searchable by country, level, subject, tuition and intake.',
+        }
+      ),
+    }
   )
   const [f, setF] = useState(emptyFilters)
   const [openId, setOpenId] = useState(-1)
@@ -55,10 +70,37 @@ export default function Universities() {
 
   return (
     <div>
-      <section className="px-5 sm:px-8 lg:px-12 pt-6 pb-4 lg:pt-12 lg:pb-6 bg-gradient-to-b from-[#F6F9FE] to-white">
+      {/* A long view of a college: the whole run of the buildings, sky above, lawn below. The
+          photograph is cut to 2.9 to 1 before it gets here, so this wide band shows the building
+          rather than a slice through the middle of it. */}
+      {/* Text on the left, picture on the right, exactly like the two country pages. The picture
+          is cut to 16:10 and sits in a 16:10 box, so the whole college is visible at every screen
+          size rather than being cropped to fit. */}
+      <section className="px-5 sm:px-8 lg:px-12 pt-6 pb-6 lg:py-14 bg-gradient-to-b from-[#F6F9FE] to-white">
+        <Container className="lg:flex lg:items-center lg:gap-12">
+          <div className="lg:flex-1">
+            <h1 className="font-display font-bold text-[27px] sm:text-[34px] lg:text-[40px] leading-[1.2] text-navy m-0 mb-3">
+              Find your university
+            </h1>
+            <p className="text-[15px] sm:text-[16px] leading-relaxed m-0 mb-5 max-w-lg">
+              Search the universities we work with in Italy and France by country, degree level, subject, tuition and
+              intake. Every one of them takes applications from Pakistan.
+            </p>
+            <Link
+              to="/apply"
+              className="block sm:inline-block bg-navy text-white text-center font-display font-semibold text-[15px] py-4 px-8 rounded-xl shadow-[0_8px_20px_rgba(10,30,60,0.22)]"
+            >
+              Get a shortlist for your profile
+            </Link>
+          </div>
+          <div className="rounded-[18px] overflow-hidden w-full aspect-[16/10] lg:flex-1 mt-5 lg:mt-0">
+            <Img image={IMAGES.universitiesHero} loading="eager" fetchPriority="high" className="w-full h-full" />
+          </div>
+        </Container>
+      </section>
+
+      <section className="px-5 sm:px-8 lg:px-12 pt-2 pb-4 lg:pb-6">
         <Container className="lg:max-w-3xl">
-          <h1 className="font-display font-bold text-[26px] sm:text-[32px] text-navy m-0 mb-2">Find your university</h1>
-          <p className="text-[14px] leading-relaxed m-0 mb-4">Search across the universities we work with in Italy and France.</p>
           <input
             value={f.query}
             onChange={setField('query')}
@@ -184,6 +226,93 @@ export default function Universities() {
               </button>
             </div>
           )}
+        </Container>
+      </section>
+
+      {/* Written content below the search. A page that is only a filter and a list gives a
+          search engine almost nothing to read, and gives a student nothing to decide with. */}
+      <section className="px-5 sm:px-8 lg:px-12 pt-10 lg:pt-14">
+        <Container className="lg:max-w-3xl">
+          <h2 className="font-display font-semibold text-[21px] sm:text-[26px] text-navy m-0 mb-3">
+            What Italian and French universities ask a Pakistani student for
+          </h2>
+          <p className="text-[14.5px] leading-[1.75] m-0 mb-3">
+            Entry requirements look intimidating written down and are usually simpler than they read. For a Bachelor,
+            both countries want your Matric and FSc or Intermediate results, attested through IBCC and then MOFA. For a
+            Master, they want your Bachelor degree and transcript, attested through HEC and then MOFA. On top of that
+            comes proof of English, either an IELTS or TOEFL score or a Medium of Instruction letter from your last
+            institution, and for most programmes a motivation letter and a CV.
+          </p>
+          <p className="text-[14.5px] leading-[1.75] m-0 mb-3">
+            Grades matter, but not as the single filter students imagine. A 60 to 70 percent average opens a great many
+            public universities in both countries. What decides the outcome more often is whether the file arrived
+            complete and on time, and whether the motivation letter was written for that specific programme rather than
+            copied across eight applications.
+          </p>
+          <p className="text-[14.5px] leading-[1.75] m-0 mb-5">
+            One thing worth knowing before you filter by tuition: in Italy the fee shown is frequently a maximum, and
+            the amount you actually pay is often calculated on assessed family income. In France, many public
+            universities choose to waive the higher international rate and charge the same as they charge French
+            students. Both mean the real number can be a good deal lower than the figure on the card.
+          </p>
+
+          <h2 className="font-display font-semibold text-[21px] sm:text-[26px] text-navy m-0 mb-3">
+            How to use this list
+          </h2>
+          <div className="flex flex-col gap-2.5 mb-6">
+            {[
+              ['Filter by tuition before anything else.', 'Work out what you can afford per year, then look at what fits. It is a shorter and much less painful process than falling for a programme first.'],
+              ['Check the language of instruction for every year.', 'A Master listed under an English title is not always taught in English throughout. Check the programme page, not the faculty page.'],
+              ['Split your shortlist.', 'Two ambitious, four realistic, two you are confident of. Eight ambitious choices is the most common way a student loses a year.'],
+              ['Ask about housing.', 'DSU housing in Italy and CROUS in France can halve your largest monthly cost, and availability differs enormously between universities.'],
+            ].map(([t, d], i) => (
+              <div key={i} className="flex gap-3 items-start py-2.5 border-b border-line-soft">
+                <div className="w-[26px] h-[26px] rounded-full bg-green-soft text-green flex items-center justify-center text-[13px] shrink-0 mt-0.5">
+                  ✓
+                </div>
+                <div>
+                  <div className="font-display font-medium text-[14.5px] text-navy">{t}</div>
+                  <div className="text-[13.5px] leading-relaxed text-slate mt-0.5">{d}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-[14.5px] leading-[1.75] m-0 mb-5">
+            We work with more universities than are listed here, and the list grows every intake. If you cannot find
+            your subject, ask us rather than assuming it is not available. There is more on all of this in our guides on{' '}
+            <Link to="/blog/choosing-a-university-in-italy-or-france" className="text-royal font-medium">
+              choosing a university
+            </Link>
+            ,{' '}
+            <Link to="/blog/cost-of-studying-in-italy-and-france" className="text-royal font-medium">
+              what it really costs
+            </Link>{' '}
+            and{' '}
+            <Link to="/blog/hec-ibcc-mofa-attestation-order" className="text-royal font-medium">
+              getting your documents attested in the right order
+            </Link>
+            .
+          </p>
+        </Container>
+      </section>
+
+      <section className="px-5 sm:px-8 lg:px-12 mt-4 mb-10 lg:mb-16">
+        <Container className="lg:max-w-3xl">
+          <div className="rounded-[20px] bg-gradient-to-br from-navy to-navy-soft p-[28px_22px] lg:p-10 text-center">
+            <h2 className="font-display font-semibold text-[21px] lg:text-[26px] text-white m-0 mb-2 leading-tight">
+              Not sure which of these you would get into?
+            </h2>
+            <p className="text-[13.5px] lg:text-[15px] leading-relaxed text-[#AAB8D4] m-0 mb-5 max-w-md mx-auto">
+              Send us your marks and your budget. We will come back with a realistic shortlist, not a wish list.
+            </p>
+            <Link
+              to="/apply"
+              className="inline-block bg-white text-navy font-display font-semibold text-[15px] py-3.5 px-8 rounded-xl"
+            >
+              Get a shortlist
+            </Link>
+          </div>
         </Container>
       </section>
     </div>

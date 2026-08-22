@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { inputClass, Container } from '../components/ui'
 import { submitForm } from '../lib/submitForm'
@@ -23,7 +24,8 @@ const selectClass = `${inputClass} text-ink`
 export default function Apply() {
   useSeo(
     'Apply Now',
-    'Start your application to study in Italy or France from Pakistan. It takes about three minutes, and a real counsellor reviews every application personally within 24 hours.'
+    'Start your application to study in Italy or France from Pakistan. It takes three minutes, and a real counsellor reviews every application within 24 hours.',
+    { path: '/apply' }
   )
   const [step, setStep] = useState(1)
   const [hint, setHint] = useState('')
@@ -180,6 +182,85 @@ export default function Apply() {
           )}
         </Container>
       </section>
+
+      {/* Below the form. Two jobs: it answers the questions that stop people submitting, and it
+          gives the page enough real content to be worth ranking, which a bare form never is. */}
+      <section className="px-5 sm:px-8 lg:px-12 pt-10 lg:pt-14">
+        <Container className="lg:max-w-2xl">
+          <h2 className="font-display font-semibold text-[21px] sm:text-[26px] text-navy m-0 mb-3">
+            What happens after you send this
+          </h2>
+          <div className="flex flex-col mb-7">
+            {[
+              ['A person reads it', 'Not an autoresponder. A counsellor reads what you wrote and looks at whether your marks, budget and intake line up.'],
+              ['We reply within 24 hours', 'By WhatsApp or a call, whichever you asked for. If we are going to say the timing is unrealistic, we say it then rather than after you have paid.'],
+              ['A free first conversation', 'Around 30 minutes. We go through your options in Italy and France, what a fully funded route would need, and what your documents need doing to them.'],
+              ['You decide', 'Fees, what they cover and when they are payable are agreed in writing before any paid work starts. Nothing is charged through this website.'],
+            ].map(([t, d], i, arr) => (
+              <div key={i} className="flex gap-3.5">
+                <div className="flex flex-col items-center">
+                  <div className="w-[30px] h-[30px] rounded-full bg-royal-soft text-royal flex items-center justify-center font-display font-semibold text-[13px] shrink-0">
+                    {i + 1}
+                  </div>
+                  {i < arr.length - 1 && <div className="w-0.5 flex-1 bg-[#E9EFF8] my-1" />}
+                </div>
+                <div className="pb-4">
+                  <div className="font-display font-semibold text-[15px] text-navy mt-1 mb-0.5">{t}</div>
+                  <div className="text-[13.5px] leading-relaxed text-slate">{d}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <h2 className="font-display font-semibold text-[21px] sm:text-[26px] text-navy m-0 mb-3">
+            What to have ready
+          </h2>
+          <p className="text-[14.5px] leading-[1.75] m-0 mb-3">
+            None of this is needed to send the form. It is what makes the first conversation useful, so gather what you
+            can before the call:
+          </p>
+          <ul className="m-0 mb-6 pl-0 list-none flex flex-col gap-2">
+            {[
+              'Your Matric and FSc or Intermediate results, and your degree transcript if you have one.',
+              'Your IELTS or TOEFL score, or whether your degree was taught in English.',
+              'A realistic figure for what your family can fund per year, in rupees is fine.',
+              'Whether attestation has been started, and which documents are done.',
+              'The intake you are aiming for, and whether that date can move.',
+            ].map((li, i) => (
+              <li key={i} className="flex gap-2.5 text-[14.5px] leading-[1.7] text-ink">
+                <span className="mt-[9px] w-1.5 h-1.5 rounded-full bg-royal shrink-0" />
+                <span>{li}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="rounded-[16px] border border-[#EFE6CC] bg-gradient-to-br from-[#FBF7EC] to-[#FDFBF5] p-4 mb-7">
+            <p className="text-[13.5px] leading-relaxed m-0">
+              We do not guarantee admission, a scholarship or a visa, because universities, awarding bodies and
+              embassies make those decisions, not consultants. What we do is make sure nothing in your file is the
+              reason you are refused. If anyone promises you a guaranteed visa, walk away.
+            </p>
+          </div>
+
+          <p className="text-[14.5px] leading-[1.75] m-0">
+            If you would rather read first, start with{' '}
+            <Link to="/blog/apply-to-italy-and-france-from-pakistan" className="text-royal font-medium">
+              how to apply from Pakistan
+            </Link>{' '}
+            or{' '}
+            <Link to="/blog/intake-deadlines-italy-france" className="text-royal font-medium">
+              the intake deadlines
+            </Link>
+            , and see{' '}
+            <Link to="/privacy" className="text-royal font-medium">
+              what we do with your details
+            </Link>
+            .
+          </p>
+        </Container>
+      </section>
+
+      <div className="pb-10 lg:pb-16" />
     </div>
   )
 }

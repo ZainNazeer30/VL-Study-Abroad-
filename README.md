@@ -3,10 +3,10 @@
 A fully responsive marketing website for a study abroad consultancy focused on Italy and France,
 built with React, Vite and Tailwind CSS. It looks like a clean mobile app on a phone, and expands
 into a proper desktop layout (wide hero sections, multi-column grids, an inline top nav) on
-tablets and larger screens. It has eight pages (Home, Study in Italy, Study in France,
-Universities, Scholarships, About, Contact and Apply) with a working navigation menu, university
-search and filters, a scholarship checker, FAQ accordions, a booking calendar and a three step
-application form.
+tablets and larger screens. It has twelve pages plus nine guide articles: Home, Study in Italy, Study in France,
+Universities, Scholarships, Guides (the blog index), About, Contact, Apply, Privacy, Terms and a
+proper "not found" page. There is a working navigation menu, university search and filters, a
+scholarship checker, FAQ accordions, a booking calendar and a three step application form.
 
 ## Run it on your computer
 
@@ -57,24 +57,25 @@ Everything you are likely to edit lives in `src/data`.
   `www.vlstudy.online`). Change the contact details here once and they update across the whole
   site, including the WhatsApp button in the bottom corner of every page. This file also has the
   `FORMS.endpoint` setting described below.
-- `src/data/images.js` lists every photo on the site, one entry per picture. **Every photo is
-  institutional on purpose**: universities, campuses, lecture halls and libraries, not the Eiffel
-  Tower or the Trevi Fountain. This is a study abroad consultancy, so a student deciding where to
-  spend three years should see where they will actually study, not a holiday brochure. If you
-  ever add a photo, keep to that rule.
-  The photos are real photographs from Unsplash, free for commercial use, referenced by their
-  exact photo ID. That detail matters: an earlier version searched by keyword, and the service
-  returned whatever matched, which is how a graffiti van ended up on the Study in France page. A
-  fixed ID always returns the same photograph. Each entry also has a `fallback` photo, and
-  `src/components/Img.jsx` tries it automatically if the first one fails, so a visitor never sees
-  a broken image icon. To use your own pictures, follow the instructions at the top of the file.
-  Real photos of the campuses your own students are on would be stronger than any stock photo.
+- `src/data/images.js` lists every photo on the site, one entry per picture, with instructions at
+  the top for swapping any of them in a single line. Most of the photographs are your own, saved
+  into `public/img` at four widths each in two formats so a visitor on a phone downloads roughly a
+  tenth of what a desktop visitor does. Four pictures still come from Unsplash: the two country
+  cards on the home page and the two country page heroes, because those have to actually look like
+  Italy and France and none of your photos were taken there. Replacing those four with your own
+  Italy and France pictures is the one remaining step to owning every image outright, and
+  `LICENCES-AND-CONTENT.md` covers the licensing in full. No photograph is the picture for two
+  different things; `npm run check-images` enforces that and will tell you if an edit breaks it.
 - `src/components/artwork.jsx` holds the three illustrated portraits on the success story cards.
   These are drawn rather than photographed on purpose. The quotes are real, but we do not have
   photos of Ayesha, Hamza and Sana, and putting a stranger's stock photo beside a named client is
   something a visitor can catch with a reverse image search. An illustration reads as a friendly
   placeholder instead of a false claim about who someone is. If a student agrees to appear on the
   site, that file explains how to swap in their real photo.
+- `src/data/blog.js` holds all nine guide articles. Adding one is a copy and paste job; the
+  instructions are at the top of the file, and `npm run build` puts the new address into the
+  sitemap automatically. One article a month, answering a question a student actually asked you,
+  is the single most useful ongoing thing you can do for search rankings.
 - `src/data/countries.js`, `universities.js`, `scholarships.js`, `home.js` and `about.js` hold
   all the written content, universities, scholarships and questions. Edit the text there.
   Scholarships have a `fullyFunded` flag; set it to `true` only for ones that realistically cover
@@ -146,25 +147,51 @@ of the Gmail function, so you only need one or the other, not both.
 
 ## SEO
 
-- Each page sets its own browser tab title and search result description through the `useSeo`
-  hook in `src/hooks/useSeo.js`, called near the top of every file in `src/pages`. Edit the text
-  passed to `useSeo(...)` on any page to change how it appears in search results.
-- `index.html` has the site-wide description, Open Graph and Twitter preview tags, and a small
-  block of structured data search engines use to understand what the business is.
-- `public/robots.txt` and `public/sitemap.xml` list all eight pages for search engines. If you
-  add a page later, add its address to `sitemap.xml` too.
+There is a full explanation in `SEO-GUIDE.md`, including the things only you can do. The short
+version of what is in the code:
+
+- Each page sets its own tab title, search description, canonical address, social preview image
+  and structured data through the `useSeo(...)` call near the top of its file in `src/pages`.
+  Edit the text there to change how a page appears in search results.
+- `index.html` holds the site wide defaults and the business details that let Google show your
+  logo beside your name.
+- Structured data covers breadcrumbs on every page, FAQ blocks on the home page, both country
+  pages and the contact page, and article blocks on every guide. The FAQ ones are what make you
+  eligible for the expandable question boxes in a search result.
+- `public/sitemap.xml` is generated by `npm run build` from the real routes and articles, so it
+  can never go stale. `npm run sitemap` regenerates it on its own.
+- Wrong addresses now get a real "not found" page marked `noindex`, instead of quietly showing
+  the home page. That change alone removes a problem that was working against you.
 - All of this points at `https://www.vlstudy.online`. If you ever move to a different domain,
-  update the address in `index.html`, `robots.txt` and `sitemap.xml`.
+  update it in `index.html`, `public/robots.txt` and `scripts/generate-sitemap.mjs`.
 
 ## Project layout
 
 ```
 src/
-  components/   shared pieces (nav, footer, bottom bar, Img, avatars, FAQ)
-  data/         all content, photos and settings
-  hooks/        useSeo, for page titles and search descriptions
+  components/   shared pieces (nav, footer, bottom bar, Img, avatars, FAQ, article body)
+  data/         all content, photos and settings, including blog.js
+  hooks/        useSeo, for titles, descriptions, canonicals and structured data
   lib/          submitForm, used by every form on the site
   pages/        one file per page
   index.css     colours, fonts and base styles
   App.jsx       the routes
+public/
+  img/          every photograph, at four widths each in webp and jpg
+  robots.txt    what search engines may read
+  sitemap.xml   generated by npm run build, do not edit by hand
+scripts/
+  generate-sitemap.mjs
 ```
+
+Three other files worth reading once:
+
+- `SEO-GUIDE.md` explains what is built into the site for search engines, and the handful of
+  things only you can do (Google Business Profile, Search Console, backlinks). Read this one.
+- `LICENCES-AND-CONTENT.md` lists every photo, font and library and who owns it, and flags the
+  one thing that still needs checking at your end.
+- `scripts/audit.mjs` is a test you can run yourself. After `npm run build`, run `npm run audit`
+  and it opens every page in a real browser and checks titles, descriptions, headings, images,
+  structured data and sideways scrolling at phone, tablet and desktop width. The first time, run
+  `npx playwright install chromium` once so it has a browser to use. `npm run check-schema` does
+  the same for the structured data on its own. Neither is needed to run or deploy the site.

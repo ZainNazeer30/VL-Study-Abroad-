@@ -2,16 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/logo.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tab icon. logo.png is the same mark at 200 pixels, which is what Google reads for the
+         logo beside your name in search results, through the structured data at the bottom. -->
+    <link rel="icon" href="/logo.ico" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <meta name="theme-color" content="#0A1E3C" />
+
+    <!-- These are the defaults for anything that reads the raw HTML without running JavaScript.
+         Every page then sets its own title, description, canonical address and preview image
+         through src/hooks/useSeo.js as soon as React loads. -->
+    <title>Study Abroad Consultants in Pakistan | Italy &amp; France | VL Study Abroad</title>
     <meta
       name="description"
-      content="VL Study Abroad Consultants helps Pakistani students get into universities in Italy and France. Fully funded scholarships, HEC and IBCC attestation guidance, and full student visa support. Free consultation, 5+ years of experience."
+      content="VL Study Abroad Consultants helps Pakistani students get into universities in Italy and France. Fully funded scholarships, HEC and IBCC attestation guidance, and full student visa support. Free consultation, 3+ years of experience."
     />
-    <meta name="keywords" content="study abroad consultants in Pakistan, study in Italy from Pakistan, study in France from Pakistan, fully funded scholarships for Pakistani students, DSU scholarship, Eiffel Excellence scholarship, Italy student visa Pakistan, Campus France Pakistan, HEC attestation, IBCC attestation" />
     <link rel="canonical" href="https://www.vlstudy.online/" />
-    <meta name="theme-color" content="#0A1E3C" />
-    <title>Study Abroad Consultants in Pakistan | Italy &amp; France | VL Study Abroad</title>
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="VL Study Abroad Consultants" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="VL Study Abroad Consultants" />
@@ -22,33 +31,96 @@
       content="Fully funded scholarships, honest admissions advice and full student visa support for Pakistani students applying to Italy and France. Free consultation."
     />
     <meta property="og:url" content="https://www.vlstudy.online/" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content="https://www.vlstudy.online/img/hero-students-1600.jpg" />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="914" />
+    <meta property="og:image:alt" content="Three graduates taking a selfie together on campus" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Study Abroad Consultants in Pakistan | Italy &amp; France" />
     <meta
       name="twitter:description"
       content="Fully funded scholarships, admissions advice and student visa support for Pakistani students applying to Italy and France."
     />
+    <meta name="twitter:image" content="https://www.vlstudy.online/img/hero-students-1600.jpg" />
 
+    <!-- Speed. The browser is told about the font and image servers before it needs them, and the
+         home page photo is fetched at the same time as the stylesheet rather than after it. That
+         photo is the largest thing on the first screen, so how quickly it appears is literally one
+         of the three scores Google measures a page on. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      href="/img/hero-students-1024.webp"
+      imagesrcset="/img/hero-students-640.webp 640w, /img/hero-students-1024.webp 1024w, /img/hero-students-1600.webp 1600w, /img/hero-students-2000.webp 2000w"
+      imagesizes="(min-width: 1024px) 50vw, 100vw"
+      fetchpriority="high"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
+    <!-- Who this business is, in the form search engines read. This is what makes the site
+         eligible to show your logo and your details beside the result rather than a bare link.
+         The blog articles and the home page FAQ add their own blocks on top of this at runtime. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "name": "VL Study Abroad Consultants",
-        "url": "https://www.vlstudy.online",
-        "logo": "https://www.vlstudy.online/logo.png",
-        "description": "Study abroad consultancy helping Pakistani students get into universities in Italy and France, with fully funded scholarship guidance, admissions support, document attestation help and student visa assistance.",
-        "areaServed": { "@type": "Country", "name": "Pakistan" },
-        "address": { "@type": "PostalAddress", "addressCountry": "PK" },
-        "knowsLanguage": ["en", "ur"],
-        "email": "vlstudy.online@gmail.com",
-        "telephone": "+92-321-5208625",
-        "foundingDate": "2020",
-        "sameAs": []
+        "@graph": [
+          {
+            "@type": ["EducationalOrganization", "ProfessionalService"],
+            "@id": "https://www.vlstudy.online/#organisation",
+            "name": "VL Study Abroad Consultants",
+            "alternateName": "VL Study Abroad",
+            "url": "https://www.vlstudy.online",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.vlstudy.online/logo.png",
+              "width": 512,
+              "height": 512
+            },
+            "image": "https://www.vlstudy.online/img/hero-students-1600.jpg",
+            "description": "Study abroad consultancy helping Pakistani students get into universities in Italy and France, with fully funded scholarship guidance, admissions support, document attestation help and student visa assistance.",
+            "email": "vlstudy.online@gmail.com",
+            "telephone": "+92-321-5208625",
+            "foundingDate": "2023",
+            "areaServed": { "@type": "Country", "name": "Pakistan" },
+            "address": { "@type": "PostalAddress", "addressCountry": "PK" },
+            "knowsLanguage": ["en", "ur"],
+            "knowsAbout": [
+              "Study in Italy from Pakistan",
+              "Study in France from Pakistan",
+              "Fully funded scholarships for Pakistani students",
+              "DSU regional scholarship",
+              "Eiffel Excellence scholarship",
+              "HEC, IBCC and MOFA attestation",
+              "Italy student visa from Pakistan",
+              "France student visa and Campus France",
+              "Universitaly pre enrolment"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer support",
+              "telephone": "+92-321-5208625",
+              "email": "vlstudy.online@gmail.com",
+              "areaServed": "PK",
+              "availableLanguage": ["English", "Urdu"]
+            },
+            "sameAs": []
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.vlstudy.online/#website",
+            "url": "https://www.vlstudy.online",
+            "name": "VL Study Abroad Consultants",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://www.vlstudy.online/#organisation" }
+          }
+        ]
       }
     </script>
   </head>

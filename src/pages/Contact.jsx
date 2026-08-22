@@ -3,7 +3,9 @@ import { CONTACT } from '../data/site'
 import { inputClass, Container } from '../components/ui'
 import { WhatsAppIcon } from '../components/icons'
 import { submitForm } from '../lib/submitForm'
-import { useSeo } from '../hooks/useSeo'
+import { Link } from 'react-router-dom'
+import Faq from '../components/Faq'
+import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
 
 const DAYS = [
   { dow: 'Mon', num: '24' },
@@ -14,6 +16,32 @@ const DAYS = [
   { dow: 'Sat', num: '29' },
 ]
 const SLOTS = ['10:00', '11:30', '13:00', '15:00', '16:30', '18:00']
+// Questions people ask before booking. They are on the page for readers, and they are handed to
+// Google as FAQ structured data as well, which is what can turn a plain search result into an
+// expandable one that takes up three times the space.
+const CONTACT_FAQS = [
+  {
+    q: 'Is the first consultation really free?',
+    a: 'Yes, and there is no obligation afterwards. It runs about 30 minutes, on WhatsApp or a call. We go through your marks, your budget and your intended intake, and tell you which universities in Italy and France are realistic and whether a fully funded scholarship route is open to you. If we think the timing does not work, we say so on that call rather than after you have paid anything.',
+  },
+  {
+    q: 'What should I have ready before the call?',
+    a: 'Your Matric and FSc or Intermediate results, your degree transcript if you have one, your IELTS score or whether your degree was taught in English, and a realistic figure for what your family can fund per year. If you do not have all of it, come anyway. We can work with what you have.',
+  },
+  {
+    q: 'Do you work with students outside Islamabad and Lahore?',
+    a: 'Yes. Almost everything is done on WhatsApp, email and calls, so where you live in Pakistan makes no difference to the service. The one part that is location bound is the visa appointment itself, which for most students happens in Islamabad, and we help you plan that trip.',
+  },
+  {
+    q: 'How quickly do you reply?',
+    a: 'Within 24 hours on any weekday, and usually much faster on WhatsApp. If you message late at night you will normally have an answer by the next morning.',
+  },
+  {
+    q: 'What does it cost to work with you?',
+    a: 'Fees depend on how much of the process you want handled and are agreed with you in writing before any paid work starts. Nothing is ever charged through this website, and we will not ask for card details or a bank transfer through a web form.',
+  },
+]
+
 const GUIDES = [
   'The full guide to studying in Italy, 2026 to 2027',
   'The full guide to studying in France, 2026 to 2027',
@@ -23,7 +51,14 @@ const GUIDES = [
 export default function Contact() {
   useSeo(
     'Book a Free Consultation',
-    'Book a free 30 minute consultation with VL Study Abroad Consultants on WhatsApp or a call, to talk through Italy and France study options, fully funded scholarships and your visa file. Available to students across Pakistan.'
+    'Book a free 30 minute call on WhatsApp or by phone to talk through Italy and France options, fully funded scholarships and your visa file. Anywhere in Pakistan.',
+    {
+      path: '/contact',
+      jsonLd: graph(
+        { '@type': 'ContactPage', name: 'Contact VL Study Abroad Consultants', url: absolute('/contact') },
+        faqSchema(CONTACT_FAQS)
+      ),
+    }
   )
   const [day, setDay] = useState(-1)
   const [slot, setSlot] = useState(-1)
@@ -160,6 +195,48 @@ export default function Contact() {
               </span>
             </div>
           </div>
+        </Container>
+      </section>
+
+      {/* Before you book */}
+      <section className="px-5 sm:px-8 lg:px-12 pt-8 lg:pt-14">
+        <Container className="lg:max-w-2xl">
+          <h2 className="font-display font-semibold text-[19px] sm:text-[22px] text-navy m-0 mb-3">
+            What the first conversation covers
+          </h2>
+          <p className="text-[14.5px] leading-[1.75] m-0 mb-3">
+            It is a conversation, not a sales call. In about half an hour we go through where you actually stand: what
+            your marks open in Italy and France, what your family budget realistically covers once housing is counted,
+            and whether a fully funded route such as the regional DSU scholarships in Italy or the Eiffel Excellence
+            scholarship in France is a genuine possibility for your profile.
+          </p>
+          <p className="text-[14.5px] leading-[1.75] m-0 mb-3">
+            We will also tell you where your documents stand. For most Pakistani students the honest answer on the
+            first call is that attestation needs to start now, because IBCC or HEC and then MOFA takes weeks, and it
+            is the single most common reason a student misses an intake with an offer already in hand.
+          </p>
+          <p className="text-[14.5px] leading-[1.75] m-0 mb-6">
+            If the intake you have in mind is not realistic, we say so on that call. Nobody is well served by paying
+            for a rushed application into a closing window, and we would rather have you back for the next intake with
+            a file that is ready.
+          </p>
+
+          <h2 className="font-display font-semibold text-[19px] sm:text-[22px] text-navy m-0 mb-3.5">
+            Before you book
+          </h2>
+          <Faq items={CONTACT_FAQS} defaultOpen={0} />
+
+          <p className="text-[14.5px] leading-[1.75] mt-6 m-0">
+            You can also read first. Start with{' '}
+            <Link to="/blog/apply-to-italy-and-france-from-pakistan" className="text-royal font-medium">
+              how to apply from Pakistan
+            </Link>
+            , or go straight to the{' '}
+            <Link to="/apply" className="text-royal font-medium">
+              application form
+            </Link>{' '}
+            if you already know what you want.
+          </p>
         </Container>
       </section>
 

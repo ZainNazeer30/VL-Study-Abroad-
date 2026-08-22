@@ -2,7 +2,7 @@
 
 export const TRUST = [
   'Fully funded scholarship routes',
-  '5+ years helping Pakistani students',
+  '3+ years helping Pakistani students',
   'HEC, IBCC and MOFA attestation help',
   'Focused on Italy and France',
   'Full visa file support',
@@ -52,7 +52,7 @@ export const HOME_SCHOLARSHIPS = [
 export const WHY_US = [
   { name: 'We lead with fully funded options', desc: 'Before we look at anything else, we check what you could get for free or close to it, and only move on once that is covered.' },
   { name: 'We know the Pakistani paperwork', desc: 'IBCC for your Matric and FSc, HEC for your degree, then MOFA. We know the order, the timings and what the consulates in Islamabad actually accept.' },
-  { name: '5+ years in Italy and France admissions', desc: 'We have been doing this since well before it was our full time job, and we have seen almost every kind of case.' },
+  { name: '3+ years in Italy and France admissions', desc: 'We have been doing this since well before it was our full time job, and we have seen almost every kind of case.' },
   { name: 'One counsellor, start to finish', desc: 'The same person handles your case from the first call to your arrival, so nothing gets lost.' },
   { name: 'Clear and honest', desc: 'You see the real costs and timelines up front. No hidden fees and no promises we cannot keep.' },
   { name: 'Track your applications', desc: 'You can check where every application stands whenever you want.' },

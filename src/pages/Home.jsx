@@ -7,7 +7,8 @@ import { Eyebrow, H2, Container, inputClass } from '../components/ui'
 import { IMAGES } from '../data/images'
 import { CONTACT, TONES, STATUS } from '../data/site'
 import { submitForm } from '../lib/submitForm'
-import { useSeo } from '../hooks/useSeo'
+import { POSTS } from '../data/blog'
+import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
 import {
   TRUST,
   SERVICES,
@@ -27,9 +28,35 @@ function matchesFilter(uni, filter) {
 }
 
 export default function Home() {
+  // The home page carries three pieces of structured data. The organisation block is who you
+  // are, and it is what Google reads for the logo and the knowledge panel. The website block
+  // ties the whole site to one name. The FAQ block is the one with a visible payoff: it makes
+  // the home page eligible for the expandable question boxes in search results, which take up
+  // far more space than a plain link and pull in clicks from people searching those exact
+  // questions. Every question in it is genuinely answered further down this page, which is both
+  // Google's rule and the reason it works.
   useSeo(
     'Study Abroad Consultants in Pakistan for Italy and France',
-    'VL Study Abroad Consultants helps Pakistani students get into universities in Italy and France. Fully funded scholarships, HEC and IBCC attestation guidance, and full student visa support from Islamabad. Free consultation, 5+ years of experience.'
+    'Study abroad consultants in Pakistan for Italy and France. Fully funded scholarships, HEC and IBCC attestation, and full student visa support. Free consultation.',
+    {
+      path: '/',
+      // The home page title already carries the brand, so it is not appended twice.
+      bare: true,
+      image: IMAGES.homeHero.src,
+      jsonLd: graph(
+        {
+          '@type': 'WebPage',
+          '@id': absolute('/#webpage'),
+          url: absolute('/'),
+          name: 'Study Abroad Consultants in Pakistan for Italy and France',
+          isPartOf: { '@id': absolute('/#website') },
+          about: { '@id': absolute('/#organisation') },
+          primaryImageOfPage: absolute(IMAGES.homeHero.src),
+          inLanguage: 'en',
+        },
+        faqSchema(HOME_FAQS)
+      ),
+    }
   )
   const [filter, setFilter] = useState('All')
   const [form, setForm] = useState({ name: '', email: '', phone: '', qual: '', country: '', intake: '', program: '' })
@@ -51,7 +78,7 @@ export default function Home() {
         <Container className="lg:flex lg:items-center lg:gap-12">
           <div className="lg:flex-1">
             <div className="inline-flex items-center gap-1.5 bg-royal-soft text-royal font-semibold text-[11px] tracking-[0.08em] uppercase px-3 py-1.5 rounded-full mb-3.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-green" /> Italy and France specialists, 5+ years running
+              <span className="w-1.5 h-1.5 rounded-full bg-green" /> Italy and France specialists, 3+ years running
             </div>
             <h1 className="font-display font-bold text-[29px] sm:text-[38px] lg:text-[46px] leading-[1.2] text-navy m-0 mb-3">
               Get into a university in Italy or France
@@ -76,7 +103,7 @@ export default function Home() {
             </div>
           </div>
           <div className="relative rounded-[18px] overflow-hidden h-[210px] lg:h-[360px] lg:flex-1 mt-0">
-            <Img image={IMAGES.homeHero} loading="eager" className="w-full h-full" />
+            <Img image={IMAGES.homeHero} loading="eager" fetchPriority="high" className="w-full h-full" />
             <div className="absolute bottom-3 left-3 bg-white/95 rounded-[10px] px-3 py-2 flex gap-2.5 items-center">
               <span className="font-display font-semibold text-[12px] text-navy">🇮🇹 Italy</span>
               <span className="w-px h-3.5 bg-[#E4E9F1]" />
@@ -308,6 +335,21 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* A full width photo band. It breaks up a long page of text blocks, and it puts the
+          outcome, graduation day, right before the students who got there. */}
+      <section className="relative mt-9 lg:mt-16 h-[190px] sm:h-[240px] lg:h-[300px]">
+        <Img image={IMAGES.homeStories} className="absolute inset-0 w-full h-full" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/60 to-navy/15" />
+        <Container className="relative h-full px-5 sm:px-8 lg:px-12 flex flex-col justify-center">
+          <p className="font-display font-semibold text-[18px] sm:text-[24px] lg:text-[30px] text-white leading-snug m-0 max-w-lg">
+            Three years, dozens of students, two countries we know properly.
+          </p>
+          <p className="text-[13px] sm:text-[14.5px] text-[#D3DCEE] mt-2 m-0 max-w-md">
+            Every one of them started with a single message asking whether it was even possible.
+          </p>
+        </Container>
+      </section>
+
       {/* Success stories */}
       <section className="pt-9 lg:pt-16 pb-2">
         <Container className="px-5 sm:px-8 lg:px-12">
@@ -399,6 +441,48 @@ export default function Home() {
           <Eyebrow>FAQ</Eyebrow>
           <H2 className="mb-3.5 lg:mb-6">Questions students ask us</H2>
           <Faq items={HOME_FAQS} defaultOpen={0} />
+        </Container>
+      </section>
+
+      {/* Guides. Linking the home page to the articles matters twice over: a student who is not
+          ready to fill in a form still has a reason to stay on the site, and search engines use
+          internal links to work out which of your pages are the important ones. */}
+      <section className="px-5 sm:px-8 lg:px-12 pt-9 lg:pt-16 pb-2">
+        <Container>
+          <Eyebrow>Guides</Eyebrow>
+          <H2 className="mb-2">Read before you apply</H2>
+          <p className="text-[13.5px] leading-relaxed mb-4 lg:mb-6 max-w-2xl">
+            Written for students applying from Pakistan, so they name IBCC, HEC, MOFA, Universitaly and Campus France
+            rather than talking in general terms. No sign up, no email required.
+          </p>
+          <div className="grid sm:grid-cols-3 gap-3.5 lg:gap-4">
+            {POSTS.slice(0, 3).map((post) => (
+              <Link
+                key={post.slug}
+                to={`/blog/${post.slug}`}
+                className="flex flex-col rounded-[16px] overflow-hidden border border-line bg-white shadow-[0_6px_16px_rgba(10,30,60,0.05)]"
+              >
+                <div className="h-[130px]">
+                  <Img image={IMAGES[post.image]} className="w-full h-full" />
+                </div>
+                <div className="p-4 flex flex-col flex-1">
+                  <div className="text-[10.5px] font-semibold tracking-[0.08em] uppercase text-royal mb-1.5">
+                    {post.category} · {post.read} min
+                  </div>
+                  <h3 className="font-display font-semibold text-[15px] text-navy m-0 mb-1.5 leading-snug">
+                    {post.title}
+                  </h3>
+                  <p className="text-[13px] leading-normal text-slate m-0 flex-1">{post.excerpt}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <Link
+            to="/blog"
+            className="block text-center mt-3.5 sm:inline-block sm:mx-auto border-[1.5px] border-[#D6DEEC] text-navy font-display font-semibold text-[14px] py-3.5 px-8 rounded-xl"
+          >
+            All guides
+          </Link>
         </Container>
       </section>
 
