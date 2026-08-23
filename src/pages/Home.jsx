@@ -209,7 +209,7 @@ export default function Home() {
       <section className="px-5 sm:px-8 lg:px-12 pt-9 lg:pt-16 pb-2">
         <Container>
           <Eyebrow>Universities</Eyebrow>
-          <H2 className="mb-3.5 lg:mb-6">A few of our universities</H2>
+          <H2 className="mb-3.5 lg:mb-6">A few of popular universities</H2>
           <div className="flex gap-2 overflow-x-auto pb-3 no-scrollbar">
             {HOME_FILTERS.map((f) => {
               const active = f === filter
