@@ -1,10 +1,10 @@
 // Content for the About page.
 
 export const ABOUT_STATS = [
-  { v: '3+', l: 'years of experience' },
-  { v: '30+', l: 'students placed' },
-  { v: '96%', l: 'visa success rate' },
-  { v: '2', l: 'countries we know well' },
+  { v: '0+', l: 'years of experience' },
+  { v: '0+', l: 'students placed' },
+  { v: '0%', l: 'visa success rate' },
+  { v: '0', l: 'countries we know well' },
 ]
 
 export const ABOUT_VALUES = [

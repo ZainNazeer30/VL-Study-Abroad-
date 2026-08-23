@@ -78,7 +78,7 @@ export default function Home() {
         <Container className="lg:flex lg:items-center lg:gap-12">
           <div className="lg:flex-1">
             <div className="inline-flex items-center gap-1.5 bg-royal-soft text-royal font-semibold text-[11px] tracking-[0.08em] uppercase px-3 py-1.5 rounded-full mb-3.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-green" /> Italy and France specialists, 3+ years running
+              <span className="w-1.5 h-1.5 rounded-full bg-green" /> Italy and France specialists, 0+ years running
             </div>
             <h1 className="font-display font-bold text-[29px] sm:text-[38px] lg:text-[46px] leading-[1.2] text-navy m-0 mb-3">
               Get into a university in Italy or France
