@@ -1,5 +1,18 @@
 {
   "buildCommand": "npm run build:host",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "vlstudy.online"
+        }
+      ],
+      "destination": "https://www.vlstudy.online/$1",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/(.*)",

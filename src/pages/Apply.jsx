@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { Container } from '../components/ui'
 import { Field, SelectField, Honeypot } from '../components/Field'
-import { useLeadForm } from '../hooks/useLeadForm'
+import { useLeadForm, PHONE_HINT } from '../hooks/useLeadForm'
 import { useSeo } from '../hooks/useSeo'
 
 const STEP_LABELS = ['Step 1 of 3, about you', 'Step 2 of 3, your education', 'Step 3 of 3, your study plans']
@@ -22,8 +22,8 @@ const emptyForm = {
 
 export default function Apply() {
   useSeo(
-    'Apply Now',
-    'Start your application to study in Italy or France from Pakistan. It takes three minutes, and a real counsellor reviews every application within 24 hours.',
+    'Apply to Study in Italy or France',
+    'Start your application to study in Italy or France from Pakistan. Three minutes to fill in, and a real counsellor reviews it within 24 hours. No fee to apply.',
     { path: '/apply' }
   )
   const [step, setStep] = useState(1)
@@ -73,8 +73,9 @@ export default function Apply() {
                      onChange={setField('name')} autoComplete="name" required className="sm:col-span-2" />
               <Field id="email" label="Email address" value={f.email} onChange={setField('email')}
                      type="email" inputMode="email" autoComplete="email" />
-              <Field id="phone" label="Phone or WhatsApp number" value={f.phone} onChange={setField('phone')}
-                     type="tel" inputMode="tel" autoComplete="tel" required />
+              <Field id="phone" label="Phone or WhatsApp number" hint={PHONE_HINT} value={f.phone}
+                     onChange={setField('phone')} type="tel" inputMode="numeric" autoComplete="tel"
+                     maxLength={11} required />
               <Field id="nation" label="Nationality" hint="For example, Pakistani" value={f.nation}
                      onChange={setField('nation')} autoComplete="country-name" className="sm:col-span-2" />
             </div>

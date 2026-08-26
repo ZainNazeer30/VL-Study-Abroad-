@@ -4,7 +4,7 @@ import { submitForm } from '../lib/submitForm'
 // One place for the logic all three forms need.
 //
 // Home.jsx, Apply.jsx and Contact.jsx each had their own copy of this: field state, a `hint`
-// string, some validation, a call to submitForm. They had already drifted apart — only Apply
+// string, some validation, a call to submitForm. They had already drifted apart: only Apply
 // checked required fields, none of the three validated an email address, and all three showed
 // a success message whether or not the submission actually arrived.
 //
@@ -16,7 +16,24 @@ import { submitForm } from '../lib/submitForm'
 //   f.sending / f.error / f.done
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
-const PHONE = /^[\d\s+()-]{7,20}$/
+
+// A Pakistani number is eleven digits and nothing else, starting with a zero: 03215208625.
+// The old rule here accepted anything from seven to twenty characters made of digits, spaces
+// and brackets, which meant "1234567" and "((((((()))))))" both got through and landed in the
+// inbox as a lead nobody could call back.
+const PHONE = /^0\d{10}$/
+export const PHONE_HINT = '11 digits, for example 03215208625'
+
+// Runs on every keystroke in a phone field, so a wrong character never appears in the first
+// place rather than being rejected after the student has finished typing. Anything that is not
+// a digit is dropped, a pasted +92 or 0092 number is converted to the local form, and the value
+// stops at eleven digits.
+export function normalisePhone(input) {
+  let digits = String(input ?? '').replace(/\D/g, '')
+  if (digits.startsWith('0092')) digits = `0${digits.slice(4)}`
+  else if (digits.startsWith('92') && digits.length >= 12) digits = `0${digits.slice(2)}`
+  return digits.slice(0, 11)
+}
 
 const LABELS = {
   name: 'your name', email: 'an email address', phone: 'a phone number',
@@ -33,7 +50,9 @@ export function useLeadForm(formName, initialValues) {
 
   const setField = (key) => (e) => {
     setError('')
-    setValues((v) => ({ ...v, [key]: e.target.value }))
+    const raw = e.target.value
+    const next = key === 'phone' ? normalisePhone(raw) : raw
+    setValues((v) => ({ ...v, [key]: next }))
   }
 
   const reset = () => {
@@ -43,9 +62,9 @@ export function useLeadForm(formName, initialValues) {
   }
 
   // Checks the fields, sends, and only reports success if it actually arrived.
-  // Returns true when sent, false when it did not — the caller uses that to decide whether to
+  // Returns true when sent, false when it did not, and the caller uses that to decide whether to
   // advance to a "thank you" screen.
-  // `extra` is for values the caller computes at submit time rather than holding in a field —
+  // `extra` is for values the caller computes at submit time rather than holding in a field,
   // the chosen day and time on the booking calendar, for instance. Passing them here keeps the
   // caller from having to mutate state, which React does not allow.
   const submit = async ({ required = [], send = true, extra = {} } = {}) => {
@@ -62,8 +81,10 @@ export function useLeadForm(formName, initialValues) {
       setError('That email address does not look right. Check it, or leave it blank.')
       return false
     }
+    // Only reached if somebody defeats the keystroke filter above, or types too few digits.
+    // The message says what to do rather than only that something is wrong.
     if (payload.phone?.trim() && !PHONE.test(payload.phone.trim())) {
-      setError('That phone number does not look right.')
+      setError('Please enter your full 11 digit number starting with 0, for example 03215208625.')
       return false
     }
     if (!send) {

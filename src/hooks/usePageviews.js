@@ -5,8 +5,7 @@ import { hasAccepted } from '../lib/consent'
 // Google Analytics is installed on this site and has never recorded a single visit.
 //
 // index.html configures it with `send_page_view: false`, which switches off the automatic
-// pageview that GA normally fires on load. That setting is correct for a single page app —
-// the automatic one would only ever record the first page and never the eleven others — but
+// pageview that GA normally fires on load. That setting is correct for a single page app, // the automatic one would only ever record the first page and never the eleven others, but
 // it has to be paired with a manual `page_view` on every route change, and nothing in the
 // codebase calls gtag again. The result is a tag that loads, costs every visitor a request to
 // googletagmanager.com, and reports nothing.

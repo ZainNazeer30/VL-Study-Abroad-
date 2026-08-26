@@ -58,6 +58,7 @@ export default function Footer() {
               <WhatsAppIcon className="w-4 h-4 text-[#25D366]" /> {CONTACT.phone}
             </a>
             <div className="mt-1">Available around the clock, every day</div>
+            <div className="mt-1">Online consultancy, serving students anywhere in Pakistan</div>
           </div>
         </div>
       </div>

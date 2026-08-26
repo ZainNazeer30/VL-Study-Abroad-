@@ -53,7 +53,7 @@ export default function CookieNotice() {
       </h2>
       <p className="text-[13px] leading-relaxed text-ink m-0 mb-3">
         We would like to use Google Analytics to see which pages help students most. It sets a
-        cookie and records the pages you open. Say no and nothing is stored — the site works
+        cookie and records the pages you open. Say no and nothing is stored. The site works
         exactly the same either way. Sending a form is separate and always goes to us, as
         explained in our{' '}
         <Link to="/privacy" className="text-royal font-medium underline">

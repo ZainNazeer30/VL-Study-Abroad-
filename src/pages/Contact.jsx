@@ -3,7 +3,7 @@ import { CONTACT } from '../data/site'
 import { Container } from '../components/ui'
 import { Field, Honeypot } from '../components/Field'
 import { nextWorkingDays } from '../lib/nextWeekdays'
-import { useLeadForm } from '../hooks/useLeadForm'
+import { useLeadForm, PHONE_HINT } from '../hooks/useLeadForm'
 import { WhatsAppIcon } from '../components/icons'
 import { Link } from 'react-router-dom'
 import Faq from '../components/Faq'
@@ -23,8 +23,8 @@ const CONTACT_FAQS = [
     a: 'Your Matric and FSc or Intermediate results, your degree transcript if you have one, your IELTS score or whether your degree was taught in English, and a realistic figure for what your family can fund per year. If you do not have all of it, come anyway. We can work with what you have.',
   },
   {
-    q: 'Do you work with students outside Islamabad and Lahore?',
-    a: 'Yes. Almost everything is done on WhatsApp, email and calls, so where you live in Pakistan makes no difference to the service. The one part that is location bound is the visa appointment itself, which for most students happens in Islamabad, and we help you plan that trip.',
+    q: 'Do you have an office I can visit?',
+    a: 'No, and that is on purpose. We work entirely online, on WhatsApp, email and calls, so wherever you are in Pakistan you get the same counsellor and the same service without travelling for it. Documents are shared digitally and reviewed the same way. The only part of the process that is tied to a place is the visa appointment itself, which for most students happens at the relevant embassy in Islamabad, and we help you plan that trip.',
   },
   {
     q: 'How quickly do you reply?',
@@ -44,8 +44,8 @@ const GUIDES = [
 
 export default function Contact() {
   useSeo(
-    'Book a Free Consultation',
-    'Book a free 30 minute call on WhatsApp or by phone to talk through Italy and France options, fully funded scholarships and your visa file. Anywhere in Pakistan.',
+    'Book a Free Study Abroad Consultation',
+    'Book a free 30 minute call on WhatsApp about studying in Italy or France: your options, fully funded scholarships and your visa file. Anywhere in Pakistan.',
     {
       path: '/contact',
       jsonLd: graph(
@@ -88,7 +88,7 @@ export default function Contact() {
       <section className="px-5 sm:px-8 lg:px-12 pt-6 pb-5 lg:pt-12 lg:pb-8 bg-gradient-to-b from-[#F6F9FE] to-white">
         <Container className="lg:max-w-3xl">
           <h1 className="font-display font-bold text-[26px] sm:text-[32px] text-navy m-0 mb-2">Book your free consultation</h1>
-          <p className="text-[14px] leading-relaxed m-0">Thirty minutes with a counsellor, by call, video or WhatsApp. No cost and no obligation.</p>
+          <p className="text-[14px] leading-relaxed m-0">Thirty minutes with a counsellor, by call, video or WhatsApp. We work entirely online, so it does not matter where in Pakistan you are. No cost and no obligation.</p>
         </Container>
       </section>
 
@@ -156,9 +156,9 @@ export default function Contact() {
                   <Honeypot value={values.company} onChange={setField('company')} />
                   <Field id="booking-name" label="Full name" value={values.name}
                          onChange={setField('name')} autoComplete="name" required className="sm:flex-1" />
-                  <Field id="booking-phone" label="Phone or WhatsApp number" value={values.phone}
-                         onChange={setField('phone')} type="tel" inputMode="tel" autoComplete="tel"
-                         required className="sm:flex-1" />
+                  <Field id="booking-phone" label="Phone or WhatsApp number" hint={PHONE_HINT}
+                         value={values.phone} onChange={setField('phone')} type="tel" inputMode="numeric"
+                         autoComplete="tel" maxLength={11} required className="sm:flex-1" />
                 </div>
                 <button
                   type="submit"
@@ -207,8 +207,8 @@ export default function Contact() {
             <div className="flex gap-3.5 items-center border border-line rounded-[14px] px-4 py-3.5 sm:col-span-2">
               <span className="w-[38px] h-[38px] rounded-[11px] bg-[#FBF7EC] text-gold-ink flex items-center justify-center text-[16px] shrink-0">⏰</span>
               <span>
-                <span className="block font-display font-semibold text-[14px] text-navy">We're online 24 hours a day</span>
-                <span className="block text-[12.5px] text-ink">Wherever you are, message us any time and a real counsellor will get back to you.</span>
+                <span className="block font-display font-semibold text-[14px] text-navy">We work entirely online, 24 hours a day</span>
+                <span className="block text-[12.5px] text-ink">There is no office to travel to. Wherever you are in Pakistan, message us any time and a real counsellor will get back to you.</span>
               </span>
             </div>
           </div>

@@ -19,7 +19,7 @@
   # Blocks scripts, styles and images from anywhere you have not listed. This is the single
   # header that turns a script injection from a stolen-applications incident into a blocked
   # request in someone's console. Without it, anything that manages to get a <script> onto the
-  # page — a compromised npm package, a bad third-party embed added later — can read every
+  # page, whether a compromised npm package or a bad third-party embed added later, can read every
   # field a student types into the application form and post it anywhere it likes.
   #
   # 'unsafe-inline' is on script-src only because index.html carries two inline scripts (the

@@ -24,11 +24,21 @@ closer to booking a call than one typing "study abroad".
 - **Every page has its own title, description and canonical address.** Set in each page file
   through `useSeo(...)`, in `src/hooks/useSeo.js`. Titles are all under 60 characters and
   descriptions under 160, which is what actually shows in a result.
-- **Structured data on every page.** Organisation and website details site wide, plus a
-  breadcrumb trail, plus a page type on each page, plus `FAQPage` on the home page, both country
-  pages and the contact page, plus `BlogPosting` and `FAQPage` on every article. The FAQ blocks
-  are the ones with a visible payoff: they make you eligible for the expandable question boxes
-  in Google, which take up several times the space of a plain blue link.
+- **Structured data on every page.** Organisation and website details site wide, including the
+  four services you sell, both founders and the free consultation. Then on each page: a page
+  type, a `BreadcrumbList`, `FAQPage` on the home page, both country pages, the contact page and
+  the scholarships page, an `ItemList` naming all eleven universities on the universities page
+  and all thirteen schemes on the scholarships page, and `BlogPosting` plus `FAQPage` on every
+  article. Two of these have a visible payoff. The FAQ blocks make you eligible for the
+  expandable question boxes, which take several times the space of a plain blue link. The
+  breadcrumb block is what puts `vlstudy.online › Guides › Italy student visa` under your result
+  on a phone instead of a truncated web address.
+- **A named person behind every guide.** Each article names Kashan or Umer as its author, in the
+  visible byline, in a bio box at the foot of the article, and as a `Person` in the structured
+  data with a link to their LinkedIn profile. Google's quality guidelines lean hard on who is
+  behind a page and whether they have real experience in the subject. An article signed by an
+  organisation asserts nothing; one signed by a named consultant you can look up is the whole
+  point. **Keep the attribution true.** If Umer writes the next guide, set `author: 'umer'` on it.
 - **A sitemap that cannot go stale.** `npm run build` regenerates `public/sitemap.xml` from the
   actual routes and articles, so adding an article automatically adds it to the sitemap.
 - **A real 404 page,** marked `noindex`. Previously any wrong address quietly showed the home
@@ -46,6 +56,13 @@ closer to booking a call than one typing "study abroad".
   footer carries the five most important guides on every page. Search engines use internal links
   to work out which of your pages you consider important.
 - **Cache headers** so photos and scripts are cached for a year while the HTML never is.
+- **One address, not two.** `vlstudy.online` now redirects permanently to `www.vlstudy.online`.
+  Before this, both served the same pages, and any link anyone built to the bare domain counted
+  towards a duplicate copy of the site rather than towards the real one.
+- **Fonts that do not block the page.** The Google Fonts stylesheet used to stop the browser
+  drawing anything until it had opened a connection to a second company's server and waited for
+  the file. On mobile data that is a few hundred milliseconds of blank screen on every page, and
+  it lands on two of the three scores Google grades a page on.
 - **Privacy and terms pages,** which are part of what Google's quality guidelines describe as
   trust signals for a business handling people's details.
 
@@ -78,9 +95,14 @@ you could do in the first month. Go to `google.com/business` and create a profil
 Abroad Consultants.
 
 - Category: "Educational consultant" or "Study abroad consultant".
-- Add your address (or set a service area if you do not have a public office), your phone number
-  and `https://www.vlstudy.online`.
-- Add real photographs of your office and your team.
+- You work online with no public office, so choose **service area business** when it asks, and
+  set the service area to Pakistan. Google will ask for an address to verify you are real; you
+  can enter it and then tick the box that hides it from the public. Do not invent an address and
+  do not list a co-working space you do not actually sit in, because a failed verification is
+  slow and unpleasant to undo.
+- Add your phone number and `https://www.vlstudy.online`.
+- Add real photographs. The two founder portraits now on the About page are the right ones to
+  use, along with anything real from your working day. Do not use stock photos of an office.
 - Post an update every week or two. The guides on this site are ready made posts.
 
 Then ask every student you have successfully placed to leave a review. Reviews are the thing
@@ -143,11 +165,15 @@ paid link schemes are detectable and get sites penalised. What works:
 
 Two placeholders are worth filling in:
 
-- `sameAs` in the structured data (in `index.html` and in `LICENCES-AND-CONTENT.md` terms) is an
-  empty list. Put your Facebook, Instagram and LinkedIn addresses in it. It is how Google
-  connects the site to your social profiles and reinforces that you are one real business.
-- If you have a public office, add the street address to the same block. A physical address is a
-  strong local signal.
+- `sameAs` in the structured data in `index.html` is still an empty list. Put your Facebook,
+  Instagram, LinkedIn, TikTok and YouTube addresses in it, one line each. It is how Google
+  connects this site to those profiles and treats them as one business rather than five
+  unrelated pages. This is the cheapest signal left on the list and it is the only thing in this
+  document that takes ten minutes.
+- Do not add a street address. You work online, and the structured data now says so: the
+  organisation is an `EducationalOrganization` serving Pakistan rather than a local business
+  with premises. Claiming an address you do not work from is the kind of thing that fails a
+  Google Business Profile verification.
 
 ### 6. Keep the guides current
 

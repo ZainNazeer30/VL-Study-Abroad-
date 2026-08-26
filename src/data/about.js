@@ -26,16 +26,22 @@ export const ABOUT_VALUES = [
 // The wording is each founder's own, condensed. If you want to change how you are described,
 // change it here and nowhere else.
 //
-// TO ADD REAL PHOTOGRAPHS: put the file in public/img, for example public/img/kashan.jpg, then
-// add  photo: '/img/kashan.jpg'  to the entry. Until then the initials are shown, which is
-// honest and looks deliberate. Real photographs would be better than any stock alternative.
+// PHOTOGRAPHS: both founders now have a real photograph, registered in src/data/images.js as
+// `founderUmer` and `founderKashan` and referenced by the `image` key below. To swap one, put
+// the new file in public/img and change the entry in images.js rather than here. If you ever
+// remove the `image` key, the page falls back to the initials on a coloured circle, which is
+// honest and looks deliberate.
 // ---------------------------------------------------------------------------------------------
 export const FOUNDERS = [
   {
+    key: 'kashan',
     name: 'Kashan Nazeer',
-    role: 'Consultant and Co-founder',
+    role: 'Consultant and Founder',
+    // The one line version used under an article headline, where there is no room for the bio.
+    credential: 'Founder of VL Study Abroad. Three years advising Pakistani students on admissions, funding and visa files for Italy and France.',
     initials: 'KN',
     tone: 'royal',
+    image: 'founderKashan',
     linkedin: 'https://www.linkedin.com/in/kashan-nazeer-a72475369/',
     bio: [
       'Kashan has spent more than three years working directly with students to simplify the study abroad journey, through counselling, university selection, admissions support and planning the year properly rather than reactively.',
@@ -45,10 +51,13 @@ export const FOUNDERS = [
       'Global education can transform careers and lives. My job is to help students confidently take the next step towards a brighter future.',
   },
   {
+    key: 'umer',
     name: 'Umer Sattar',
     role: 'Educator and Co-founder',
+    credential: 'Co-founder of VL Study Abroad and a working teacher, advising students on choosing a country, a programme and a realistic plan.',
     initials: 'US',
     tone: 'green',
+    image: 'founderUmer',
     linkedin: 'https://www.linkedin.com/in/umer-sattar-76221942b/',
     bio: [
       'Umer came to study abroad consultancy from teaching, and still teaches alongside his work at VL. Being in a classroom and in a counselling session in the same week gives him an unusually direct view of what students actually struggle with when they start planning.',
@@ -58,6 +67,11 @@ export const FOUNDERS = [
       'Good guidance is about more than paperwork. It starts with understanding the student and giving honest, practical advice.',
   },
 ]
+
+// Keyed by the short name each article's `author` field uses in src/data/blog.js, so an article
+// can name a real person without repeating their details. An article with no `author`, or one
+// naming a key that is not here, falls back to the company byline.
+export const AUTHOR_BY_KEY = Object.fromEntries(FOUNDERS.map((f) => [f.key, f]))
 
 // Real testimonials from students we have worked with, taken from vlstudy.online.
 // The portraits beside them are illustrations, not photos of these students. See

@@ -9,7 +9,7 @@
 const KEY = 'vl-cookie-choice' // 'accepted' | 'declined' | null (not asked yet)
 
 // localStorage throws in some private browsing modes and where third-party storage is blocked.
-// In that case we treat it as "not asked", which means analytics stays off — the safe direction.
+// In that case we treat it as "not asked", which means analytics stays off, the safe direction.
 export function readChoice() {
   try {
     return localStorage.getItem(KEY)

@@ -51,6 +51,17 @@ function meta(attr, key, content) {
   tag.setAttribute('content', content)
 }
 
+// Sets a tag when there is a value and takes it off the page when there is not. A single page
+// app never reloads, so a tag written on one page and left behind describes the next one too.
+function metaOrRemove(attr, key, content) {
+  const tag = document.head.querySelector(`meta[${attr}="${key}"]`)
+  if (!content) {
+    if (tag) tag.remove()
+    return
+  }
+  meta(attr, key, content)
+}
+
 function link(rel, href) {
   if (!href) return
   let tag = document.head.querySelector(`link[rel="${rel}"]`)
@@ -68,7 +79,11 @@ export function absolute(url) {
 }
 
 export function useSeo(title, description, options = {}) {
-  const { path, image, type = 'website', jsonLd, noindex = false, bare = false } = options
+  const {
+    path, image, type = 'website', jsonLd, noindex = false, bare = false,
+    // Article only. Passed by src/pages/BlogPost.jsx and ignored everywhere else.
+    published, modified, author, section, imageAlt,
+  } = options
   const jsonLdKey = jsonLd ? JSON.stringify(jsonLd) : ''
 
   useEffect(() => {
@@ -90,6 +105,16 @@ export function useSeo(title, description, options = {}) {
     meta('property', 'og:url', url)
     meta('property', 'og:type', type)
     meta('property', 'og:image', preview)
+    // Article specific tags. Facebook and LinkedIn read these to show a date and a byline on a
+    // shared link, and they are one more consistent statement of who wrote the page and when,
+    // which is the same thing the structured data says. Removed on a normal page, or an old
+    // article date would stay attached to whatever the visitor opened next.
+    metaOrRemove('property', 'article:published_time', type === 'article' ? published : null)
+    metaOrRemove('property', 'article:modified_time', type === 'article' ? modified : null)
+    metaOrRemove('property', 'article:author', type === 'article' ? author : null)
+    metaOrRemove('property', 'article:section', type === 'article' ? section : null)
+    metaOrRemove('property', 'og:image:alt', imageAlt)
+
     meta('name', 'twitter:card', 'summary_large_image')
     meta('name', 'twitter:title', fullTitle)
     meta('name', 'twitter:description', description)
@@ -109,19 +134,20 @@ export function useSeo(title, description, options = {}) {
     return () => {
       document.querySelectorAll('script[data-seo="page"]').forEach((n) => n.remove())
     }
-  }, [title, description, path, image, type, jsonLdKey, noindex, bare])
+  }, [title, description, path, image, type, jsonLdKey, noindex, bare,
+      published, modified, author, section, imageAlt])
 }
 
 // ---------------------------------------------------------------------------------------------
 // Helpers for the structured data blocks, so pages do not have to remember the exact shape.
 // ---------------------------------------------------------------------------------------------
 
-// NOTE: this file used to export a breadcrumbs() helper, and the pages showed a small
-// "Home / Universities" trail above each heading. Both were removed on request. The trail was
-// there to make a page eligible for the breadcrumb line Google can show in place of a raw web
-// address, but the top menu is on every page anyway, so nothing about getting around the site
-// depends on it. If you ever want it back, it was a BreadcrumbList block in the structured data
-// plus a small <nav> above each page heading.
+// NOTE: breadcrumbs do not live here. They were removed from this file once, then rebuilt in
+// src/components/Breadcrumbs.jsx, which renders the visible trail and writes its own
+// BreadcrumbList block. Putting both in one component means adding a page never means
+// remembering to add a breadcrumb block to it, and it keeps the two halves impossible to
+// separate, which matters because Google only shows the trail in a search result when the
+// markup describes something the visitor can actually see.
 
 // Makes a page eligible for the expandable question and answer boxes in Google. Only use it for
 // questions that are genuinely on the page, which is both Google's rule and the honest thing.

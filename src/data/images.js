@@ -43,6 +43,9 @@
 
 const WIDTHS = [480, 768, 1200, 1800]
 const WIDE = [640, 1024, 1600, 2000]
+// Portraits sit in a box that is never wider than about 300 pixels, so the big widths above
+// would only ever mean a slower page for no visible gain.
+const FOUNDER_WIDTHS = [400, 640, 900]
 
 // Builds the set of sizes for one of your own photos in public/img.
 function own(slug, alt, { widths = WIDTHS, sizes = '100vw', position = 'center' } = {}) {
@@ -138,6 +141,22 @@ export const IMAGES = {
 
   aboutTeam: own('graduates-raising-caps', 'International graduates in gowns raising their caps outside their university', {
     sizes: '(min-width: 1024px) 50vw, 100vw',
+  }),
+
+  // The two founders, on the About page. Real photographs of real people, which is the whole
+  // point of them: a student handing over their documents wants to see who they are dealing
+  // with. Saved as a 4:5 portrait crop at three widths, which is the shape of the box they sit
+  // in, so the browser never has to trim a face to make one fit. They are smaller than the
+  // other photos on the site because the box is never wider than about 300 pixels.
+  founderUmer: own('founder-umer', 'Umer Sattar, co-founder of VL Study Abroad Consultants, at his desk in a navy suit', {
+    widths: FOUNDER_WIDTHS,
+    sizes: '(min-width: 1024px) 300px, 100vw',
+    position: 'center 22%',
+  }),
+  founderKashan: own('founder-kashan', 'Kashan Nazeer, founder of VL Study Abroad Consultants, holding a phone at his desk in a white shalwar kameez', {
+    widths: FOUNDER_WIDTHS,
+    sizes: '(min-width: 1024px) 300px, 100vw',
+    position: 'center 18%',
   }),
 
   // -------------------------------------------------------------------------------------------

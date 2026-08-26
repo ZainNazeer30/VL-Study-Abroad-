@@ -2,7 +2,7 @@ import Img from '../components/Img'
 import Faq from '../components/Faq'
 import { Container } from '../components/ui'
 import { Field, Honeypot } from '../components/Field'
-import { useLeadForm } from '../hooks/useLeadForm'
+import { useLeadForm, PHONE_HINT } from '../hooks/useLeadForm'
 import { COUNTRIES } from '../data/countries'
 import { IMAGES } from '../data/images'
 import { POST_BY_SLUG } from '../data/blog'
@@ -285,8 +285,9 @@ export default function Country({ which }) {
                 <Honeypot value={form.company} onChange={setField('company')} />
                 <Field id={`${which}-name`} label="Full name" value={form.name} onChange={setField('name')}
                        autoComplete="name" required />
-                <Field id={`${which}-phone`} label="Phone or WhatsApp number" value={form.phone}
-                       onChange={setField('phone')} type="tel" inputMode="tel" autoComplete="tel" required />
+                <Field id={`${which}-phone`} label="Phone or WhatsApp number" hint={PHONE_HINT} value={form.phone}
+                       onChange={setField('phone')} type="tel" inputMode="numeric" autoComplete="tel"
+                       maxLength={11} required />
                 <Field id={`${which}-program`} label="Program you are interested in" value={form.program}
                        onChange={setField('program')} />
                 <button

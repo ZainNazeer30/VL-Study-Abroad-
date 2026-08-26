@@ -3,8 +3,8 @@ import { CONTACT } from '../data/site'
 
 // Catches a crash in any page so one broken component does not blank the whole site.
 //
-// This is a single page app: React renders everything. If any component throws — a typo in a
-// new article, a missing image key, a data field that turned out to be undefined — React
+// This is a single page app: React renders everything. If any component throws, a typo in a
+// new article, a missing image key, a data field that turned out to be undefined, React
 // unmounts the entire tree. The visitor gets a white page. No menu, no phone number, no way to
 // reach you, and no error they can report. For a site whose only job is producing enquiries,
 // that is a total loss rather than a degraded experience.
@@ -27,7 +27,7 @@ export default class ErrorBoundary extends Component {
   }
 
   // To clear a crash when the visitor navigates, the parent gives this a `key` of the current
-  // path. React remounts the boundary on a key change, which resets the state for free — no
+  // path. React remounts the boundary on a key change, which resets the state for free, no
   // setState in a lifecycle method, which React discourages because it triggers a second render.
 
   render() {

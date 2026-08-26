@@ -22,6 +22,11 @@
 //      because any links pointing at the old address will break.
 //   3. Add the address to public/sitemap.xml so Google finds it quickly.
 //   4. `image` must be a key that exists in src/data/images.js.
+//   5. `author` must be a key that exists in AUTHOR_BY_KEY in src/data/about.js, currently
+//      'kashan' or 'umer'. Name the person who actually wrote or checked the article. Google's
+//      guidance on who is behind a page is explicit that this has to be true, and a student who
+//      reads a visa guide signed by a named consultant with a LinkedIn profile trusts it more
+//      than one signed by "the team". Leave it out and the company byline is used instead.
 //
 // One article a month, answering one real question a student asked you that week, is worth more
 // than ten thin pages written in an afternoon.
@@ -42,6 +47,7 @@ export const POSTS = [
   // -------------------------------------------------------------------------------------------
   {
     slug: 'apply-to-italy-and-france-from-pakistan',
+    author: 'kashan',
     title: 'How to apply to a university in Italy or France from Pakistan',
     seoTitle: 'Apply to Italy or France from Pakistan',
     description:
@@ -80,6 +86,7 @@ faqs: [
   // -------------------------------------------------------------------------------------------
   {
     slug: 'hec-ibcc-mofa-attestation-order',
+    author: 'kashan',
     title: 'HEC, IBCC and MOFA attestation, in the right order',
     seoTitle: 'HEC, IBCC and MOFA Attestation Order',
     description:
@@ -121,6 +128,7 @@ faqs: [
   // -------------------------------------------------------------------------------------------
   {
     slug: 'fully-funded-scholarships-for-pakistani-students',
+    author: 'kashan',
     title: 'Fully funded scholarships in Italy and France for Pakistani students',
     seoTitle: 'Fully Funded Scholarships in Italy & France',
     description:
@@ -163,6 +171,7 @@ faqs: [
   // -------------------------------------------------------------------------------------------
   {
     slug: 'italy-student-visa-from-pakistan',
+    author: 'kashan',
     title: 'The Italy student visa from Pakistan, step by step',
     seoTitle: 'Italy Student Visa from Pakistan',
     description:
@@ -205,6 +214,7 @@ faqs: [
   // -------------------------------------------------------------------------------------------
   {
     slug: 'france-student-visa-from-pakistan',
+    author: 'kashan',
     title: 'The France student visa from Pakistan, and the Campus France step',
     seoTitle: 'France Student Visa and Campus France',
     description:
@@ -247,6 +257,7 @@ faqs: [
   // -------------------------------------------------------------------------------------------
   {
     slug: 'cost-of-studying-in-italy-and-france',
+    author: 'umer',
     title: 'What it really costs to study in Italy or France',
     seoTitle: 'Cost of Studying in Italy and France',
     description:
@@ -285,6 +296,7 @@ faqs: [
   // -------------------------------------------------------------------------------------------
   {
     slug: 'study-without-ielts',
+    author: 'umer',
     title: 'Can you study in Italy or France without IELTS?',
     seoTitle: 'Study in Italy or France Without IELTS',
     description:
@@ -322,6 +334,7 @@ faqs: [
   // -------------------------------------------------------------------------------------------
   {
     slug: 'choosing-a-university-in-italy-or-france',
+    author: 'umer',
     title: 'How to choose a university in Italy or France, and not regret it',
     seoTitle: 'Choosing a University in Italy or France',
     description:
@@ -359,6 +372,7 @@ faqs: [
   // -------------------------------------------------------------------------------------------
   {
     slug: 'intake-deadlines-italy-france',
+    author: 'umer',
     title: 'Italy and France intake deadlines, month by month',
     seoTitle: 'Italy and France Intake Deadlines',
     description:

@@ -16,7 +16,7 @@
     <title>Study Abroad Consultants in Pakistan | Italy &amp; France | VL Study Abroad</title>
     <meta
       name="description"
-      content="VL Study Abroad Consultants helps Pakistani students get into universities in Italy and France. Fully funded scholarships, HEC and IBCC attestation guidance, and full student visa support. Free consultation, 3+ years of experience."
+      content="VL Study Abroad Consultants helps Pakistani students get into universities in Italy and France. Fully funded scholarships, HEC and IBCC attestation guidance, and full student visa support. Free online consultation, from anywhere in Pakistan."
     />
     <link rel="canonical" href="https://www.vlstudy.online/" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -59,20 +59,43 @@
       imagesizes="(min-width: 1024px) 50vw, 100vw"
       fetchpriority="high"
     />
+    <!-- The fonts, loaded without blocking the first paint.
+         Before this, the browser hit this stylesheet, stopped, opened a connection to a second
+         company's server, waited for the file and only then drew anything. On a phone on mobile
+         data in Pakistan that is a few hundred milliseconds of blank screen on every page, and
+         it lands on First Contentful Paint and Largest Contentful Paint, two of the three scores
+         Google grades a page on.
+         The trick below is standard: ask for it as a print stylesheet, which the browser fetches
+         without blocking, then flip it to all media once it has arrived. The <noscript> copy
+         covers the small number of visitors with JavaScript off. -->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all';this.onload=null;"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- Who this business is, in the form search engines read. This is what makes the site
          eligible to show your logo and your details beside the result rather than a bare link.
-         The blog articles and the home page FAQ add their own blocks on top of this at runtime. -->
+         The blog articles and the home page FAQ add their own blocks on top of this at runtime.
+
+         "sameAs" at the bottom is an empty list waiting for your Facebook, Instagram, LinkedIn,
+         TikTok and YouTube addresses. It is how Google ties this site to those profiles and
+         treats them as one business rather than five unrelated pages. One line each, and it is
+         the cheapest entity signal available to you. Note that this block is JSON, so it takes
+         no comments of its own: anything you add has to be a real field. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@graph": [
           {
-            "@type": ["EducationalOrganization", "ProfessionalService"],
+            "@type": "EducationalOrganization",
             "@id": "https://www.vlstudy.online/#organisation",
             "name": "VL Study Abroad Consultants",
             "alternateName": "VL Study Abroad",
@@ -84,12 +107,13 @@
               "height": 512
             },
             "image": "https://www.vlstudy.online/img/hero-students-1600.jpg",
-            "description": "Study abroad consultancy helping Pakistani students get into universities in Italy and France, with fully funded scholarship guidance, admissions support, document attestation help and student visa assistance.",
+            "description": "Online study abroad consultancy helping Pakistani students get into universities in Italy and France, with fully funded scholarship guidance, admissions support, document attestation help and student visa assistance. Every consultation is by call, video or WhatsApp, from anywhere in Pakistan.",
             "email": "vlstudy.online@gmail.com",
             "telephone": "+92-321-5208625",
             "foundingDate": "2023",
             "areaServed": { "@type": "Country", "name": "Pakistan" },
             "address": { "@type": "PostalAddress", "addressCountry": "PK" },
+            "availableLanguage": ["English", "Urdu"],
             "knowsLanguage": ["en", "ur"],
             "knowsAbout": [
               "Study in Italy from Pakistan",
@@ -109,6 +133,65 @@
               "email": "vlstudy.online@gmail.com",
               "areaServed": "PK",
               "availableLanguage": ["English", "Urdu"]
+            },
+            "founder": [
+              {
+                "@type": "Person",
+                "name": "Kashan Nazeer",
+                "jobTitle": "Consultant and Founder",
+                "sameAs": ["https://www.linkedin.com/in/kashan-nazeer-a72475369/"]
+              },
+              {
+                "@type": "Person",
+                "name": "Umer Sattar",
+                "jobTitle": "Educator and Co-founder",
+                "sameAs": ["https://www.linkedin.com/in/umer-sattar-76221942b/"]
+              }
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Study abroad services for Pakistani students",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "University admissions guidance for Italy and France",
+                    "description": "Shortlisting programmes a student can realistically get into, preparing the application and tracking it to a decision."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Fully funded scholarship applications",
+                    "description": "DSU regional scholarships in Italy, the Eiffel Excellence scholarship in France and university merit awards, including the separate deadlines students most often miss."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Document attestation guidance",
+                    "description": "The IBCC, HEC and MOFA chain in the right order, and embassy legalisation including the Declaration of Value for Italy."
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Student visa file preparation",
+                    "description": "Bank statement and funding evidence, Universitaly pre enrolment, Campus France, and preparation for the appointment in Islamabad."
+                  }
+                }
+              ]
+            },
+            "makesOffer": {
+              "@type": "Offer",
+              "name": "Free 30 minute consultation",
+              "price": "0",
+              "priceCurrency": "PKR",
+              "url": "https://www.vlstudy.online/contact"
             },
             "sameAs": []
           },

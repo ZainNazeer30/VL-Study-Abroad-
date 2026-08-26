@@ -7,6 +7,8 @@ import { IMAGES } from '../data/images'
 import { POST_BY_SLUG, formatPostDate } from '../data/blog'
 import { BODY_BY_SLUG } from '../data/postBodies'
 import { CONTACT } from '../data/site'
+import { AUTHOR_BY_KEY } from '../data/about'
+import { Avatar } from '../components/ui'
 import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
 
 export default function BlogPost() {
@@ -24,12 +26,18 @@ export default function BlogPost() {
 
 function Article({ post }) {
   const image = IMAGES[post.image]
+  const author = AUTHOR_BY_KEY[post.author]
   const related = (post.related || []).map((s) => POST_BY_SLUG[s]).filter(Boolean)
 
   useSeo(post.seoTitle || post.title, post.description, {
     path: `/blog/${post.slug}`,
     image: image?.src,
+    imageAlt: image?.alt,
     type: 'article',
+    published: post.date,
+    modified: post.updated || post.date,
+    author: author?.name,
+    section: post.category,
     jsonLd: graph(
       {
         '@type': 'BlogPosting',
@@ -43,7 +51,23 @@ function Article({ post }) {
         wordCount: countWords(post),
         timeRequired: `PT${post.read}M`,
         mainEntityOfPage: { '@type': 'WebPage', '@id': absolute(`/blog/${post.slug}`) },
-        author: { '@type': 'Organization', name: 'VL Study Abroad Consultants', url: absolute('/') },
+        // Who wrote this, as a person Google can tie to a profile it already knows. An article
+        // signed by an Organization asserts nothing about expertise; one signed by a named
+        // consultant with a LinkedIn profile and a bio on this site is the whole of what the
+        // quality guidelines mean by experience and authority. This is the single largest
+        // on-page difference between two otherwise identical guides.
+        author: author
+          ? {
+              '@type': 'Person',
+              name: author.name,
+              jobTitle: author.role,
+              description: author.credential,
+              url: absolute('/about'),
+              sameAs: [author.linkedin],
+              image: author.image && IMAGES[author.image] ? absolute(IMAGES[author.image].src) : undefined,
+              worksFor: { '@id': absolute('/#organisation') },
+            }
+          : { '@type': 'Organization', name: 'VL Study Abroad Consultants', url: absolute('/') },
         publisher: {
           '@type': 'Organization',
           name: 'VL Study Abroad Consultants',
@@ -69,7 +93,19 @@ function Article({ post }) {
             </h1>
             <p className="text-[15px] sm:text-[16px] leading-relaxed text-slate m-0 mb-4">{post.excerpt}</p>
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] text-mist">
-              <span>By the VL Study Abroad team</span>
+              {/* The byline has to match the author in the structured data, and both have to be
+                  a real person, or the whole signal is worth nothing. */}
+              {author ? (
+                <span>
+                  By{' '}
+                  <Link to="/about" className="text-royal font-medium">
+                    {author.name}
+                  </Link>
+                  , {author.role}
+                </span>
+              ) : (
+                <span>By the VL Study Abroad team</span>
+              )}
               <span aria-hidden="true">·</span>
               <span>
                 Published{' '}
@@ -112,6 +148,11 @@ function Article({ post }) {
           </section>
         )}
       </article>
+
+      {/* Who wrote it, at the point the reader has finished and is deciding whether to trust it.
+          This is the visible half of the author signal: the structured data above says a named
+          consultant wrote the guide, and this is where a reader can check that for themselves. */}
+      {author && <AuthorBox author={author} />}
 
       <section className="px-5 sm:px-8 lg:px-12 pt-8">
         <Container className="lg:max-w-3xl">
@@ -196,4 +237,42 @@ function countWords(post) {
     return []
   })
   return parts.join(' ').split(/\s+/).filter(Boolean).length
+}
+
+function AuthorBox({ author }) {
+  const photo = author.image ? IMAGES[author.image] : null
+  return (
+    <section className="px-5 sm:px-8 lg:px-12 pt-9">
+      <Container className="lg:max-w-3xl">
+        <div className="border-t border-line pt-6 flex gap-4">
+          <div className="w-[68px] h-[68px] rounded-full overflow-hidden shrink-0 bg-[#F4F8FE]">
+            {photo ? (
+              <Img image={photo} className="w-full h-full" />
+            ) : (
+              <Avatar initials={author.initials} tone={author.tone} className="w-full h-full text-[20px]" />
+            )}
+          </div>
+          <div className="min-w-0">
+            <div className="text-[11px] font-semibold tracking-[0.08em] uppercase text-mist mb-1">Written by</div>
+            <div className="font-display font-semibold text-[15.5px] text-navy leading-tight">{author.name}</div>
+            <p className="text-[13px] leading-relaxed text-ink m-0 mt-1.5">{author.credential}</p>
+            <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2">
+              <Link to="/about" className="text-[13px] font-semibold text-royal">
+                More about {author.name.split(' ')[0]}
+              </Link>
+              <a
+                href={author.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-royal"
+              >
+                LinkedIn
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  )
 }

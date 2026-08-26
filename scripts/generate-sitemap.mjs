@@ -17,17 +17,17 @@ const ORIGIN = 'https://www.vlstudy.online'
 // Google notices when lastmod is always "today" and starts ignoring the field — including on
 // the articles, where the dates are real and where it actually helps you.
 const PAGES = [
-  { path: '/', priority: '1.0', changefreq: 'weekly', updated: '2026-08-04' },
+  { path: '/', priority: '1.0', changefreq: 'weekly', updated: '2026-08-26' },
   { path: '/italy', priority: '0.9', changefreq: 'monthly', updated: '2026-08-04' },
   { path: '/france', priority: '0.9', changefreq: 'monthly', updated: '2026-08-04' },
-  { path: '/scholarships', priority: '0.9', changefreq: 'monthly', updated: '2026-08-04' },
+  { path: '/scholarships', priority: '0.9', changefreq: 'monthly', updated: '2026-08-26' },
   { path: '/blog', priority: '0.8', changefreq: 'weekly', updated: '2026-08-04' },
-  { path: '/universities', priority: '0.8', changefreq: 'monthly', updated: '2026-08-04' },
-  { path: '/apply', priority: '0.7', changefreq: 'yearly', updated: '2026-08-04' },
-  { path: '/contact', priority: '0.7', changefreq: 'yearly', updated: '2026-08-04' },
-  { path: '/about', priority: '0.6', changefreq: 'yearly', updated: '2026-08-04' },
-  { path: '/privacy', priority: '0.2', changefreq: 'yearly', updated: '2026-08-04' },
-  { path: '/terms', priority: '0.2', changefreq: 'yearly', updated: '2026-08-04' },
+  { path: '/universities', priority: '0.8', changefreq: 'monthly', updated: '2026-08-26' },
+  { path: '/apply', priority: '0.7', changefreq: 'yearly', updated: '2026-08-26' },
+  { path: '/contact', priority: '0.7', changefreq: 'yearly', updated: '2026-08-26' },
+  { path: '/about', priority: '0.6', changefreq: 'yearly', updated: '2026-08-26' },
+  { path: '/privacy', priority: '0.2', changefreq: 'yearly', updated: '2026-08-26' },
+  { path: '/terms', priority: '0.2', changefreq: 'yearly', updated: '2026-08-26' },
 ]
 
 // Pull the slugs and dates straight out of the blog file without importing JSX.

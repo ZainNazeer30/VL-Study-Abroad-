@@ -24,7 +24,9 @@ import { useSeo, graph } from '../hooks/useSeo'
 // with partners abroad it is worth having a lawyer read it once.
 // ---------------------------------------------------------------------------------------------
 
-const LAST_UPDATED = '26 August 2026'
+// Month and year only. A policy dated to the day looks like it was generated on the day, and
+// nothing in here changes often enough for a date that precise to mean anything.
+const LAST_UPDATED = 'April 2026'
 
 export default function Legal({ which }) {
   const page = which === 'terms' ? TERMS : PRIVACY
@@ -109,93 +111,92 @@ const PRIVACY = {
     {
       h: 'The short version',
       p: [
-        `${BRAND.fullName} collects the details you type into a form on this site so that a counsellor can reply to you. We do not sell your details, we do not pass them to anyone who is not working on your application, and if you ask us to delete them we delete them.`,
+        `${BRAND.fullName} collects the details you type into a form here so that a counsellor can write back to you. That is the whole purpose. We do not sell your details, we do not pass them to anyone who is not working on your application, and if you ask us to delete them, we delete them.`,
       ],
     },
     {
       h: 'What we collect',
-      p: ['Only what you type in, which depending on the form is:'],
+      p: ['Only what you type in. Depending on which form you used, that is:'],
       ul: [
         'Your name, email address and phone or WhatsApp number.',
-        'Your current qualification, your preferred country, intake and programme.',
-        'Anything you choose to write in a message or notes field.',
-        'For a booking, the date and time you selected.',
+        'Your current qualification, and the country, intake and programme you have in mind.',
+        'Whatever you choose to write in a message or notes box.',
+        'If you booked a call, the day and time you picked.',
       ],
-      // eslint-disable-next-line
     },
     {
       h: 'Cookies and how we measure the site',
       p: [
-        'When you first open the site you are asked whether we may measure how it is used. Nothing is stored until you answer, and nothing is stored at all if you say no. The site works identically either way.',
-        'If you say yes, we use Google Analytics, which sets a cookie in your browser and records which pages you open, roughly how long you stay, the approximate area you are in (from your IP address, which is shortened before it is stored), and the kind of device and browser you are using. We use it for one thing: to see which pages actually help students, so we know what to write more of.',
-        'Your answer is remembered in your browser so you are not asked on every visit. You can change it at any time using the button at the bottom of this page. Clearing your browser data also clears it, and you will simply be asked again.',
-        'We do not run advertising, we do not use the site to build a profile of you, and we do not sell or share anything with advertisers. Google Analytics is configured with advertising features and personalisation switched off.',
+        'The first time you open the site we ask whether we may measure how it gets used. Nothing is stored before you answer, and nothing is stored at all if you say no. The site behaves exactly the same either way.',
+        'If you say yes, we use Google Analytics. It sets a cookie and records which pages you open, roughly how long you stay, the rough area you are in (worked out from your IP address, which is shortened before it is stored) and what device and browser you are on. We look at it for one reason: to see which pages are actually helping students, so we know what to write more of.',
+        'Your answer is saved in your browser so you are not asked again on every visit. You can change it whenever you like, using the buttons at the bottom of this page. Clearing your browser data clears it too, and you will simply be asked again next time.',
+        'We do not run ads, we do not build a profile of you, and we do not share anything with advertisers. The advertising and personalisation features in Google Analytics are switched off.',
       ],
     },
     {
-      h: 'What we do not collect',
+      h: 'What we never collect',
       ul: [
-        'We do not ask for your passport number, CNIC, bank details or any payment information through this website.',
-        'We do not run advertising trackers, retargeting pixels or profiling cookies.',
-        'If you decline the measurement above and do not submit a form, we hold nothing about your visit.',
+        'We never ask for your passport number, CNIC, bank details or card details through this website.',
+        'There are no advertising trackers, retargeting pixels or profiling cookies anywhere on the site.',
+        'If you say no to the measurement above and do not send a form, we hold nothing at all about your visit.',
       ],
       p: [
-        'If anyone contacts you claiming to be us and asks for a bank transfer or a card number through a web form, it is not us. Speak to us on the number listed on the contact page before paying anything.',
+        'One line worth reading twice. If somebody contacts you claiming to be us and asks for a bank transfer or a card number through a web form, it is not us. Call the number on the contact page before you pay anybody anything.',
       ],
     },
     {
       h: 'Where it goes, and who else sees it',
       p: [
-        'When you submit a form, the details are sent to our own email inbox so a counsellor can read them and reply. They are held in that email account and, for students who become clients, in our own working records for the application.',
-        'We do not sell your details, and we do not pass them to other consultancies, agents or lead-buying services. If an application needs your information to go to a university, a scholarship body or an embassy, that only happens for a student who has asked us to make that application, and it goes only to that institution.',
+        'When you send a form it arrives as an email in our own inbox, a counsellor reads it and replies. It stays in that inbox, and for students who go on to become clients, in our own working notes for the application. We work entirely online and keep no paper files, so there is no filing cabinet in an office somewhere with your documents in it.',
+        'We do not sell your details and we do not hand them to other consultancies, agents or lead buying services. If your information needs to reach a university, a scholarship body or an embassy, that happens only for a student who has asked us to make that application, and it goes to that institution and nowhere else.',
       ],
       ul: [
-        'Our website host, which serves the pages and runs the small program that emails us your form.',
-        'Google (Gmail), which carries and stores that email, and Google Analytics if you agreed to the measurement described above.',
-        'WhatsApp, owned by Meta, if you choose to message us there. That conversation is governed by WhatsApp\u2019s own privacy terms, not ours.',
+        'Our website host, which serves these pages and runs the small program that emails your form to us.',
+        'Google, which carries and stores that email in Gmail, and Google Analytics if you agreed to the measurement above.',
+        'WhatsApp, owned by Meta, if you choose to message us there. That conversation is covered by WhatsApp\u2019s own privacy terms rather than ours.',
       ],
       p2: [
-        'Some of these providers are based outside Pakistan, which means your details may be stored on servers in other countries, including in the United States and the European Union.',
+        'Some of these companies are based outside Pakistan, so your details may sit on servers in other countries, including the United States and the European Union.',
       ],
     },
     {
       h: 'How long we keep it',
       p: [
-        'If you enquire and do not go ahead, we keep your enquiry while it is still useful to you, since students often come back a year later for the next intake, and delete it on request at any time.',
-        'If you become a client, we keep the records connected to your application for as long as we are working on it and for a reasonable period afterwards, because questions about a visa or an enrolment can come back months later.',
+        'If you enquire and then decide not to go ahead, we keep the enquiry for as long as it is still useful to you. Students often come back a year later for the next intake. Ask us to delete it at any point and we will.',
+        'If you become a client, we keep the records tied to your application while we are working on it and for a reasonable period afterwards, because a question about a visa or an enrolment can turn up months later.',
       ],
     },
     {
       h: 'Your choices',
       ul: [
-        'You can ask us what we hold about you, and we will tell you.',
-        'You can ask us to correct anything that is wrong.',
-        'You can ask us to delete your details, and we will, unless we are in the middle of an application you have asked us to run.',
-        'You can ask us to stop contacting you, and we will stop.',
-        'You can ask us to send you a copy of what you gave us, in a form you can pass to someone else.',
-        'You can change your mind about the measurement cookie at any time, using the button at the bottom of this page.',
+        'Ask what we hold about you and we will tell you.',
+        'Ask us to correct anything that is wrong.',
+        'Ask us to delete your details and we will, unless we are in the middle of an application you asked us to run.',
+        'Ask us to stop contacting you and we stop.',
+        'Ask for a copy of what you gave us, in a form you can pass to someone else.',
+        'Change your mind about the measurement cookie whenever you like, using the buttons at the bottom of this page.',
       ],
       p: [
-        'Email us and say what you want. There is no form to fill in for this, and we will not ask you to prove anything beyond enough to be sure it is really you. We answer within 30 days and usually much sooner.',
-        'If you are in the European Union or the United Kingdom, the rules there give you these rights directly, and you also have the right to complain to your national data protection authority if you think we have handled your details badly. We would rather you told us first so we can fix it.',
+        'Email us and say what you want. There is no form to fill in for this. We will not ask you to prove anything beyond enough for us to be sure it is really you, and we answer within 30 days, usually much sooner.',
+        'If you are in the European Union or the United Kingdom, the law there gives you these rights directly, and you can complain to your national data protection authority if you think we have handled your details badly. We would far rather you told us first, so we can put it right.',
       ],
     },
     {
-      h: 'Photographs and success stories',
+      h: 'Photographs on this site',
       p: [
-        'The quotes on this site come from students we have worked with. The portraits beside them are illustrations, not photographs of those students, so that nobody is identifiable from a picture they did not agree to. If a student agrees to appear with their real name and photograph, we ask them in writing first and they can withdraw at any time.',
+        'The photographs of Umer and Kashan on the About page are really them. The quotes on the success story cards come from students we have worked with, but the portraits beside those quotes are illustrations rather than photographs, so no student is identifiable from a picture they never agreed to. If a student does agree to appear with their real name and photograph, we ask them in writing first, and they can change their mind at any time.',
       ],
     },
     {
       h: 'Children',
       p: [
-        'This site is aimed at students applying to university. If you are under 18, please go through the enquiry with a parent or guardian, since they will need to be involved in the funding and the visa file anyway.',
+        'This site is for students applying to university. If you are under 18, go through the enquiry with a parent or guardian. They will need to be part of the funding and the visa file anyway.',
       ],
     },
     {
       h: 'Changes',
       p: [
-        'If this policy changes we will update the date at the top. This is a plain description of how we work rather than a legal document drafted by a lawyer, and it is not legal advice.',
+        'If this policy changes we update the date at the top of the page. This is a plain description of how we actually work rather than a document drafted by a lawyer, and it is not legal advice.',
       ],
     },
   ],
@@ -210,59 +211,66 @@ const TERMS = {
     {
       h: 'What this website is',
       p: [
-        `This site describes the services of ${BRAND.fullName} and gives general guidance to students applying to universities in Italy and France from Pakistan. Using the site does not create a contract between us. That happens separately, in writing, when you engage us for a specific piece of work.`,
+        `This site describes what ${BRAND.fullName} does and gives general guidance to students applying to universities in Italy and France from Pakistan. Reading it does not put you under contract with us. That happens separately and in writing, when you engage us for a specific piece of work.`,
       ],
     },
     {
       h: 'Guidance, not a decision',
       p: [
-        'Nothing on this site is legal or immigration advice, and we are not a law firm. Admission decisions are made by universities. Visa decisions are made by embassies and consulates. Scholarship decisions are made by the awarding bodies. We prepare, advise and represent you as well as we can, and none of us can decide those outcomes.',
-        'For that reason we do not guarantee admission, a scholarship or a visa, and we would ask you to be careful with any consultant who does.',
+        'Nothing here is legal or immigration advice, and we are not a law firm. Universities decide admissions. Embassies and consulates decide visas. Awarding bodies decide scholarships. We prepare your file, advise you and represent you as well as we can, and none of that lets us decide the outcome.',
+        'So we do not guarantee admission, a scholarship or a visa, and we would ask you to be careful with any consultant who does.',
+      ],
+    },
+    {
+      h: 'How we work with you',
+      p: [
+        'We operate online. Consultations happen by call, video or WhatsApp, and documents are shared and reviewed digitally. There is no office to visit and no walk in service. That is what lets us charge the same fee to a student in Karachi as to one in Gilgit.',
+        'It also means you should be sure you are talking to us. Our number and email address are on the contact page. A message from any other number, or an offer made in our name by somebody else, is not us.',
       ],
     },
     {
       h: 'Accuracy and dates',
       p: [
-        'Fees, deadlines, scholarship amounts and visa requirements change, sometimes in the middle of an application cycle. We keep the pages here current as best we can and mark when guides were last updated, but before you rely on any figure for a decision, confirm it against the university, the embassy or the awarding body for your own intake year. Where a page names a specific amount, treat it as a guide rather than a promise.',
+        'Fees, deadlines, scholarship amounts and visa requirements change, sometimes in the middle of an application cycle. We keep these pages as current as we can and mark when each guide was last updated. Even so, before you make a decision based on a figure here, check it against the university, the embassy or the awarding body for your own intake year. Where a page names an amount, treat it as a guide rather than a promise.',
       ],
     },
     {
       h: 'Fees and refunds',
       p: [
-        'Our fees, what they cover and when they are payable are agreed with you directly before any paid work begins, in writing, along with the refund position. Nothing is charged through this website, and we will never ask for card details or a bank transfer through a web form.',
+        'What we charge, what it covers and when it is payable are agreed with you directly and in writing before any paid work begins, along with where you stand on refunds. Nothing is charged through this website, and we will never ask for card details or a bank transfer through a web form.',
       ],
     },
     {
       h: 'What we ask of you',
       ul: [
-        'Give us accurate information and genuine documents. We will not submit anything we believe to be false, and doing so puts your own future travel at risk far more than it puts ours.',
-        'Meet the deadlines we give you, since most of them belong to somebody else and cannot be moved.',
-        'Tell us promptly if your circumstances, funding or plans change.',
+        'Give us accurate information and genuine documents. We will not submit anything we believe to be false, and doing so puts your own future travel at far more risk than it puts ours.',
+        'Meet the deadlines we give you. Most of them belong to somebody else and cannot be moved.',
+        'Tell us quickly if your circumstances, your funding or your plans change.',
       ],
     },
     {
       h: 'Other websites',
       p: [
-        'This site links to university, government and embassy pages so you can check things at the source. We do not control those sites and are not responsible for their content, though we would rather you checked them than took our word for it.',
+        'We link to university, government and embassy pages so you can check things at the source. We do not control those sites and are not responsible for what is on them, though we would rather you checked them than took our word for it.',
       ],
     },
     {
       h: 'The content on this site',
       p: [
-        'The text, guides and design here are our own work. You are welcome to read, print and share links to any of it. Please do not republish whole articles as your own; a link back is always fine and always welcome.',
+        'The text, the guides and the design here are our own work. Read it, print it and share the links, all of that is welcome. Please do not republish whole articles as your own. A link back is always fine.',
       ],
     },
     {
       h: 'Law',
       p: [
-        'These terms are governed by the law of Pakistan. If something here does not match what we agreed with you in writing for your own case, the written agreement is what counts.',
+        'These terms are governed by the law of Pakistan. If anything here does not match what we agreed with you in writing for your own case, the written agreement is what counts.',
       ],
     },
   ],
 }
 
 // Lets a visitor see and change the analytics choice they made in the banner. Required in
-// substance by the EU and UK rules — withdrawing consent has to be as easy as giving it — and
+// substance by the EU and UK rules, withdrawing consent has to be as easy as giving it, and
 // it is the part most sites skip.
 function ConsentControl() {
   const [choice, setChoice] = useState(() => readChoice())

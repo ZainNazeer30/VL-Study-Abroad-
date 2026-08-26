@@ -31,6 +31,7 @@ export function Field({
   required = false,
   hint,
   invalid = false,
+  maxLength,
   className = '',
   as = 'input',
   rows,
@@ -58,6 +59,7 @@ export function Field({
         rows={rows}
         autoComplete={autoComplete}
         inputMode={inputMode}
+        maxLength={maxLength}
         required={required}
         aria-invalid={invalid || undefined}
         aria-describedby={hintId}

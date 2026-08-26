@@ -3,6 +3,17 @@
   publish = "dist"
   functions = "netlify/functions"
 
+# The site answers on both vlstudy.online and www.vlstudy.online. Left alone, that is two
+# addresses serving identical pages, and every link anyone builds to the bare domain counts
+# towards a copy of the site rather than towards the real one. The canonical tag tells Google
+# which to prefer, but a 301 is the instruction rather than the hint, and it passes the value of
+# those links across. This has to come before the catch-all below or it never runs.
+[[redirects]]
+  from = "https://vlstudy.online/*"
+  to = "https://www.vlstudy.online/:splat"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

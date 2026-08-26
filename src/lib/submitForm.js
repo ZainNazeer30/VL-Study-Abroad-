@@ -42,7 +42,7 @@ export async function submitForm(formName, data) {
     return {
       ok: false,
       error: offline
-        ? 'That took too long — check your connection and try again, or message us on WhatsApp.'
+        ? 'That took too long. Check your connection and try again, or message us on WhatsApp.'
         : 'We could not send that just now. Please WhatsApp us instead.',
     }
   } finally {

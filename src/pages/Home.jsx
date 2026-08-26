@@ -5,7 +5,7 @@ import Img from '../components/Img'
 import { PersonAvatar } from '../components/artwork'
 import { Eyebrow, H2, Container } from '../components/ui'
 import { Field, SelectField, Honeypot } from '../components/Field'
-import { useLeadForm } from '../hooks/useLeadForm'
+import { useLeadForm, PHONE_HINT } from '../hooks/useLeadForm'
 import { IMAGES } from '../data/images'
 import { CONTACT, TONES, STATUS } from '../data/site'
 import { POSTS } from '../data/blog'
@@ -38,7 +38,7 @@ export default function Home() {
   // Google's rule and the reason it works.
   useSeo(
     'Study Abroad Consultants in Pakistan for Italy and France',
-    'Study abroad consultants in Pakistan for Italy and France. Fully funded scholarships, HEC and IBCC attestation, and full student visa support. Free consultation.',
+    'Study abroad consultants in Pakistan for Italy and France. Fully funded scholarships, HEC and IBCC attestation and full visa support. Free first consultation.',
     {
       path: '/',
       // The home page title already carries the brand, so it is not appended twice.
@@ -67,7 +67,7 @@ export default function Home() {
   })
   const shownUnis = HOME_UNIS.filter((u) => matchesFilter(u, filter)).slice(0, 3)
 
-  // Previously this did `if (!form.name.trim()) return` — pressing the button with an empty
+  // Previously this did `if (!form.name.trim()) return`, pressing the button with an empty
   // name did nothing at all, with no message explaining why. Now it says what is missing.
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -405,8 +405,9 @@ export default function Home() {
                        autoComplete="name" required />
                 <Field id="home-email" label="Email address" value={form.email} onChange={setField('email')}
                        type="email" inputMode="email" autoComplete="email" />
-                <Field id="home-phone" label="Phone or WhatsApp number" value={form.phone}
-                       onChange={setField('phone')} type="tel" inputMode="tel" autoComplete="tel" required />
+                <Field id="home-phone" label="Phone or WhatsApp number" hint={PHONE_HINT} value={form.phone}
+                       onChange={setField('phone')} type="tel" inputMode="numeric" autoComplete="tel"
+                       maxLength={11} required />
                 <SelectField id="home-qual" label="Current qualification" prompt="Choose one" value={form.qual}
                              onChange={setField('qual')}
                              options={['Matric or O Levels', 'FSc, FA or A Levels', 'Bachelor degree (BS, BSc, BA)', 'Master degree (MS, MSc, MA)']} />

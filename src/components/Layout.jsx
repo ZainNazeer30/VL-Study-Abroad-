@@ -4,6 +4,7 @@ import Nav from './Nav'
 import Footer from './Footer'
 import BottomBar from './BottomBar'
 import ErrorBoundary from './ErrorBoundary'
+import Breadcrumbs from './Breadcrumbs'
 import CookieNotice from './CookieNotice'
 import { usePageviews } from '../hooks/usePageviews'
 
@@ -11,7 +12,7 @@ export default function Layout() {
   const { pathname } = useLocation()
 
   // Records the visit in Google Analytics. index.html switches off the automatic pageview,
-  // which is correct for a single page app, but nothing was firing the manual one — so the
+  // which is correct for a single page app, but nothing was firing the manual one, so the
   // tag had never recorded a single visit.
   usePageviews()
 
@@ -33,6 +34,9 @@ export default function Layout() {
 
       <Nav />
       <main id="main">
+        {/* Renders nothing on the home page and nothing on an unknown address. See the file
+            itself for why the visible trail and the structured data have to travel together. */}
+        <Breadcrumbs />
         {/* Keying on the path remounts the boundary on navigation, so a crash on one page
             does not trap the visitor on the error screen for the rest of the session. */}
         <ErrorBoundary key={pathname}>

@@ -48,7 +48,7 @@ function buildResult({ country, level, grade }) {
 
 export default function Scholarships() {
   useSeo(
-    'Scholarships in Italy and France',
+    'Fully Funded Scholarships in Italy, France',
     'Which Italy and France scholarships are genuinely fully funded, which only cut your fees, and a free check of what you qualify for from Pakistan.',
     {
       path: '/scholarships',
@@ -60,6 +60,27 @@ export default function Scholarships() {
           url: absolute('/scholarships'),
           description:
             'Fully funded and partial scholarships in Italy and France, with what each one covers and who qualifies.',
+        },
+        // The schemes themselves, named. "Fully funded scholarship" is the phrase students search
+        // before anything else, but they also search the schemes by name, DSU and Eiffel most of
+        // all. Listing them is what connects this page to those searches. Generated from the same
+        // array the page renders, so it can never name a scheme that is not on the page.
+        {
+          '@type': 'ItemList',
+          name: 'Scholarships in Italy and France for Pakistani students',
+          numberOfItems: SCHOLARSHIPS.length,
+          itemListElement: SCHOLARSHIPS.map((s, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            item: {
+              '@type': 'EducationalOccupationalProgram',
+              name: s.name,
+              description: s.benefit,
+              educationalCredentialAwarded: s.level,
+              provider: { '@type': 'Organization', name: s.runBy },
+              applicationDeadline: s.deadline,
+            },
+          })),
         },
         // Every question in here is answered further down this page, which is both Google's rule
         // and the reason the expandable boxes are worth having.

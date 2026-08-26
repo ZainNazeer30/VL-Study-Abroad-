@@ -40,6 +40,32 @@ export default function Universities() {
           url: absolute('/universities'),
           description:
             'Universities in Italy and France that Pakistani students can apply to, searchable by country, level, subject, tuition and intake.',
+        },
+        // The list itself, named. A CollectionPage on its own tells a search engine that this
+        // page collects things; it does not say what. Spelling out the universities is what
+        // connects this page to a search for any one of them by name, and it is the difference
+        // between a page about "universities" and a page Google knows mentions Politecnico di
+        // Milano, Sorbonne and nine others. Built from the same array the page renders, so it
+        // can never describe a university that is not actually listed.
+        {
+          '@type': 'ItemList',
+          name: 'Universities in Italy and France for Pakistani students',
+          numberOfItems: UNIVERSITIES.length,
+          itemListOrder: 'https://schema.org/ItemListUnordered',
+          itemListElement: UNIVERSITIES.map((u, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            item: {
+              '@type': 'CollegeOrUniversity',
+              name: u.name,
+              description: u.detail,
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: u.city,
+                addressCountry: u.country === 'Italy' ? 'IT' : 'FR',
+              },
+            },
+          })),
         }
       ),
     }
@@ -123,7 +149,7 @@ export default function Universities() {
         <Container className="lg:max-w-3xl flex flex-col gap-2.5 sm:grid sm:grid-cols-2 lg:grid-cols-3">
           {/* Each filter needs a name a screen reader can announce. The labels are visually
               hidden because the first <option> already reads as the filter name for sighted
-              users — "Country", "Degree level" and so on. */}
+              users, "Country", "Degree level" and so on. */}
           <Filter id="filter-country" label="Country" value={f.country} onChange={setField('country')}
                   options={['Italy', 'France']} />
           <Filter id="filter-level" label="Degree level" value={f.level} onChange={setField('level')}

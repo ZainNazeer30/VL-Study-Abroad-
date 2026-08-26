@@ -10,8 +10,8 @@ import { ABOUT_STATS, ABOUT_VALUES, ABOUT_STORIES, FOUNDERS } from '../data/abou
 
 export default function About() {
   useSeo(
-    'About Us',
-    'Three years helping Pakistani students into universities in Italy and France, with a focus on fully funded scholarships and a strong visa record.',
+    'About Us: Italy and France Specialists',
+    'Meet Kashan and Umer. Three years getting Pakistani students into universities in Italy and France, with fully funded scholarships and a strong visa record.',
     {
       path: '/about',
       image: IMAGES.aboutTeam.src,
@@ -24,6 +24,9 @@ export default function About() {
           name: f.name,
           jobTitle: f.role,
           description: f.quote,
+          // A named person with a face and a checkable profile is the strongest trust signal a
+          // small consultancy has, and it is exactly what Google's quality guidelines look for.
+          image: f.image && IMAGES[f.image] ? absolute(IMAGES[f.image].src) : undefined,
           sameAs: [f.linkedin],
           worksFor: { '@id': absolute('/#organisation') },
         })),
@@ -97,40 +100,12 @@ export default function About() {
           </h2>
           <p className="text-[14px] leading-relaxed m-0 mb-4">
             VL is deliberately small. There is no call centre and no handing your file between departments: you deal
-            with one of us from the first conversation to the day you land.
+            with one of us from the first conversation to the day you land. We work entirely online, on calls, video
+            and WhatsApp, so it makes no difference where in Pakistan you are.
           </p>
-          <div className="flex flex-col gap-3.5">
+          <div className="flex flex-col gap-4">
             {FOUNDERS.map((f) => (
-              <div key={f.name} className="border border-line rounded-[16px] p-5 bg-white shadow-[0_6px_16px_rgba(10,30,60,0.05)]">
-                <div className="flex items-center gap-3.5 mb-3">
-                  {f.photo ? (
-                    <img src={f.photo} alt={f.name} className="w-14 h-14 rounded-full object-cover shrink-0" />
-                  ) : (
-                    <Avatar initials={f.initials} tone={f.tone} className="w-14 h-14 text-[17px]" />
-                  )}
-                  <div>
-                    <div className="font-display font-semibold text-[16px] text-navy leading-tight">{f.name}</div>
-                    <div className="text-[12.5px] text-mist mt-0.5">{f.role}</div>
-                  </div>
-                </div>
-                {f.bio.map((para, i) => (
-                  <p key={i} className="text-[13.5px] leading-relaxed text-ink m-0 mb-2.5">
-                    {para}
-                  </p>
-                ))}
-                <blockquote className="border-l-[3px] border-royal-soft pl-3.5 my-3 m-0">
-                  <p className="text-[13.5px] leading-relaxed text-navy italic m-0">“{f.quote}”</p>
-                </blockquote>
-                <a
-                  href={f.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-royal"
-                >
-                  {f.name.split(' ')[0]} on LinkedIn
-                  <span aria-hidden="true">↗</span>
-                </a>
-              </div>
+              <FounderCard key={f.name} founder={f} />
             ))}
           </div>
         </Container>
@@ -159,7 +134,7 @@ export default function About() {
         </Container>
       </section>
 
-      <section className="px-5 sm:px-8 lg:px-12 mt-8 mb-9 lg:mt-14 lg:mb-16">
+      <section className="px-5 sm:px-8 lg:px-12 mt-8 mb-9 lg:mt-14 lg:mb-16" id="cta">
         <Container className="lg:max-w-3xl">
           <div className="rounded-[20px] bg-gradient-to-br from-navy to-navy-soft p-[28px_22px] lg:p-12 text-center">
             <h2 className="font-display font-semibold text-[20px] lg:text-[26px] text-white m-0 mb-2">Your story could be next</h2>
@@ -173,5 +148,56 @@ export default function About() {
         </Container>
       </section>
     </div>
+  )
+}
+
+// One founder, laid out the way the lead card on the Guides page is: photograph on the left,
+// words on the right once there is room for both side by side. On a phone the photo sits on top
+// at a fixed height and the text runs underneath, because two narrow columns would leave the
+// bio about four words wide.
+//
+// The photo is a real photograph now, so it is given the same treatment as every other photo on
+// the site: three widths in webp and jpg, and the browser takes the smallest file that still
+// looks sharp. If an entry in src/data/about.js has no `image` key, the initials show instead
+// and the layout is unchanged.
+function FounderCard({ founder: f }) {
+  const photo = f.image ? IMAGES[f.image] : null
+  return (
+    <article className="border border-line rounded-[18px] overflow-hidden bg-white shadow-[0_6px_16px_rgba(10,30,60,0.05)] sm:flex">
+      <div className="h-[260px] sm:h-auto sm:w-[38%] lg:w-[34%] shrink-0 bg-[#F4F8FE]">
+        {photo ? (
+          <Img image={photo} className="w-full h-full min-h-[260px]" />
+        ) : (
+          <div className="w-full h-full min-h-[260px] flex items-center justify-center">
+            <Avatar initials={f.initials} tone={f.tone} className="w-20 h-20 text-[24px]" />
+          </div>
+        )}
+      </div>
+
+      <div className="p-5 lg:p-7 flex flex-col justify-center">
+        <h3 className="font-display font-semibold text-[17px] sm:text-[18px] text-navy leading-tight m-0">{f.name}</h3>
+        <div className="text-[12.5px] text-mist mt-1 mb-3">{f.role}</div>
+
+        {f.bio.map((para, i) => (
+          <p key={i} className="text-[13.5px] leading-relaxed text-ink m-0 mb-2.5">
+            {para}
+          </p>
+        ))}
+
+        <blockquote className="border-l-[3px] border-royal-soft pl-3.5 my-2.5 m-0">
+          <p className="text-[13.5px] leading-relaxed text-navy italic m-0">“{f.quote}”</p>
+        </blockquote>
+
+        <a
+          href={f.linkedin}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-royal mt-1 self-start"
+        >
+          {f.name.split(' ')[0]} on LinkedIn
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
   )
 }
