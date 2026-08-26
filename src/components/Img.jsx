@@ -19,6 +19,11 @@ import { useState } from 'react'
 // immediately. Everything else stays lazy, so photos further down the page are only fetched when
 // the visitor scrolls near them.
 export default function Img({ image, className = '', loading = 'lazy', fetchPriority }) {
+  // The photo at the top of a page is the one Chrome measures for Largest Contentful Paint,
+  // and LCP is recorded at the moment of paint. Fading it in from opacity-0 means it does not
+  // count as painted for half a second — on the exact image the score is about. So the eager
+  // (above the fold) image appears instantly; everything below the fold still fades.
+  const instant = loading === 'eager'
   const [stage, setStage] = useState(0) // 0 = main photo, 1 = fallback photo, 2 = gave up
   const [loaded, setLoaded] = useState(false)
 
@@ -45,8 +50,8 @@ export default function Img({ image, className = '', loading = 'lazy', fetchPrio
         setStage((s) => (s === 0 && image.fallback ? 1 : 2))
       }}
       style={image.position ? { objectPosition: image.position } : undefined}
-      className={`w-full h-full object-cover transition-opacity duration-500 ${
-        loaded ? 'opacity-100' : 'opacity-0'
+      className={`w-full h-full object-cover ${
+        instant ? '' : `transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`
       }`}
     />
   )

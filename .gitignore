@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Secrets. `*.local` above already covers .env.local, but a plain .env or .env.production
+# would otherwise be committed — and once a Gmail app password is in git history, deleting
+# the file does not remove it.
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,16 +1,22 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Home from './pages/Home'
-import Country from './pages/Country'
-import Universities from './pages/Universities'
-import Scholarships from './pages/Scholarships'
-import About from './pages/About'
-import Contact from './pages/Contact'
-import Apply from './pages/Apply'
-import Blog from './pages/Blog'
-import BlogPost from './pages/BlogPost'
-import Legal from './pages/Legal'
-import NotFound from './pages/NotFound'
+
+// Every page except the home page is loaded on demand. A visitor who lands on the home page and
+// never leaves it now downloads only the home page's code, instead of all twelve pages plus
+// every article. Home itself stays eagerly loaded because it is the page most visitors land on,
+// and making it wait for a second request would slow down the one that matters most.
+const Country = lazy(() => import('./pages/Country'))
+const Universities = lazy(() => import('./pages/Universities'))
+const Scholarships = lazy(() => import('./pages/Scholarships'))
+const About = lazy(() => import('./pages/About'))
+const Contact = lazy(() => import('./pages/Contact'))
+const Apply = lazy(() => import('./pages/Apply'))
+const Blog = lazy(() => import('./pages/Blog'))
+const BlogPost = lazy(() => import('./pages/BlogPost'))
+const Legal = lazy(() => import('./pages/Legal'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 export default function App() {
   return (
@@ -18,23 +24,26 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/italy" element={<Country which="italy" />} />
-          <Route path="/france" element={<Country which="france" />} />
-          <Route path="/universities" element={<Universities />} />
-          <Route path="/scholarships" element={<Scholarships />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/apply" element={<Apply />} />
-          <Route path="/privacy" element={<Legal which="privacy" />} />
-          <Route path="/terms" element={<Legal which="terms" />} />
-          {/* Anything else gets a real "not found" page rather than quietly showing the home
-              page. Showing the home page at a wrong address makes a search engine think you have
-              hundreds of duplicate copies of it, which actively harms ranking. */}
-          <Route path="*" element={<NotFound />} />
+          <Route path="/italy" element={<L><Country which="italy" /></L>} />
+          <Route path="/france" element={<L><Country which="france" /></L>} />
+          <Route path="/universities" element={<L><Universities /></L>} />
+          <Route path="/scholarships" element={<L><Scholarships /></L>} />
+          <Route path="/blog" element={<L><Blog /></L>} />
+          <Route path="/blog/:slug" element={<L><BlogPost /></L>} />
+          <Route path="/about" element={<L><About /></L>} />
+          <Route path="/contact" element={<L><Contact /></L>} />
+          <Route path="/apply" element={<L><Apply /></L>} />
+          <Route path="/privacy" element={<L><Legal which="privacy" /></L>} />
+          <Route path="/terms" element={<L><Legal which="terms" /></L>} />
+          <Route path="*" element={<L><NotFound /></L>} />
         </Route>
       </Routes>
     </BrowserRouter>
   )
+}
+
+// Holds the page height steady while the next page's code arrives, so the footer does not jump
+// up the screen for a moment. On a fast connection this is never visible.
+function L({ children }) {
+  return <Suspense fallback={<div className="min-h-[70vh]" />}>{children}</Suspense>
 }

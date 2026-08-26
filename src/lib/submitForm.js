@@ -1,24 +1,24 @@
 import { FORMS } from '../data/site'
 
-// Sends a form submission somewhere you can actually see it. Every call is tagged with which
-// form it came from so they're easy to tell apart in your inbox.
+// Sends a form submission and TELLS YOU WHETHER IT ARRIVED.
 //
-// By default this posts to /api/submit, a small function (see netlify/functions/submit.js and
-// api/submit.js) that emails the submission to your own Gmail using Nodemailer, for free. That
-// only works once you deploy to Netlify or Vercel and set the GMAIL_USER and GMAIL_APP_PASSWORD
-// environment variables described in the README.
+// The previous version swallowed every error and returned nothing, so the page showed
+// "Application received" whether or not the submission reached your inbox. A student on a
+// dropped connection in Lahore would be told their application was received, close the tab,
+// and wait for a call that was never going to come. That is the single most expensive bug on
+// the site, because it is invisible from your end: you cannot follow up on an enquiry you
+// never got.
 //
-// If you'd rather use a service like Formspree instead (simpler to set up, no Gmail app
-// password, but capped at 50 submissions a month on its free plan), set FORMS.endpoint in
-// src/data/site.js to your Formspree URL and this will post there instead.
-//
-// Either way, if the request fails for any reason (not deployed yet, offline visitor, endpoint
-// not configured), this quietly does nothing rather than blocking the on-page "thanks" message
-// the visitor sees regardless.
+// Returns { ok: true } or { ok: false, error: 'a sentence you can show the visitor' }.
 export async function submitForm(formName, data) {
   const endpoint = FORMS.endpoint || '/api/submit'
+
+  // A hung request should not leave the button spinning forever on a slow mobile connection.
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 15000)
+
   try {
-    await fetch(endpoint, {
+    const res = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
@@ -26,8 +26,26 @@ export async function submitForm(formName, data) {
         submittedAt: new Date().toISOString(),
         ...data,
       }),
+      signal: controller.signal,
     })
-  } catch {
-    // Swallowed on purpose, see the note above.
+
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}))
+      return {
+        ok: false,
+        error: body.error || 'We could not send that just now. Please WhatsApp us instead.',
+      }
+    }
+    return { ok: true }
+  } catch (err) {
+    const offline = err.name === 'AbortError' || !navigator.onLine
+    return {
+      ok: false,
+      error: offline
+        ? 'That took too long — check your connection and try again, or message us on WhatsApp.'
+        : 'We could not send that just now. Please WhatsApp us instead.',
+    }
+  } finally {
+    clearTimeout(timeout)
   }
 }

@@ -8,22 +8,26 @@
 import { writeFileSync, readFileSync } from 'node:fs'
 
 const ORIGIN = 'https://www.vlstudy.online'
-const today = new Date().toISOString().slice(0, 10)
 
 // Static pages, with how important each one is relative to the others (1.0 is the home page)
 // and roughly how often it changes.
+// `updated` is the date you last actually changed that page. Bump it by hand when you edit
+// one. It used to be set to the build date for every page, which meant fixing a typo in the
+// footer told Google that the privacy policy, the terms and every other page had changed too.
+// Google notices when lastmod is always "today" and starts ignoring the field — including on
+// the articles, where the dates are real and where it actually helps you.
 const PAGES = [
-  { path: '/', priority: '1.0', changefreq: 'weekly' },
-  { path: '/italy', priority: '0.9', changefreq: 'monthly' },
-  { path: '/france', priority: '0.9', changefreq: 'monthly' },
-  { path: '/scholarships', priority: '0.9', changefreq: 'monthly' },
-  { path: '/blog', priority: '0.8', changefreq: 'weekly' },
-  { path: '/universities', priority: '0.8', changefreq: 'monthly' },
-  { path: '/apply', priority: '0.7', changefreq: 'yearly' },
-  { path: '/contact', priority: '0.7', changefreq: 'yearly' },
-  { path: '/about', priority: '0.6', changefreq: 'yearly' },
-  { path: '/privacy', priority: '0.2', changefreq: 'yearly' },
-  { path: '/terms', priority: '0.2', changefreq: 'yearly' },
+  { path: '/', priority: '1.0', changefreq: 'weekly', updated: '2026-08-04' },
+  { path: '/italy', priority: '0.9', changefreq: 'monthly', updated: '2026-08-04' },
+  { path: '/france', priority: '0.9', changefreq: 'monthly', updated: '2026-08-04' },
+  { path: '/scholarships', priority: '0.9', changefreq: 'monthly', updated: '2026-08-04' },
+  { path: '/blog', priority: '0.8', changefreq: 'weekly', updated: '2026-08-04' },
+  { path: '/universities', priority: '0.8', changefreq: 'monthly', updated: '2026-08-04' },
+  { path: '/apply', priority: '0.7', changefreq: 'yearly', updated: '2026-08-04' },
+  { path: '/contact', priority: '0.7', changefreq: 'yearly', updated: '2026-08-04' },
+  { path: '/about', priority: '0.6', changefreq: 'yearly', updated: '2026-08-04' },
+  { path: '/privacy', priority: '0.2', changefreq: 'yearly', updated: '2026-08-04' },
+  { path: '/terms', priority: '0.2', changefreq: 'yearly', updated: '2026-08-04' },
 ]
 
 // Pull the slugs and dates straight out of the blog file without importing JSX.
@@ -35,7 +39,7 @@ const posts = [...blog.matchAll(/slug:\s*'([^']+)'[\s\S]*?updated:\s*'([\d-]+)'/
   changefreq: 'monthly',
 }))
 
-const urls = [...PAGES.map((p) => ({ ...p, lastmod: today })), ...posts]
+const urls = [...PAGES.map((p) => ({ ...p, lastmod: p.updated })), ...posts]
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

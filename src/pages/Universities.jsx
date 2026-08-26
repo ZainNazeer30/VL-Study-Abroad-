@@ -101,10 +101,18 @@ export default function Universities() {
 
       <section className="px-5 sm:px-8 lg:px-12 pt-2 pb-4 lg:pb-6">
         <Container className="lg:max-w-3xl">
+          {/* A search box needs a name a screen reader can announce. The label is visually
+              hidden because the placeholder already says what it is for sighted users. */}
+          <label htmlFor="uni-search" className="sr-only">
+            Search universities by name or city
+          </label>
           <input
+            id="uni-search"
+            type="search"
             value={f.query}
             onChange={setField('query')}
             placeholder="Search by university or city"
+            aria-describedby="uni-count"
             className={`${inputClass} px-4`}
           />
         </Container>
@@ -113,29 +121,18 @@ export default function Universities() {
       {/* Filters */}
       <div className="px-5 sm:px-8 lg:px-12 pb-1.5">
         <Container className="lg:max-w-3xl flex flex-col gap-2.5 sm:grid sm:grid-cols-2 lg:grid-cols-3">
-          <select value={f.country} onChange={setField('country')} className={selectClass}>
-            <option value="">Country</option>
-            <option>Italy</option>
-            <option>France</option>
-          </select>
-          <select value={f.level} onChange={setField('level')} className={selectClass}>
-            <option value="">Degree level</option>
-            <option>Bachelor</option>
-            <option>Master</option>
-          </select>
-          <select value={f.subject} onChange={setField('subject')} className={selectClass}>
-            <option value="">Subject</option>
-            {SUBJECTS.map((s) => (
-              <option key={s}>{s}</option>
-            ))}
-          </select>
-          <select value={f.tuition} onChange={setField('tuition')} className={selectClass}>
-            <option value="">Tuition</option>
-            <option>Under €2,000</option>
-            <option>€2,000 to €4,000</option>
-            <option>Over €4,000</option>
-          </select>
-          <select value={f.intake} onChange={setField('intake')} className={selectClass}>
+          {/* Each filter needs a name a screen reader can announce. The labels are visually
+              hidden because the first <option> already reads as the filter name for sighted
+              users — "Country", "Degree level" and so on. */}
+          <Filter id="filter-country" label="Country" value={f.country} onChange={setField('country')}
+                  options={['Italy', 'France']} />
+          <Filter id="filter-level" label="Degree level" value={f.level} onChange={setField('level')}
+                  options={['Bachelor', 'Master']} />
+          <Filter id="filter-subject" label="Subject" value={f.subject} onChange={setField('subject')}
+                  options={SUBJECTS} />
+          <Filter id="filter-tuition" label="Tuition" value={f.tuition} onChange={setField('tuition')}
+                  options={['Under €2,000', '€2,000 to €4,000', 'Over €4,000']} />
+          <select id="filter-intake" aria-label="Intake" value={f.intake} onChange={setField('intake')} className={selectClass}>
             <option value="">Intake</option>
             <option>September 2026</option>
             <option>February 2027</option>
@@ -316,5 +313,24 @@ export default function Universities() {
         </Container>
       </section>
     </div>
+  )
+}
+
+// A labelled filter dropdown. The visible prompt doubles as the accessible name.
+function Filter({ id, label, value, onChange, options }) {
+  return (
+    <>
+      <label htmlFor={id} className="sr-only">
+        Filter by {label.toLowerCase()}
+      </label>
+      <select id={id} value={value} onChange={onChange} className={selectClass}>
+        <option value="">{label}</option>
+        {options.map((o) => (
+          <option key={o} value={o}>
+            {o}
+          </option>
+        ))}
+      </select>
+    </>
   )
 }

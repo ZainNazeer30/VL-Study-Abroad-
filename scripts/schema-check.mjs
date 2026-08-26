@@ -14,7 +14,27 @@ const DIST = fileURLToPath(new URL('../dist', import.meta.url))
 const MIME={'.html':'text/html','.js':'text/javascript','.css':'text/css','.jpg':'image/jpeg','.webp':'image/webp','.png':'image/png','.ico':'image/x-icon','.xml':'application/xml'}
 const server=createServer((q,s)=>{const u=decodeURIComponent(q.url.split('?')[0]);let f=join(DIST,u);if(!existsSync(f)||statSync(f).isDirectory())f=join(DIST,'index.html');s.writeHead(200,{'Content-Type':MIME[extname(f)]||'application/octet-stream'});s.end(readFileSync(f))})
 await new Promise(r=>server.listen(4326,r))
-const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium'})
+// Find the browser. `npx playwright install chromium` puts it where Playwright looks by
+// default, so no path is needed. PW_CHROME is only an override for unusual setups such as CI
+// images that ship their own Chromium.
+//
+// This used to hardcode '/opt/pw-browsers/chromium', which is a path that exists on the machine
+// this project was originally built on and nowhere else — so `npm run check-schema` failed with
+// "executable doesn't exist" for anyone else who tried to run it.
+async function launchBrowser() {
+  try {
+    return await chromium.launch(
+      process.env.PW_CHROME ? { executablePath: process.env.PW_CHROME } : {}
+    )
+  } catch (err) {
+    console.error('\n  Could not start a browser. Install one once with:\n')
+    console.error('    npx playwright install chromium\n')
+    console.error('  ' + String(err).split('\n')[0] + '\n')
+    process.exit(1)
+  }
+}
+
+const b = await launchBrowser()
 const p=await (await b.newContext({viewport:{width:1440,height:900}})).newPage()
 const problems=[]
 const check=(cond,msg)=>{ if(!cond) problems.push(msg) }

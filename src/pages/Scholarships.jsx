@@ -105,19 +105,22 @@ export default function Scholarships() {
             <h2 className="font-display font-semibold text-[18px] text-white m-0 mb-1">Scholarship checker</h2>
             <p className="text-[13px] text-[#AAB8D4] m-0 mb-4">Three quick questions and you get an instant read, fully funded options first.</p>
             <div className="flex flex-col gap-2.5">
-              <select value={answers.country} onChange={setAnswer('country')} className={checkerSelect}>
+              <label htmlFor="check-country" className="sr-only">Where do you want to study?</label>
+              <select id="check-country" value={answers.country} onChange={setAnswer('country')} className={checkerSelect}>
                 <option value="">Where do you want to study?</option>
                 <option>Italy</option>
                 <option>France</option>
                 <option>Either</option>
               </select>
-              <select value={answers.level} onChange={setAnswer('level')} className={checkerSelect}>
+              <label htmlFor="check-level" className="sr-only">What will you study?</label>
+              <select id="check-level" value={answers.level} onChange={setAnswer('level')} className={checkerSelect}>
                 <option value="">What will you study?</option>
                 <option>Bachelor</option>
                 <option>Master</option>
                 <option>PhD</option>
               </select>
-              <select value={answers.grade} onChange={setAnswer('grade')} className={checkerSelect}>
+              <label htmlFor="check-grade" className="sr-only">Your academic average</label>
+              <select id="check-grade" value={answers.grade} onChange={setAnswer('grade')} className={checkerSelect}>
                 <option value="">Your academic average</option>
                 <option>Above 80%</option>
                 <option>65 to 80%</option>
@@ -132,7 +135,7 @@ export default function Scholarships() {
               </button>
             </div>
             {result && (
-              <div className="mt-3.5 bg-white/8 border border-white/15 rounded-[14px] p-4">
+              <div role="status" aria-live="polite" className="mt-3.5 bg-white/8 border border-white/15 rounded-[14px] p-4">
                 <div className="font-display font-semibold text-[14.5px] text-gold mb-1.5">{result.title}</div>
                 <div className="text-[13px] leading-relaxed text-[#DCE4F2]">{result.text}</div>
                 <Link
@@ -473,7 +476,7 @@ export default function Scholarships() {
           <h2 className="font-display font-semibold text-[21px] sm:text-[26px] text-navy m-0 mb-3.5">
             Scholarship questions
           </h2>
-          <Faq items={SCHOLARSHIP_FAQS} defaultOpen={0} />
+          <Faq id="scholarships" items={SCHOLARSHIP_FAQS} defaultOpen={0} />
           <p className="text-[14px] leading-[1.75] mt-5 m-0">
             There is more in our longer guide to{' '}
             <Link to="/blog/fully-funded-scholarships-for-pakistani-students" className="text-royal font-medium">

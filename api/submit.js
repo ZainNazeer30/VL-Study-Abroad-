@@ -1,44 +1,76 @@
-// Vercel Serverless Function: emails every form submission to your own Gmail, for free, using
-// Nodemailer. This only runs once the site is deployed on Vercel with the two environment
-// variables below set (Project settings -> Environment Variables). See the README section
-// "Receiving applications and bookings" for the full setup, including how to get a Gmail app
-// password. Vercel picks this up automatically, there is nothing else to configure.
+// Vercel Serverless Function: emails every form submission to your own Gmail using Nodemailer.
+// Needs GMAIL_USER and GMAIL_APP_PASSWORD in Project settings -> Environment Variables.
 import nodemailer from 'nodemailer'
+import {
+  validateSubmission,
+  buildEmailText,
+  rateLimited,
+  ALLOWED_ORIGINS,
+} from '../lib/validateSubmission.js'
+
+// Created once per warm instance instead of once per request. Rebuilding the SMTP connection
+// on every submission is slow and makes Gmail more likely to throttle you.
+let transporter = null
+function getTransporter(user, pass) {
+  if (!transporter) {
+    transporter = nodemailer.createTransport({ service: 'gmail', auth: { user, pass } })
+  }
+  return transporter
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    res.status(405).send('Method not allowed')
+    res.setHeader('Allow', 'POST')
+    res.status(405).json({ ok: false, error: 'Method not allowed' })
+    return
+  }
+
+  // Only accept submissions that came from your own site. A missing Origin header is allowed
+  // because some privacy browsers strip it; a *wrong* one is always rejected.
+  const origin = req.headers.origin
+  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    res.status(403).json({ ok: false, error: 'Forbidden' })
+    return
+  }
+
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim()
+  if (rateLimited(ip)) {
+    res.status(429).json({ ok: false, error: 'Too many submissions. Please try again in a minute.' })
+    return
+  }
+
+  const result = validateSubmission(req.body)
+  if (!result.ok) {
+    // A tripped honeypot gets a 200 so the bot learns nothing.
+    if (result.silent) {
+      res.status(200).json({ ok: true })
+      return
+    }
+    res.status(400).json({ ok: false, error: result.error })
     return
   }
 
   const user = process.env.GMAIL_USER
   const pass = process.env.GMAIL_APP_PASSWORD
   const to = process.env.TO_EMAIL || user
-
-  // Not configured yet: say so quietly rather than throwing, so the rest of the site keeps
-  // working while you finish the Gmail app password step.
   if (!user || !pass) {
-    res.status(200).json({ ok: false, reason: 'not_configured' })
+    res.status(503).json({ ok: false, error: 'The form is not connected yet.' })
     return
   }
 
-  const { form, submittedAt, ...fields } = req.body || {}
-  const rows = Object.entries(fields)
-    .filter(([, v]) => v !== '' && v !== undefined && v !== null)
-    .map(([k, v]) => `${k}: ${v}`)
-    .join('\n')
-
   try {
-    const transporter = nodemailer.createTransport({ service: 'gmail', auth: { user, pass } })
-    await transporter.sendMail({
+    await getTransporter(user, pass).sendMail({
       from: `"VL Study Abroad website" <${user}>`,
       to,
-      replyTo: fields.email || undefined,
-      subject: `New submission: ${form || 'Website form'}`,
-      text: `${form || 'Website form'}\nSubmitted: ${submittedAt || new Date().toISOString()}\n\n${rows}`,
+      replyTo: result.replyTo,
+      subject: `New submission: ${result.form}`,
+      text: buildEmailText(result.form, result.fields, req.body?.submittedAt),
     })
     res.status(200).json({ ok: true })
   } catch (err) {
-    res.status(500).json({ ok: false, error: err.message })
+    // Logged for you, never sent to the browser: SMTP errors can echo back the account
+    // name and parts of the credentials.
+    console.error('[submit] send failed:', err)
+    res.status(502).json({ ok: false, error: 'Could not send right now. Please WhatsApp us instead.' })
   }
 }

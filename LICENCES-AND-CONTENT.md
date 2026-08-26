@@ -74,6 +74,33 @@ The originals you sent are unchanged; these are cut copies made for the web.
 > the file, and look at where it appears. If the top results are Unsplash or Pexels pages, you
 > are fine. Note the photographer's name while you are there, and add it to this file.
 
+### 2a-ii. One downloaded Unsplash photograph, served from your own server
+
+`graduate-campus-path` is the hero on the Universities page. Unlike the ten in the next section,
+this one is **downloaded into `public/img` and served from your own domain** rather than fetched
+from Unsplash at page load, so it gets the same four-widths-two-formats treatment as your own
+photographs and the same one-year cache.
+
+| File | Source | Photographer | Photo ID |
+|---|---|---|---|
+| `graduate-campus-path-*.jpg` / `.webp` | Unsplash | Creative Soul Studios | `tmlyvhC3P2w` |
+
+**Licence:** the Unsplash Licence — free for commercial use, no permission or attribution
+required. The credit above is recorded because it is good practice and costs nothing, not
+because it is required.
+
+**One thing to be careful about.** The photograph shows a real, recognisable person. The Unsplash
+Licence covers the photographer's copyright; it does not give you a model release, and it does
+not let you imply that this person is a client, a graduate you placed, or an endorser. As a
+general hero image on a page about choosing a university, that is ordinary use and is fine. What
+you must not do is put a name, a quote or a success story beside it — which is exactly the reason
+the three testimonials on the About page use drawn portraits instead. If you ever want a real
+face beside a real name, ask that student and use their own photo.
+
+It replaced `hero-campus`, a building shot, whose files have been deleted. That change was
+deliberate: this is the page where a student is choosing a university, and a person in a cap and
+gown shows the reason for choosing one better than a photograph of a facade does.
+
 `students-city-walk` is deliberately not placed on any page. It is a good photograph, but the
 American flag and the New York skyline are in the middle of it and this site is about Italy and
 France. `src/data/images.js` explains how to add it in one line if you want it anyway.

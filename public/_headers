@@ -1,8 +1,4 @@
-# Caching rules for Netlify. Vercel reads the equivalent block in vercel.json instead.
-#
-# The photos and the built JavaScript never change without changing their file name, so they can
-# be cached for a year. The HTML must never be cached, or a visitor would keep seeing yesterday's
-# version of the site after you deploy a fix.
+# Caching and security rules for Netlify. Vercel reads the equivalent block in vercel.json.
 
 /img/*
   Cache-Control: public, max-age=31536000, immutable
@@ -20,3 +16,24 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
+  # Blocks scripts, styles and images from anywhere you have not listed. This is the single
+  # header that turns a script injection from a stolen-applications incident into a blocked
+  # request in someone's console. Without it, anything that manages to get a <script> onto the
+  # page — a compromised npm package, a bad third-party embed added later — can read every
+  # field a student types into the application form and post it anywhere it likes.
+  #
+  # 'unsafe-inline' is on script-src only because index.html carries two inline scripts (the
+  # structured data block and the Google Analytics snippet). Move both to files and you can
+  # drop it, which is worth doing when you next touch that file.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://formspree.io; form-action 'self' https://formspree.io; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+  # Nothing on this site uses a camera, microphone, location or payment API. Saying so stops
+  # any script that gets onto the page from asking a student for those permissions.
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  # Tells browsers to refuse plain http for a year. Set max-age low (300) for the first day in
+  # case something is misconfigured, then raise it.
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# The submission endpoint should never be cached by a browser or a CDN.
+/api/*
+  Cache-Control: no-store
+  X-Robots-Tag: noindex

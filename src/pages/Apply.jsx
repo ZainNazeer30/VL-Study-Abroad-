@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { inputClass, Container } from '../components/ui'
-import { submitForm } from '../lib/submitForm'
+import { Container } from '../components/ui'
+import { Field, SelectField, Honeypot } from '../components/Field'
+import { useLeadForm } from '../hooks/useLeadForm'
 import { useSeo } from '../hooks/useSeo'
 
 const STEP_LABELS = ['Step 1 of 3, about you', 'Step 2 of 3, your education', 'Step 3 of 3, your study plans']
@@ -19,8 +20,6 @@ const emptyForm = {
   country: '', level: '', program: '', intake: '', notes: '',
 }
 
-const selectClass = `${inputClass} text-ink`
-
 export default function Apply() {
   useSeo(
     'Apply Now',
@@ -28,31 +27,19 @@ export default function Apply() {
     { path: '/apply' }
   )
   const [step, setStep] = useState(1)
-  const [hint, setHint] = useState('')
-  const [f, setF] = useState(emptyForm)
+  const { values: f, setField, submit, sending, error } = useLeadForm('Application form', emptyForm)
 
-  const set = (k) => (e) => {
-    setHint('')
-    setF((s) => ({ ...s, [k]: e.target.value }))
-  }
-
-  const goNext = () => {
-    if (step === 1 && (!f.name.trim() || !f.phone.trim())) {
-      setHint('Your name and phone number are required.')
-      return
-    }
-    if (step === 3 && !f.country) {
-      setHint('Please choose a preferred country.')
-      return
-    }
-    if (step === 3) submitForm('Application form', f)
+  // The form is a real <form> now, so this runs on Enter as well as on the button.
+  const goNext = async (e) => {
+    e.preventDefault()
+    // Steps 1 and 2 only validate; step 3 validates AND sends, and we do not advance to the
+    // "Application received" screen unless it actually arrived.
+    const required = step === 1 ? ['name', 'phone'] : step === 3 ? ['country'] : []
+    const ok = await submit({ required, send: step === 3 })
+    if (!ok) return
     setStep(step + 1)
-    setHint('')
   }
-  const goBack = () => {
-    setStep(step - 1)
-    setHint('')
-  }
+  const goBack = () => setStep(step - 1)
 
   return (
     <div>
@@ -76,31 +63,33 @@ export default function Apply() {
 
       <section className="px-5 sm:px-8 lg:px-12 pb-10 lg:pb-16">
         <Container className="lg:max-w-2xl">
+          {/* A real form: Enter submits it, and the browser can offer to autofill a saved
+              name, email and phone number. */}
+          <form onSubmit={goNext} noValidate>
           {step === 1 && (
-            <div className="flex flex-col gap-2.5 sm:grid sm:grid-cols-2">
-              <input value={f.name} onChange={set('name')} placeholder="Full name, as in your passport" className={`${inputClass} sm:col-span-2`} />
-              <input value={f.email} onChange={set('email')} placeholder="Email address" className={inputClass} />
-              <input value={f.phone} onChange={set('phone')} placeholder="Phone or WhatsApp number" className={inputClass} />
-              <input value={f.nation} onChange={set('nation')} placeholder="Nationality, for example Pakistani" className={`${inputClass} sm:col-span-2`} />
+            <div className="relative flex flex-col gap-3.5 sm:grid sm:grid-cols-2">
+              <Honeypot value={f.company} onChange={setField('company')} />
+              <Field id="name" label="Full name" hint="As written in your passport" value={f.name}
+                     onChange={setField('name')} autoComplete="name" required className="sm:col-span-2" />
+              <Field id="email" label="Email address" value={f.email} onChange={setField('email')}
+                     type="email" inputMode="email" autoComplete="email" />
+              <Field id="phone" label="Phone or WhatsApp number" value={f.phone} onChange={setField('phone')}
+                     type="tel" inputMode="tel" autoComplete="tel" required />
+              <Field id="nation" label="Nationality" hint="For example, Pakistani" value={f.nation}
+                     onChange={setField('nation')} autoComplete="country-name" className="sm:col-span-2" />
             </div>
           )}
 
           {step === 2 && (
-            <div className="flex flex-col gap-2.5 sm:grid sm:grid-cols-2">
-              <select value={f.qual} onChange={set('qual')} className={selectClass}>
-                <option value="">Highest qualification</option>
-                <option>Matric or O Levels</option>
-                <option>FSc, FA or A Levels</option>
-                <option>Bachelor degree (BS, BSc, BA)</option>
-                <option>Master degree (MS, MSc, MA)</option>
-              </select>
-              <input value={f.grade} onChange={set('grade')} placeholder="Marks or CGPA, for example 78% or 3.2" className={inputClass} />
-              <select value={f.english} onChange={set('english')} className={`${selectClass} sm:col-span-2`}>
-                <option value="">English proficiency</option>
-                <option>IELTS or TOEFL taken</option>
-                <option>Test booked</option>
-                <option>Not yet, I need advice</option>
-              </select>
+            <div className="flex flex-col gap-3.5 sm:grid sm:grid-cols-2">
+              <SelectField id="qual" label="Highest qualification" prompt="Choose one" value={f.qual}
+                           onChange={setField('qual')}
+                           options={['Matric or O Levels', 'FSc, FA or A Levels', 'Bachelor degree (BS, BSc, BA)', 'Master degree (MS, MSc, MA)']} />
+              <Field id="grade" label="Marks or CGPA" hint="For example 78% or 3.2" value={f.grade}
+                     onChange={setField('grade')} />
+              <SelectField id="english" label="English proficiency" prompt="Choose one" value={f.english}
+                           onChange={setField('english')} className="sm:col-span-2"
+                           options={['IELTS or TOEFL taken', 'Test booked', 'Not yet, I need advice']} />
               <div className="sm:col-span-2 bg-[#F9FBFE] border border-dashed border-[#C9D5E8] rounded-xl p-4 text-center text-[12.5px] text-slate">
                 You can send your transcripts, passport and attestation documents on WhatsApp once a counsellor has reviewed your profile.
               </div>
@@ -108,33 +97,19 @@ export default function Apply() {
           )}
 
           {step === 3 && (
-            <div className="flex flex-col gap-2.5 sm:grid sm:grid-cols-2">
-              <select value={f.country} onChange={set('country')} className={selectClass}>
-                <option value="">Preferred country</option>
-                <option>Italy</option>
-                <option>France</option>
-                <option>Either, advise me</option>
-              </select>
-              <select value={f.level} onChange={set('level')} className={selectClass}>
-                <option value="">Degree level</option>
-                <option>Bachelor</option>
-                <option>Master</option>
-                <option>PhD</option>
-              </select>
-              <input value={f.program} onChange={set('program')} placeholder="Preferred program or field" className={inputClass} />
-              <select value={f.intake} onChange={set('intake')} className={selectClass}>
-                <option value="">Target intake</option>
-                <option>September 2026</option>
-                <option>February 2027</option>
-                <option>September 2027</option>
-              </select>
-              <textarea
-                value={f.notes}
-                onChange={set('notes')}
-                placeholder="Anything else we should know, such as budget, scholarships or preferred cities"
-                rows={3}
-                className={`${inputClass} resize-y sm:col-span-2`}
-              />
+            <div className="flex flex-col gap-3.5 sm:grid sm:grid-cols-2">
+              <SelectField id="country" label="Preferred country" prompt="Choose one" value={f.country}
+                           onChange={setField('country')} required
+                           options={['Italy', 'France', 'Either, advise me']} />
+              <SelectField id="level" label="Degree level" prompt="Choose one" value={f.level}
+                           onChange={setField('level')} options={['Bachelor', 'Master', 'PhD']} />
+              <Field id="program" label="Preferred program or field" value={f.program} onChange={setField('program')} />
+              <SelectField id="intake" label="Target intake" prompt="Choose one" value={f.intake}
+                           onChange={setField('intake')}
+                           options={['September 2026', 'February 2027', 'September 2027']} />
+              <Field as="textarea" rows={3} id="notes" label="Anything else we should know"
+                     hint="Budget, scholarships, preferred cities" value={f.notes}
+                     onChange={setField('notes')} className="sm:col-span-2" />
             </div>
           )}
 
@@ -169,17 +144,32 @@ export default function Apply() {
                     Back
                   </button>
                 )}
+                {/* disabled while sending, so a slow connection cannot put three copies of the
+                    same application in your inbox. */}
                 <button
-                  type="button"
-                  onClick={goNext}
-                  className="flex-[2] bg-royal text-white font-display font-semibold text-[14.5px] py-3.5 rounded-xl cursor-pointer shadow-[0_8px_20px_rgba(43,92,230,0.28)]"
+                  type="submit"
+                  disabled={sending}
+                  className="flex-[2] bg-royal text-white font-display font-semibold text-[14.5px] py-3.5 rounded-xl cursor-pointer shadow-[0_8px_20px_rgba(43,92,230,0.28)] disabled:opacity-60 disabled:cursor-wait"
                 >
-                  {step === 3 ? 'Submit application' : 'Continue'}
+                  {sending ? 'Sending…' : step === 3 ? 'Submit application' : 'Continue'}
                 </button>
               </div>
-              {hint && <div className="text-[12.5px] text-rust text-center mt-2.5">{hint}</div>}
+              {/* role="alert" so the message is spoken, rather than appearing silently below a
+                  button the visitor has already looked away from. */}
+              <div role="alert" aria-live="polite" className="text-[12.5px] text-rust text-center mt-2.5 min-h-[1.2em]">
+                {error}
+              </div>
+              <p className="text-[11.5px] leading-relaxed text-slate text-center m-0 mt-1">
+                A counsellor reads this personally. We never sell your details or pass them to
+                other agents. See our{' '}
+                <Link to="/privacy" className="text-royal font-medium underline">
+                  privacy policy
+                </Link>
+                .
+              </p>
             </>
           )}
+          </form>
         </Container>
       </section>
 

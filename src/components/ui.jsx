@@ -42,5 +42,9 @@ export function Avatar({ initials, tone = 'royal', className = '' }) {
 }
 
 // Reusable text input style.
+// `outline-none` on its own leaves a keyboard user with no way to see where they are: a
+// border colour change does not meet the 3:1 contrast a focus indicator needs. focus-visible
+// shows a proper ring for keyboard users without boxing every field a mouse user clicks.
 export const inputClass =
-  'w-full px-3.5 py-3.5 rounded-[11px] border border-field text-[14px] bg-white outline-none focus:border-royal'
+  'w-full px-3.5 py-3.5 rounded-[11px] border border-field text-[14px] bg-white outline-none ' +
+  'focus:border-royal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-royal'

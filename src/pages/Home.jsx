@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 import Faq from '../components/Faq'
 import Img from '../components/Img'
 import { PersonAvatar } from '../components/artwork'
-import { Eyebrow, H2, Container, inputClass } from '../components/ui'
+import { Eyebrow, H2, Container } from '../components/ui'
+import { Field, SelectField, Honeypot } from '../components/Field'
+import { useLeadForm } from '../hooks/useLeadForm'
 import { IMAGES } from '../data/images'
 import { CONTACT, TONES, STATUS } from '../data/site'
-import { submitForm } from '../lib/submitForm'
 import { POSTS } from '../data/blog'
 import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
 import {
@@ -59,16 +60,18 @@ export default function Home() {
     }
   )
   const [filter, setFilter] = useState('All')
-  const [form, setForm] = useState({ name: '', email: '', phone: '', qual: '', country: '', intake: '', program: '' })
-  const [sent, setSent] = useState(false)
-
-  const setField = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
+  const {
+    values: form, setField, submit, sending, error, done: sent,
+  } = useLeadForm('Home eligibility check', {
+    name: '', email: '', phone: '', qual: '', country: '', intake: '', program: '',
+  })
   const shownUnis = HOME_UNIS.filter((u) => matchesFilter(u, filter)).slice(0, 3)
 
-  const submit = () => {
-    if (!form.name.trim()) return
-    setSent(true)
-    submitForm('Home eligibility check', form)
+  // Previously this did `if (!form.name.trim()) return` — pressing the button with an empty
+  // name did nothing at all, with no message explaining why. Now it says what is missing.
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    await submit({ required: ['name', 'phone'] })
   }
 
   return (
@@ -396,40 +399,46 @@ export default function Home() {
                 <div className="text-[13px] text-ink">One of our counsellors will contact you within 24 hours.</div>
               </div>
             ) : (
-              <div className="flex flex-col gap-2.5">
-                <input value={form.name} onChange={setField('name')} placeholder="Full name" className={inputClass} />
-                <input value={form.email} onChange={setField('email')} placeholder="Email address" className={inputClass} />
-                <input value={form.phone} onChange={setField('phone')} placeholder="Phone or WhatsApp number" className={inputClass} />
-                <select value={form.qual} onChange={setField('qual')} className={`${inputClass} text-ink`}>
-                  <option value="">Current qualification</option>
-                  <option>Matric or O Levels</option>
-                  <option>FSc, FA or A Levels</option>
-                  <option>Bachelor degree (BS, BSc, BA)</option>
-                  <option>Master degree (MS, MSc, MA)</option>
-                </select>
+              <form onSubmit={onSubmit} noValidate className="relative flex flex-col gap-3.5">
+                <Honeypot value={form.company} onChange={setField('company')} />
+                <Field id="home-name" label="Full name" value={form.name} onChange={setField('name')}
+                       autoComplete="name" required />
+                <Field id="home-email" label="Email address" value={form.email} onChange={setField('email')}
+                       type="email" inputMode="email" autoComplete="email" />
+                <Field id="home-phone" label="Phone or WhatsApp number" value={form.phone}
+                       onChange={setField('phone')} type="tel" inputMode="tel" autoComplete="tel" required />
+                <SelectField id="home-qual" label="Current qualification" prompt="Choose one" value={form.qual}
+                             onChange={setField('qual')}
+                             options={['Matric or O Levels', 'FSc, FA or A Levels', 'Bachelor degree (BS, BSc, BA)', 'Master degree (MS, MSc, MA)']} />
                 <div className="flex gap-2.5">
-                  <select value={form.country} onChange={setField('country')} className={`${inputClass} flex-1 min-w-0 text-ink`}>
-                    <option value="">Country</option>
-                    <option>Italy</option>
-                    <option>France</option>
-                    <option>Either</option>
-                  </select>
-                  <select value={form.intake} onChange={setField('intake')} className={`${inputClass} flex-1 min-w-0 text-ink`}>
-                    <option value="">Intake</option>
-                    <option>Sep 2026</option>
-                    <option>Feb 2027</option>
-                    <option>Sep 2027</option>
-                  </select>
+                  <SelectField id="home-country" label="Country" prompt="Choose one" value={form.country}
+                               onChange={setField('country')} className="flex-1 min-w-0"
+                               options={['Italy', 'France', 'Either']} />
+                  <SelectField id="home-intake" label="Intake" prompt="Choose one" value={form.intake}
+                               onChange={setField('intake')} className="flex-1 min-w-0"
+                               options={['Sep 2026', 'Feb 2027', 'Sep 2027']} />
                 </div>
-                <input value={form.program} onChange={setField('program')} placeholder="Preferred program, for example MSc Data Science" className={inputClass} />
+                <Field id="home-program" label="Preferred program" hint="For example, MSc Data Science"
+                       value={form.program} onChange={setField('program')} />
                 <button
-                  type="button"
-                  onClick={submit}
-                  className="mt-1 bg-royal text-white font-display font-semibold text-[15px] py-3.5 rounded-xl cursor-pointer shadow-[0_8px_20px_rgba(43,92,230,0.28)]"
+                  type="submit"
+                  disabled={sending}
+                  className="mt-1 bg-royal text-white font-display font-semibold text-[15px] py-3.5 rounded-xl cursor-pointer shadow-[0_8px_20px_rgba(43,92,230,0.28)] disabled:opacity-60 disabled:cursor-wait"
                 >
-                  Check my eligibility
+                  {sending ? 'Sending…' : 'Check my eligibility'}
                 </button>
-              </div>
+                <div role="alert" aria-live="polite" className="text-[12.5px] text-rust text-center min-h-[1.2em]">
+                  {error}
+                </div>
+                <p className="text-[11.5px] leading-relaxed text-slate m-0">
+                  We use these details only to reply to you. We never sell them or pass them to
+                  other agents. See our{' '}
+                  <Link to="/privacy" className="text-royal font-medium underline">
+                    privacy policy
+                  </Link>
+                  .
+                </p>
+              </form>
             )}
           </div>
         </Container>
@@ -440,7 +449,7 @@ export default function Home() {
         <Container className="lg:max-w-3xl">
           <Eyebrow>FAQ</Eyebrow>
           <H2 className="mb-3.5 lg:mb-6">Questions students ask us</H2>
-          <Faq items={HOME_FAQS} defaultOpen={0} />
+          <Faq id="home" items={HOME_FAQS} defaultOpen={0} />
         </Container>
       </section>
 

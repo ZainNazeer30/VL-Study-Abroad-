@@ -5,12 +5,14 @@ import PostBody from '../components/PostBody'
 import { Container } from '../components/ui'
 import { IMAGES } from '../data/images'
 import { POST_BY_SLUG, formatPostDate } from '../data/blog'
+import { BODY_BY_SLUG } from '../data/postBodies'
 import { CONTACT } from '../data/site'
 import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
 
 export default function BlogPost() {
   const { slug } = useParams()
-  const post = POST_BY_SLUG[slug]
+  const meta = POST_BY_SLUG[slug]
+  const post = meta ? { ...meta, ...(BODY_BY_SLUG[slug] || { body: [], faqs: [] }) } : undefined
 
   // An address that does not match an article should not quietly show something else, because a
   // search engine would then index a page that is not what its address says. Send it to the blog

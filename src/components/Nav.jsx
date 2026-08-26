@@ -18,7 +18,7 @@ export default function Nav() {
         </Link>
 
         {/* Desktop nav links, hidden below lg so the wider menu never wraps */}
-        <nav className="hidden lg:flex items-center gap-1 flex-1 justify-center">
+        <nav aria-label="Main" className="hidden lg:flex items-center gap-1 flex-1 justify-center">
           {NAV_ITEMS.map((item) => (
             <NavLink
               key={item.to}
@@ -46,8 +46,9 @@ export default function Nav() {
         {/* Hamburger, hidden from md up since the full menu is inline */}
         <button
           type="button"
-          aria-label="Open menu"
+          aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
+          aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
           className="lg:hidden w-10 h-10 border border-[#E4E9F1] rounded-[10px] bg-white flex flex-col gap-1 items-center justify-center cursor-pointer"
         >
@@ -58,7 +59,7 @@ export default function Nav() {
       </div>
 
       {open && (
-        <nav className="lg:hidden bg-white border-t border-[#EEF1F6] px-4 pt-2 pb-4 flex flex-col gap-0.5 animate-fadeup">
+        <nav id="mobile-menu" aria-label="Main" className="lg:hidden bg-white border-t border-[#EEF1F6] px-4 pt-2 pb-4 flex flex-col gap-0.5 animate-fadeup">
           {NAV_ITEMS.map((item) => (
             <NavLink
               key={item.to}

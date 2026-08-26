@@ -19,7 +19,7 @@
 //
 //    Several are saved as a crop rather than the full frame, cut to the exact shape of the box
 //    they sit in. That way the browser never has to chop the middle out of a picture to make it
-//    fit, and you choose what stays in frame. Those are `hero-students`, `hero-campus`,
+//    fit, and you choose what stays in frame. Those are `hero-students`, `graduate-campus-path`,
 //    `band-sunset`, `life-reading-room` and `life-study-desk`.
 //
 // 2. UNSPLASH PHOTOS, for the places where a picture has to actually be Italy or France, and for
@@ -127,9 +127,11 @@ export const IMAGES = {
   // -------------------------------------------------------------------------------------------
 
   // Sits in the box beside the heading, the same layout the two country pages use. Cut to
-  // exactly 16:10, which is the shape of that box, so the whole college is visible at every
-  // screen size and nothing is trimmed off the sides.
-  universitiesHero: own('hero-campus', 'A historic university college seen in full across its front lawn', {
+  // exactly 16:10, which is the shape of that box, so nothing is trimmed off the sides at any
+  // screen size. A graduate rather than a building, deliberately: this is the page where a
+  // student is picking a university, and the picture should show the thing they are picking it
+  // for. See LICENCES-AND-CONTENT.md for the licence.
+  universitiesHero: own('graduate-campus-path', 'A graduate in a red cap and gown standing on a path between university buildings on a green campus', {
     widths: WIDE,
     sizes: '(min-width: 1024px) 50vw, 100vw',
   }),

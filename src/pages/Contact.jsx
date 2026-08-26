@@ -1,20 +1,14 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { CONTACT } from '../data/site'
-import { inputClass, Container } from '../components/ui'
+import { Container } from '../components/ui'
+import { Field, Honeypot } from '../components/Field'
+import { nextWorkingDays } from '../lib/nextWeekdays'
+import { useLeadForm } from '../hooks/useLeadForm'
 import { WhatsAppIcon } from '../components/icons'
-import { submitForm } from '../lib/submitForm'
 import { Link } from 'react-router-dom'
 import Faq from '../components/Faq'
 import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
 
-const DAYS = [
-  { dow: 'Mon', num: '24' },
-  { dow: 'Tue', num: '25' },
-  { dow: 'Wed', num: '26' },
-  { dow: 'Thu', num: '27' },
-  { dow: 'Fri', num: '28' },
-  { dow: 'Sat', num: '29' },
-]
 const SLOTS = ['10:00', '11:30', '13:00', '15:00', '16:30', '18:00']
 // Questions people ask before booking. They are on the page for readers, and they are handed to
 // Google as FAQ structured data as well, which is what can turn a plain search result into an
@@ -60,27 +54,34 @@ export default function Contact() {
       ),
     }
   )
+  // The next six working days, generated fresh. These were typed in by hand before, with the
+  // month hardcoded to "Aug", so from the end of that week onwards a student would book a date
+  // in the past and get a confirmation for it. useMemo keeps the array stable, or all six day
+  // buttons would re-render on every keystroke in the name field.
+  const DAYS = useMemo(() => nextWorkingDays(6), [])
+
   const [day, setDay] = useState(-1)
   const [slot, setSlot] = useState(-1)
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [hint, setHint] = useState('')
-  const [booked, setBooked] = useState(false)
+  const {
+    values, setField, submit, sending, error, done: booked,
+  } = useLeadForm('Consultation booking', { name: '', phone: '' })
 
-  const book = () => {
+  const book = async (e) => {
+    e.preventDefault()
     if (day < 0 || slot < 0) {
-      setHint('Please pick a day and a time first.')
+      setSlotHint('Please pick a day and a time first.')
       return
     }
-    if (!name.trim() || !phone.trim()) {
-      setHint('Please add your name and phone number.')
-      return
-    }
-    setBooked(true)
-    submitForm('Consultation booking', { name, phone, day: DAYS[day].dow, time: SLOTS[slot] })
+    // The ISO date goes to your inbox, so the booking is never ambiguous.
+    await submit({
+      required: ['name', 'phone'],
+      extra: { day: DAYS[day].iso, time: SLOTS[slot] },
+    })
   }
+  const [slotHint, setSlotHint] = useState('')
 
-  const confirmLine = day >= 0 && slot >= 0 ? `${DAYS[day].dow} ${DAYS[day].num} Aug at ${SLOTS[slot]}` : ''
+  const confirmLine =
+    day >= 0 && slot >= 0 ? `${DAYS[day].dow} ${DAYS[day].num} ${DAYS[day].month} at ${SLOTS[slot]}` : ''
 
   return (
     <div>
@@ -103,11 +104,13 @@ export default function Contact() {
                   <button
                     key={i}
                     type="button"
+                    aria-pressed={active}
+                    aria-label={`${d.dow} ${d.num} ${d.month}`}
                     onClick={() => {
                       setDay(i)
-                      setHint('')
+                      setSlotHint('')
                     }}
-                    className={`shrink-0 w-[62px] px-1 py-2.5 rounded-xl border text-center cursor-pointer ${
+                    className={`shrink-0 w-[62px] px-1 py-2.5 rounded-xl border text-center cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-royal ${
                       active ? 'border-royal bg-royal text-white' : 'border-[#E4E9F1] bg-white text-navy'
                     }`}
                   >
@@ -126,11 +129,12 @@ export default function Contact() {
                   <button
                     key={i}
                     type="button"
+                    aria-pressed={active}
                     onClick={() => {
                       setSlot(i)
-                      setHint('')
+                      setSlotHint('')
                     }}
-                    className={`px-1 py-2.5 rounded-[10px] border text-[13px] font-medium cursor-pointer ${
+                    className={`px-1 py-2.5 rounded-[10px] border text-[13px] font-medium cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-royal ${
                       active ? 'border-royal bg-royal text-white' : 'border-[#E4E9F1] bg-white text-ink'
                     }`}
                   >
@@ -147,21 +151,34 @@ export default function Contact() {
                 <div className="text-[13px]">We will confirm on WhatsApp shortly.</div>
               </div>
             ) : (
-              <div className="flex flex-col sm:flex-row gap-2.5">
-                <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Full name" className={`${inputClass} py-3 sm:flex-1`} />
-                <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone or WhatsApp number" className={`${inputClass} py-3 sm:flex-1`} />
-              </div>
+              <form onSubmit={book} noValidate>
+                <div className="relative flex flex-col sm:flex-row gap-2.5">
+                  <Honeypot value={values.company} onChange={setField('company')} />
+                  <Field id="booking-name" label="Full name" value={values.name}
+                         onChange={setField('name')} autoComplete="name" required className="sm:flex-1" />
+                  <Field id="booking-phone" label="Phone or WhatsApp number" value={values.phone}
+                         onChange={setField('phone')} type="tel" inputMode="tel" autoComplete="tel"
+                         required className="sm:flex-1" />
+                </div>
+                <button
+                  type="submit"
+                  disabled={sending}
+                  className="mt-2.5 w-full bg-navy text-white font-display font-semibold text-[15px] py-3.5 rounded-xl cursor-pointer shadow-[0_8px_20px_rgba(10,30,60,0.22)] disabled:opacity-60 disabled:cursor-wait"
+                >
+                  {sending ? 'Booking…' : 'Confirm booking'}
+                </button>
+                <p className="text-[11.5px] leading-relaxed text-slate m-0 mt-2.5">
+                  We use your name and number only to confirm this call. See our{' '}
+                  <Link to="/privacy" className="text-royal font-medium underline">
+                    privacy policy
+                  </Link>
+                  .
+                </p>
+              </form>
             )}
-            {!booked && (
-              <button
-                type="button"
-                onClick={book}
-                className="mt-2.5 w-full bg-navy text-white font-display font-semibold text-[15px] py-3.5 rounded-xl cursor-pointer shadow-[0_8px_20px_rgba(10,30,60,0.22)]"
-              >
-                Confirm booking
-              </button>
-            )}
-            {hint && <div className="text-[12.5px] text-rust text-center mt-2.5">{hint}</div>}
+            <div role="alert" aria-live="polite" className="text-[12.5px] text-rust text-center mt-2.5 min-h-[1.2em]">
+              {slotHint || error}
+            </div>
           </div>
         </Container>
       </div>
@@ -224,7 +241,7 @@ export default function Contact() {
           <h2 className="font-display font-semibold text-[19px] sm:text-[22px] text-navy m-0 mb-3.5">
             Before you book
           </h2>
-          <Faq items={CONTACT_FAQS} defaultOpen={0} />
+          <Faq id="contact" items={CONTACT_FAQS} defaultOpen={0} />
 
           <p className="text-[14.5px] leading-[1.75] mt-6 m-0">
             You can also read first. Start with{' '}

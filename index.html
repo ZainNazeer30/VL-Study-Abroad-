@@ -123,12 +123,40 @@
         ]
       }
     </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T871688R35"></script>
+    <!-- Google Analytics, with consent switched OFF until the visitor agrees.
+         =========================================================================================
+         This block MUST come before the gtag.js script below it. It sets Google Consent Mode v2
+         to "denied" by default, which means the tag loads but stores no cookies and sends no
+         identifiable data until src/components/CookieNotice.jsx calls gtag('consent','update')
+         after someone presses Accept.
+
+         Why it matters: without this, the site sets analytics cookies on every visitor the
+         instant the page opens, with no notice and no way to say no. That is the thing Google
+         flags, and it also made two lines of the privacy policy untrue.
+
+         wait_for_update gives the banner half a second to read the saved choice before the tag
+         decides, so a returning visitor who already accepted is not counted twice.
+    -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted',
+        wait_for_update: 500
+      });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T871688R35"></script>
+    <script>
       gtag('js', new Date());
-      gtag('config', 'G-T871688R35', { send_page_view: false });
+      gtag('config', 'G-T871688R35', {
+        send_page_view: false,
+        anonymize_ip: true
+      });
     </script>
   </head>
   <body>

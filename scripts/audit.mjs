@@ -39,7 +39,27 @@ const ROUTES = ['/', '/italy', '/france', '/universities', '/scholarships', '/bl
   '/blog/study-without-ielts', '/blog/choosing-a-university-in-italy-or-france',
   '/blog/intake-deadlines-italy-france']
 
-const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' })
+// Find the browser. `npx playwright install chromium` puts it where Playwright looks by
+// default, so no path is needed. PW_CHROME is only an override for unusual setups such as CI
+// images that ship their own Chromium.
+//
+// This used to hardcode '/opt/pw-browsers/chromium', which is a path that exists on the machine
+// this project was originally built on and nowhere else — so `npm run audit` failed with
+// "executable doesn't exist" for anyone else who tried to run it.
+async function launchBrowser() {
+  try {
+    return await chromium.launch(
+      process.env.PW_CHROME ? { executablePath: process.env.PW_CHROME } : {}
+    )
+  } catch (err) {
+    console.error('\n  Could not start a browser. Install one once with:\n')
+    console.error('    npx playwright install chromium\n')
+    console.error('  ' + String(err).split('\n')[0] + '\n')
+    process.exit(1)
+  }
+}
+
+const browser = await launchBrowser()
 let fails = 0
 const rows = []
 

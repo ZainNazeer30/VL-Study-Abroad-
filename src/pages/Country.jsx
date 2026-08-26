@@ -1,11 +1,11 @@
-import { useState } from 'react'
 import Img from '../components/Img'
 import Faq from '../components/Faq'
-import { inputClass, Container } from '../components/ui'
+import { Container } from '../components/ui'
+import { Field, Honeypot } from '../components/Field'
+import { useLeadForm } from '../hooks/useLeadForm'
 import { COUNTRIES } from '../data/countries'
 import { IMAGES } from '../data/images'
 import { POST_BY_SLUG } from '../data/blog'
-import { submitForm } from '../lib/submitForm'
 import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
 import { Link } from 'react-router-dom'
 
@@ -39,13 +39,13 @@ export default function Country({ which }) {
       ),
     }
   )
-  const [form, setForm] = useState({ name: '', phone: '', program: '' })
-  const [sent, setSent] = useState(false)
-  const setField = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
-  const submit = () => {
-    if (!form.name.trim()) return
-    setSent(true)
-    submitForm(`${c.name} consultation request`, form)
+  const {
+    values: form, setField, submit, sending, error, done: sent,
+  } = useLeadForm(`${c.name} consultation request`, { name: '', phone: '', program: '' })
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    await submit({ required: ['name', 'phone'] })
   }
 
   return (
@@ -238,7 +238,7 @@ export default function Country({ which }) {
       <section className="px-5 sm:px-8 lg:px-12 pt-8 lg:pt-14 pb-1.5">
         <Container className="lg:max-w-3xl">
           <h2 className="font-display font-semibold text-[21px] sm:text-[26px] text-navy m-0 mb-3.5">{c.name} questions</h2>
-          <Faq items={c.faqs} />
+          <Faq id={which} items={c.faqs} />
         </Container>
       </section>
 
@@ -281,18 +281,33 @@ export default function Country({ which }) {
                 <div className="font-display font-semibold text-[15px] text-green">Got it. We will be in touch within 24 hours.</div>
               </div>
             ) : (
-              <div className="flex flex-col gap-2.5">
-                <input value={form.name} onChange={setField('name')} placeholder="Full name" className={inputClass} />
-                <input value={form.phone} onChange={setField('phone')} placeholder="Phone or WhatsApp number" className={inputClass} />
-                <input value={form.program} onChange={setField('program')} placeholder="Program you are interested in" className={inputClass} />
+              <form onSubmit={onSubmit} noValidate className="relative flex flex-col gap-3.5">
+                <Honeypot value={form.company} onChange={setField('company')} />
+                <Field id={`${which}-name`} label="Full name" value={form.name} onChange={setField('name')}
+                       autoComplete="name" required />
+                <Field id={`${which}-phone`} label="Phone or WhatsApp number" value={form.phone}
+                       onChange={setField('phone')} type="tel" inputMode="tel" autoComplete="tel" required />
+                <Field id={`${which}-program`} label="Program you are interested in" value={form.program}
+                       onChange={setField('program')} />
                 <button
-                  type="button"
-                  onClick={submit}
-                  className="bg-royal text-white font-display font-semibold text-[15px] py-3.5 rounded-xl cursor-pointer shadow-[0_8px_20px_rgba(43,92,230,0.28)]"
+                  type="submit"
+                  disabled={sending}
+                  className="bg-royal text-white font-display font-semibold text-[15px] py-3.5 rounded-xl cursor-pointer shadow-[0_8px_20px_rgba(43,92,230,0.28)] disabled:opacity-60 disabled:cursor-wait"
                 >
-                  Book my free call
+                  {sending ? 'Sending…' : 'Book my free call'}
                 </button>
-              </div>
+                <div role="alert" aria-live="polite" className="text-[12.5px] text-rust text-center min-h-[1.2em]">
+                  {error}
+                </div>
+                <p className="text-[11.5px] leading-relaxed text-slate m-0">
+                  We use these details only to reply to you. We never sell them or pass them to
+                  other agents. See our{' '}
+                  <Link to="/privacy" className="text-royal font-medium underline">
+                    privacy policy
+                  </Link>
+                  .
+                </p>
+              </form>
             )}
           </div>
         </Container>
