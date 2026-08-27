@@ -253,8 +253,7 @@ export default function Home() {
                 </div>
                 <div className="flex justify-between items-center">
                   <div>
-                    <span className="font-display font-semibold text-[14px] text-navy">{u.tuition}</span>
-                    <span className="text-[11.5px] text-mist"> a year</span>
+                    <span className="font-display font-semibold text-[13px] text-navy">{u.apply}</span>
                   </div>
                   <Link to="/universities" className="font-semibold text-[13px] text-royal">
                     View details →

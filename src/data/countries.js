@@ -41,10 +41,10 @@ export const COUNTRIES = {
       },
     ],
     unis: [
-      { name: 'University of Bologna', city: 'Bologna', known: 'The oldest university in the world, with strong departments in almost every field.', tuition: '€2k to €3k' },
-      { name: 'Politecnico di Milano', city: 'Milan', known: 'One of the top technical universities anywhere for engineering, architecture and design.', tuition: '€3.9k' },
-      { name: 'Sapienza University', city: 'Rome', known: 'One of the largest universities in Europe, with excellent science and humanities.', tuition: '€1k to €2.9k' },
-      { name: 'University of Padua', city: 'Padua', known: 'A historic research university where Galileo once taught, strong in medicine and psychology.', tuition: '€2.6k' },
+      { name: 'University of Bologna', city: 'Bologna', known: 'The oldest university in the world, with strong departments in almost every field.', opens: 'Applications open Nov 2026' },
+      { name: 'Politecnico di Milano', city: 'Milan', known: 'One of the top technical universities anywhere for engineering, architecture and design.', opens: 'Applications open Oct 2026' },
+      { name: 'Sapienza University', city: 'Rome', known: 'One of the largest universities in Europe, with excellent science and humanities.', opens: 'Applications open Dec 2026' },
+      { name: 'University of Padua', city: 'Padua', known: 'A historic research university where Galileo once taught, strong in medicine and psychology.', opens: 'Applications open Nov 2026' },
     ],
     courses: ['Engineering', 'Architecture', 'Design and Fashion', 'Business and Management', 'Computer Science', 'Medicine', 'Economics', 'International Relations'],
     costs: [
@@ -127,11 +127,11 @@ export const COUNTRIES = {
       },
     ],
     unis: [
-      { name: 'Sorbonne University', city: 'Paris', known: 'A famous research university, strong in the humanities and sciences.', tuition: '€2.8k' },
-      { name: 'Sciences Po', city: 'Paris', known: 'One of the most respected schools for political science and public policy, with income-scaled fees.', tuition: 'Scaled' },
-      { name: 'Université PSL', city: 'Paris', known: 'The highest ranked university in France, selective and research led.', tuition: '€2.8k' },
-      { name: 'Université Grenoble Alpes', city: 'Grenoble', known: 'A leading science and engineering hub with a big international community.', tuition: '€2.8k' },
-      { name: 'Université de Lyon', city: 'Lyon', known: 'A major student city with strong business and science faculties.', tuition: '€2.8k' },
+      { name: 'Sorbonne University', city: 'Paris', known: 'A famous research university, strong in the humanities and sciences.', opens: 'Campus France opens Oct 2026' },
+      { name: 'Sciences Po', city: 'Paris', known: 'One of the most respected schools for political science and public policy, judged on your essays as much as your transcript.', opens: 'Applications open Oct 2026' },
+      { name: 'Université PSL', city: 'Paris', known: 'The highest ranked university in France, selective and research led.', opens: 'Campus France opens Oct 2026' },
+      { name: 'Université Grenoble Alpes', city: 'Grenoble', known: 'A leading science and engineering hub with a big international community.', opens: 'Campus France opens Nov 2026' },
+      { name: 'Université de Lyon', city: 'Lyon', known: 'A major student city with strong business and science faculties.', opens: 'Campus France opens Nov 2026' },
     ],
     courses: ['Business and Management', 'Computer Science', 'Data Science and AI', 'Engineering', 'Fashion and Luxury', 'Hospitality', 'Political Science', 'Finance'],
     costs: [

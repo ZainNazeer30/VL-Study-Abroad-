@@ -76,7 +76,18 @@ Everything you are likely to edit lives in `src/data`.
   instructions are at the top of the file, and `npm run build` puts the new address into the
   sitemap automatically. One article a month, answering a question a student actually asked you,
   is the single most useful ongoing thing you can do for search rankings.
-- `src/data/countries.js`, `universities.js`, `scholarships.js`, `home.js` and `about.js` hold
+- `src/data/universities.js` is the one to keep an eye on. It drives the details table on the
+  Universities page, the search filters and the structured data Google reads, all from a single
+  array. Two things about it are deliberate. First, **there is no tuition or fee field** anywhere
+  in it: Italian public universities set fees on assessed family income and French ones
+  frequently waive the international rate, so a single figure beside a university name is wrong
+  for most of the students reading it, and walking that number back on the first phone call costs
+  more trust than it wins clicks. Cost is discussed properly, with the conditions attached, in the
+  cost guide and on the scholarships page. Second, `intake`, `applyBy` and `status` go stale every
+  admissions cycle, so when you go through them, update `LAST_REVIEWED` at the top of the file.
+  The page prints that date to the visitor, which is the difference between a deadline table that
+  gets trusted and one that gets ignored.
+- `src/data/countries.js`, `scholarships.js`, `home.js` and `about.js` hold
   all the written content, universities, scholarships and questions. Edit the text there.
   Scholarships have a `fullyFunded` flag; set it to `true` only for ones that realistically cover
   both tuition and living costs, since that badge is what the site uses to sort and highlight

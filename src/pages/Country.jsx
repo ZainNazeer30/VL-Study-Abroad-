@@ -113,7 +113,7 @@ export default function Country({ which }) {
               <div className="font-display font-semibold text-[14.5px] text-navy leading-snug">{u.name}</div>
               <div className="text-[12px] text-mist mt-1 mb-2.5">{u.city}</div>
               <div className="text-[12.5px] leading-normal mb-2.5">{u.known}</div>
-              <div className="font-display font-semibold text-[13px] text-royal">{u.tuition} a year</div>
+              <div className="font-display font-semibold text-[13px] text-royal">{u.opens}</div>
             </div>
           ))}
         </div>

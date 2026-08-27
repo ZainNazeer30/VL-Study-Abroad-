@@ -31,20 +31,25 @@ export const STEPS = [
 
 export const HOME_FILTERS = ['All', 'Italy', 'France', 'English-taught', 'STEM']
 
+// No fee field here on purpose. See the note at the top of src/data/universities.js: a single
+// tuition figure beside a university name is wrong for most of the students reading it, because
+// Italy sets fees on assessed family income and France frequently waives the international rate.
+// `apply` is what a student can act on instead, and it is the same window shown on the
+// Universities page. Update both together each admissions cycle.
 export const HOME_UNIS = [
-  { name: 'University of Bologna', flag: '🇮🇹', city: 'Bologna', country: 'Italy', tags: ['English-taught', 'Public', 'All levels'], tuition: '€2,000 to €3,000', status: 'Open', tone: 'green' },
-  { name: 'Politecnico di Milano', flag: '🇮🇹', city: 'Milan', country: 'Italy', tags: ['Engineering', 'Design', 'Master'], tuition: '€3,900', status: 'Open', tone: 'green' },
-  { name: 'Sorbonne University', flag: '🇫🇷', city: 'Paris', country: 'France', tags: ['Humanities', 'Science', 'Public'], tuition: '€2,770 to €3,790', status: 'Closing soon', tone: 'rust' },
-  { name: 'Sciences Po', flag: '🇫🇷', city: 'Paris', country: 'France', tags: ['Humanities', 'Business', 'Public'], tuition: 'Scaled to income', status: 'Open', tone: 'green' },
-  { name: 'Université Grenoble Alpes', flag: '🇫🇷', city: 'Grenoble', country: 'France', tags: ['STEM', 'English-taught'], tuition: '€2,770 to €3,790', status: 'Open', tone: 'green' },
-  { name: 'Sapienza University of Rome', flag: '🇮🇹', city: 'Rome', country: 'Italy', tags: ['Public', 'Wide choice'], tuition: '€1,000 to €2,900', status: 'Opens Oct', tone: 'neutral' },
+  { name: 'University of Bologna', flag: '🇮🇹', city: 'Bologna', country: 'Italy', tags: ['English-taught', 'Public', 'All levels'], apply: 'Apply Nov 2026 to Mar 2027', status: 'Opens Nov', tone: 'neutral' },
+  { name: 'Politecnico di Milano', flag: '🇮🇹', city: 'Milan', country: 'Italy', tags: ['Engineering', 'Design', 'Master'], apply: 'Apply Oct 2026 to Feb 2027', status: 'Opens Oct', tone: 'neutral' },
+  { name: 'Sorbonne University', flag: '🇫🇷', city: 'Paris', country: 'France', tags: ['Humanities', 'Science', 'Public'], apply: 'Campus France, Oct 2026 to Jan 2027', status: 'Opens Oct', tone: 'neutral' },
+  { name: 'Sciences Po', flag: '🇫🇷', city: 'Paris', country: 'France', tags: ['Humanities', 'Business', 'Public'], apply: 'Apply Oct 2026 to Jan 2027', status: 'Opens Oct', tone: 'neutral' },
+  { name: 'Université Grenoble Alpes', flag: '🇫🇷', city: 'Grenoble', country: 'France', tags: ['STEM', 'English-taught'], apply: 'Campus France, Nov 2026 to Mar 2027', status: 'Opens Nov', tone: 'neutral' },
+  { name: 'Politecnico di Torino', flag: '🇮🇹', city: 'Turin', country: 'Italy', tags: ['Engineering', 'STEM', 'Spring intake'], apply: 'Closing now for February 2027', status: 'Closing soon', tone: 'rust' },
 ]
 
 // These three are the fully funded routes, the ones that cover tuition and living costs rather
 // than just cutting the fee. Most students who come to us ask about these first, so they lead
 // the homepage scholarships section.
 export const HOME_SCHOLARSHIPS = [
-  { flag: '🇮🇹', country: 'Italy', name: 'DSU regional scholarship', deadline: 'Sep 2026', fullyFunded: true, benefit: 'Up to €7,000 a year plus a tuition waiver, housing and meal support.', eligibility: 'Based on family income (ISEE). Most international students qualify.' },
+  { flag: '🇮🇹', country: 'Italy', name: 'DSU regional scholarship', deadline: 'Aug 2027', fullyFunded: true, benefit: 'Up to €7,000 a year plus a tuition waiver, housing and meal support.', eligibility: 'Based on family income (ISEE). Most international students qualify.' },
   { flag: '🇫🇷', country: 'France', name: 'Eiffel Excellence scholarship', deadline: 'Jan 2027', fullyFunded: true, benefit: '€1,181 a month plus travel, insurance and activities.', eligibility: 'A strong academic record, under 25 for a Master or 30 for a PhD.' },
   { flag: '🇮🇹', country: 'Italy', name: 'Invest Your Talent in Italy', deadline: 'Feb 2027', fullyFunded: true, benefit: '€900 a month plus tuition support, for Master students in fields like engineering or design.', eligibility: 'Open to citizens of selected countries with strong grades.' },
 ]
@@ -73,7 +78,7 @@ export const HOME_FAQS = [
   { q: 'Which scholarships are actually fully funded?', a: 'The DSU regional scholarship in Italy and Invest Your Talent in Italy both cover tuition and living costs, and the Eiffel Excellence scholarship in France does the same. These are the ones we check first for every student, because they are the difference between studying abroad and not being able to afford it. Fee waivers and merit awards help too, but they lower the bill rather than cover it.' },
   { q: 'What do I need to get in?', a: 'Most programs ask for your transcripts, a valid passport, proof of English such as IELTS or a Medium of Instruction letter, a motivation letter and a CV. We check your profile and give you the exact list for each university.' },
   { q: 'Do my documents need HEC and IBCC attestation?', a: 'Yes, and the order matters. Matric and FSc certificates go through IBCC, a Bachelor or Master degree goes through HEC, and after that both usually need MOFA attestation before a consulate will accept them. Skipping a step, or doing them out of order, is one of the most common reasons a Pakistani student loses weeks. We give you the exact sequence for your documents at the start, so it runs alongside your applications rather than holding them up.' },
-  { q: 'How much is tuition in Italy and France?', a: 'Public universities in Italy charge roughly €1,000 to €4,000 a year, often based on income. Public universities in France are around €2,770 for a Bachelor and €3,790 for a Master for international students, before any scholarship. In rupees that is far less than most families expect, and a fully funded scholarship can bring it close to nothing.' },
+  { q: 'How much is tuition in Italy and France?', a: 'Less than most families expect, and there is no single figure we can honestly give you. Italian public universities set tuition on assessed family income, so two students on the same course can pay very different amounts. Many French public universities waive the higher international rate down to what a French student pays. On top of that a fully funded scholarship can bring the number close to nothing. Send us your household details and we will work out your actual figure, at no cost.' },
   { q: 'How much money do I need to show in my bank statement?', a: 'Both countries want proof you can support yourself for the year, and both accept a sponsor, usually a parent. Italy generally looks for around €7,000 for the year and France for roughly €615 a month. The amount matters less than how the account looks: consulates want to see funds that have been there for a while, not a large deposit made the week before. We review your statement before you book the appointment and tell you honestly if it needs work.' },
   { q: 'Where do I give my visa interview?', a: 'For most students it is Islamabad, at the Italian Embassy for Italy or through the French Embassy process for France. We book the appointment, put the file together in the order they expect it, and take you through the likely questions beforehand so you walk in prepared.' },
   { q: 'Can I get a scholarship?', a: 'Very likely. Italy has regional DSU scholarships that can cover tuition, housing and meals, and France has the Eiffel scholarship, the Sciences Po Émile Boutmy award and university-specific awards. We check what you qualify for at no cost, and we tell you honestly if a fully funded route is not realistic for your profile.' },
