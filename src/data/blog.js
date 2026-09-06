@@ -173,7 +173,12 @@ faqs: [
     slug: 'italy-student-visa-from-pakistan',
     author: 'kashan',
     title: 'The Italy student visa from Pakistan, step by step',
-    seoTitle: 'Italy Student Visa from Pakistan',
+    // "Requirements" is in here on purpose. Search Console shows this page sitting at about
+    // position 8 for "italy student visa requirements pakistan", its single best query, and the
+    // title did not contain the word the student actually typed. With the site name appended
+    // this comes to roughly 63 characters, which Google may trim at the end, but the words that
+    // matter are at the front where they are read first.
+    seoTitle: 'Italy Student Visa Requirements from Pakistan',
     description:
       'What the Italian Embassy in Islamabad asks for, how much money to show, what a good bank statement looks like, and how long the student visa takes.',
     excerpt:
@@ -216,7 +221,7 @@ faqs: [
     slug: 'france-student-visa-from-pakistan',
     author: 'kashan',
     title: 'The France student visa from Pakistan, and the Campus France step',
-    seoTitle: 'France Student Visa and Campus France',
+    seoTitle: 'France Student Visa Requirements from Pakistan',
     description:
       'How Campus France and Études en France fit into the French student visa, what the interview asks, and how much money a Pakistani student needs to show.',
     excerpt:

@@ -8,6 +8,8 @@
 // The headings become real <h2> and <h3> tags in the right order under the page's single <h1>.
 // That heading hierarchy is one of the oldest and least glamorous parts of on page SEO, and it
 // still works, because it is how a machine works out what the page is actually about.
+import { Link } from 'react-router-dom'
+
 export default function PostBody({ blocks }) {
   return (
     <div className="flex flex-col">
@@ -67,6 +69,24 @@ export default function PostBody({ blocks }) {
               <span className="text-gold-ink text-[15px] leading-none mt-1">◆</span>
               <p className="text-[14px] leading-[1.65] text-ink m-0">{b.note}</p>
             </div>
+          )
+        // A link out of the middle of an article to another page on the site.
+        //
+        //   { cta: { to: '/italy', text: 'Study in Italy from Pakistan', after: 'the rest of it.' } }
+        //
+        // The "related articles" strip at the foot of a post is generic furniture and a reader
+        // has usually stopped by the time they reach it. A link placed where the reader is
+        // already thinking about that subject gets used. It also carries meaning the footer
+        // links do not: the words inside the link describe the page it points at, which is one
+        // of the plainest signals available for saying what that page is about.
+        if (b.cta)
+          return (
+            <p key={i} className="text-[15px] leading-[1.75] text-ink m-0 mb-4">
+              <Link to={b.cta.to} className="font-semibold text-royal underline underline-offset-2">
+                {b.cta.text}
+              </Link>
+              {b.cta.after ? ` ${b.cta.after}` : null}
+            </p>
           )
         if (b.table)
           return (

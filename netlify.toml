@@ -1,5 +1,11 @@
 [build]
-  command = "npm run build"
+  # build:host, not build. Plain `npm run build` runs scripts/prerender.mjs without installing a
+  # browser first, and that script is written to warn and exit cleanly rather than fail the
+  # deploy. So the site would go out looking fine while every page quietly served the home page's
+  # title and preview image to anything that does not run JavaScript, WhatsApp included. The
+  # extra command installs Chromium so the prerender actually happens.
+  # Check the deploy log for the line "prerendered 20 pages" to confirm it ran.
+  command = "npm run build:host"
   publish = "dist"
   functions = "netlify/functions"
 

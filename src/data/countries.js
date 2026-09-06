@@ -82,7 +82,11 @@ export const COUNTRIES = {
     faqs: [
       { q: 'Do I need to speak Italian?', a: 'Not for the English-taught programs. A little Italian makes daily life easier, and most universities run free classes for international students.' },
       { q: 'Can I work while I study?', a: 'Yes. A student permit lets you work up to 20 hours a week.' },
-      { q: 'How much money do I need to show for the visa?', a: 'Usually around €7,000 to €8,000 for the year, which works out to roughly €467 a month. You can show it with bank statements or a sponsor.' },
+      // Kept deliberately in step with the figure and the caveat in
+      // src/data/posts/italy-student-visa-from-pakistan.js. If you update one, update the other:
+      // two different numbers for the same requirement on the same site is the kind of thing a
+      // careful reader notices and a competitor screenshots.
+      { q: 'How much money do I need to show for the visa?', a: 'The figure commonly used is in the region of €7,000 for an academic year, but confirm the current requirement for your intake with the consulate, because it is reviewed. What matters as much as the amount is that the funds have a visible history and a traceable source. You can show it with your own statements or with a documented sponsor, usually a parent.' },
       { q: 'Is the DSU scholarship really within reach?', a: 'For a lot of students, yes. It looks at family income rather than grades, so students from lower income families often qualify when the paperwork is done properly.' },
     ],
   },

@@ -7,6 +7,14 @@ export default {
       p: 'An Italian student visa application is not judged on your marks. It is judged on whether the file is complete, whether the money is credible, and whether you sound like someone who is going to study. Those are three separate things and each one can be prepared.',
     },
 
+    {
+      cta: {
+        to: '/italy',
+        text: 'Study in Italy from Pakistan',
+        after: 'covers the universities, the DSU scholarship and what the year costs. This page is the visa file on its own.',
+      },
+    },
+
     { h2: 'Before the visa: pre enrolment on Universitaly' },
     {
       p: 'Italy requires a pre enrolment application through Universitaly, the government portal, in addition to your application to the university itself. This links your admission to your visa file. Without it the consulate has nothing to attach your application to, so it is the first real deadline in your year rather than an afterthought.',
@@ -97,6 +105,31 @@ export default {
     {
       q: 'Can my father sponsor my Italian student visa?',
       a: 'Yes, a parent sponsor is normal and expected. You will need their bank statements, proof of their income, a sponsorship affidavit and documents proving the relationship, and the sponsor’s income should plausibly match the balance being shown.',
+    },
+    // The five below were added to cover the questions students actually type once they are past
+    // the obvious ones. They are deliberately about process rather than amounts: a process answer
+    // stays true next year, and these are the searches nobody with a generic study-abroad page
+    // bothers to answer properly. They also feed the FAQ structured data, which is what makes the
+    // expandable questions eligible to appear under your result in Google.
+    {
+      q: 'What happens if my Italy student visa is refused?',
+      a: 'You are given the reason in writing. In most Pakistani cases it comes down to the funds not being convincing or a document being missing or unrecognised, and both are fixable rather than final. You can prepare a stronger file and apply again, but the second application is read alongside the first, so it has to answer the reason given rather than repeat the same file with a new date.',
+    },
+    {
+      q: 'Do I need confirmed accommodation before the visa appointment?',
+      a: 'Yes, you need proof of somewhere to stay for the initial period. A university residence offer, a signed rental contract or a hosting declaration all work. It does not have to be where you live for the whole year, but an empty space on the checklist is treated as an incomplete file.',
+    },
+    {
+      q: 'Can someone other than a parent sponsor my visa?',
+      a: 'It is possible, but it is harder. A parent sponsor is expected and needs the least explanation. Any other sponsor has to document both their income and why they are funding you, and a relationship a consular officer has to work out for themselves is a question you did not need to invite. If a parent can sponsor you on paper, let them.',
+    },
+    {
+      q: 'Is the Declaration of Value always required?',
+      a: 'Not always. Some universities accept a CIMEA statement of comparability instead, and a few programmes accept other recognition documents. Confirm which one your programme wants before paying for either, because they are issued by different bodies on different timelines and the wrong one is time you do not get back.',
+    },
+    {
+      q: 'Do I need to speak Italian for an English-taught programme?',
+      a: 'Not for the visa or for the admission. Italian is not assessed for an English-taught degree. It matters for daily life and for finding part time work, and most universities run free classes for international students, so it is worth starting before you fly rather than after.',
     },
   ],
 }

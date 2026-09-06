@@ -21,6 +21,13 @@ export default function Country({ which }) {
   const c = COUNTRIES[which]
   const path = `/${which}`
   const guides = (COUNTRY_GUIDES[which] || []).map((slug) => POST_BY_SLUG[slug]).filter(Boolean)
+  // The first guide in the list above is the visa article for this country. The visa section
+  // further down links straight to it, rather than leaving the reader to find it in the card grid
+  // at the bottom of the page. Two reasons. A reader who has just read "you will need a Type D
+  // visa" is at the exact moment of wanting the detail, and a link placed inside the visa text
+  // with the words "student visa" in it tells a search engine which of the two pages is the real
+  // answer for that search. Without it, this page and the article compete with each other.
+  const visaGuide = guides[0]
 
   useSeo(
     `Study in ${c.name} from Pakistan`,
@@ -195,7 +202,18 @@ export default function Country({ which }) {
       <section className="px-5 sm:px-8 lg:px-12 pt-8 lg:pt-14 pb-1.5">
         <Container className="lg:max-w-3xl">
           <h2 className="font-display font-semibold text-[21px] sm:text-[26px] text-navy m-0 mb-1">Student visa process</h2>
-          <p className="text-[13.5px] leading-normal m-0 mb-4.5">{c.visaIntro}</p>
+          <p className="text-[13.5px] leading-normal m-0 mb-3">{c.visaIntro}</p>
+          {visaGuide && (
+            <p className="text-[13.5px] leading-normal m-0 mb-4.5">
+              <Link
+                to={`/blog/${visaGuide.slug}`}
+                className="font-semibold text-royal underline underline-offset-2"
+              >
+                Read the full {c.name} student visa guide for Pakistani students
+              </Link>{' '}
+              — the documents, the bank statement, and the questions asked at the appointment.
+            </p>
+          )}
           <div className="flex flex-col">
             {c.timeline.map((tl, i) => {
               const notLast = i < c.timeline.length - 1
