@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import Img from '../components/Img'
 import { PersonAvatar } from '../components/artwork'
 import { Eyebrow, Container } from '../components/ui'
+import { SERVICE_ICONS } from '../components/icons'
 import { TONES } from '../data/site'
 import { IMAGES } from '../data/images'
 import { useSeo, graph, absolute } from '../hooks/useSeo'
@@ -76,17 +77,20 @@ export default function About() {
         <Container className="lg:max-w-3xl">
           <h2 className="font-display font-semibold text-[21px] sm:text-[24px] text-navy m-0 mb-4">How we work</h2>
           <div className="flex flex-col sm:grid sm:grid-cols-2 gap-2.5">
-            {ABOUT_VALUES.map((v, i) => (
-              <div key={i} className="flex gap-3.5 bg-[#F9FBFE] border border-[#ECF0F7] rounded-[14px] p-4">
-                <div className={`w-[34px] h-[34px] rounded-[10px] ${TONES[v.tone].bg} ${TONES[v.tone].fg} flex items-center justify-center text-[15px] shrink-0`}>
-                  {v.glyph}
+            {ABOUT_VALUES.map((v, i) => {
+              const Icon = SERVICE_ICONS[v.icon]
+              return (
+                <div key={i} className="flex gap-3.5 bg-[#F9FBFE] border border-[#ECF0F7] rounded-[14px] p-4">
+                  <div className={`w-[34px] h-[34px] rounded-[10px] ${TONES[v.tone].bg} ${TONES[v.tone].fg} flex items-center justify-center shrink-0`}>
+                    {Icon ? <Icon className="w-[18px] h-[18px]" /> : null}
+                  </div>
+                  <div>
+                    <div className="font-display font-semibold text-[14.5px] text-navy">{v.t}</div>
+                    <div className="text-[13px] leading-relaxed mt-0.5">{v.d}</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="font-display font-semibold text-[14.5px] text-navy">{v.t}</div>
-                  <div className="text-[13px] leading-relaxed mt-0.5">{v.d}</div>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </Container>
       </section>

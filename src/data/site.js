@@ -18,6 +18,25 @@ export const CONTACT = {
   whatsapp: 'https://wa.me/923215208625',
 }
 
+// Your social profiles, in one place.
+//
+// Two separate things need these, and it is worth knowing they are separate. The footer renders
+// them as icons so a visitor can find you. The "sameAs" list in index.html tells Google that these
+// profiles and this website are one business, which is what makes your logo and details eligible
+// to appear beside your name in a search result.
+//
+// Google reads sameAs more confidently when the same links are also on the page where a person
+// can click them, which is the other reason the footer block exists.
+//
+// KEEP IN SYNC: index.html is a plain static file and cannot import this one, so its sameAs list
+// is a copy of these addresses. Change a profile here and change it there in the same commit, or
+// the two quietly drift apart.
+export const SOCIAL = [
+  { label: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/share/1YUPTvTdaB/' },
+  { label: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/vl.study.abroad/' },
+  { label: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/company/vl-study-abroad-consultants/' },
+]
+
 // Where form submissions go. Leave this exactly as it is to use the free option: every
 // submission emails your own Gmail through the function in netlify/functions/submit.js (or
 // api/submit.js on Vercel). That needs two settings on your hosting dashboard, GMAIL_USER and

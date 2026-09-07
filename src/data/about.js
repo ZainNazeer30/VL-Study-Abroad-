@@ -8,10 +8,10 @@ export const ABOUT_STATS = [
 ]
 
 export const ABOUT_VALUES = [
-  { glyph: '◎', tone: 'royal', t: 'Honest, personal advice', d: 'One counsellor who knows your file and tells you the truth about your chances.' },
-  { glyph: '▤', tone: 'green', t: 'A clear process', d: 'Set fees, set timelines and a way to track your applications any time.' },
-  { glyph: '◆', tone: 'gold', t: 'Deep local knowledge', d: 'We only work with Italy and France, so we know Universitaly, DSU, Campus France and CROUS well.' },
-  { glyph: '✈', tone: 'rust', t: 'With you the whole way', d: 'From the first call to your first week on campus, including housing, permits and a bank account.' },
+  { icon: 'advice', tone: 'royal', t: 'Honest, personal advice', d: 'One counsellor who knows your file and tells you the truth about your chances.' },
+  { icon: 'process', tone: 'green', t: 'A clear process', d: 'Set fees, set timelines and a way to track your applications any time.' },
+  { icon: 'local', tone: 'gold', t: 'Deep local knowledge', d: 'We only work with Italy and France, so we know Universitaly, DSU, Campus France and CROUS well.' },
+  { icon: 'departure', tone: 'rust', t: 'With you the whole way', d: 'From the first call to your first week on campus, including housing, permits and a bank account.' },
 ]
 
 // ---------------------------------------------------------------------------------------------

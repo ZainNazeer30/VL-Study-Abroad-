@@ -9,15 +9,19 @@ export const TRUST = [
   'One counsellor who knows your case',
 ]
 
+// `icon` keys map to the drawings in src/components/icons.jsx (SERVICE_ICONS). They used to be
+// single Unicode characters, which rendered in whatever font each device had and so never looked
+// like a matched set — and two of them were plainly wrong, ⌘ (the Mac command key) for housing and
+// ◎ (a circle) for career counselling. `tone` still controls the colour of the tile.
 export const SERVICES = [
-  { name: 'University selection', glyph: '⌂', tone: 'green' },
-  { name: 'Admissions assistance', glyph: '✎', tone: 'gold' },
-  { name: 'Visa guidance', glyph: '✓', tone: 'royal' },
-  { name: 'Scholarship support', glyph: '✦', tone: 'rust' },
-  { name: 'Pre-departure guidance', glyph: '✈', tone: 'gold' },
-  { name: 'Career counselling', glyph: '◎', tone: 'royal' },
-  { name: 'Finding somewhere to live', glyph: '⌘', tone: 'green' },
-  { name: 'Support after you land', glyph: '☏', tone: 'rust' },
+  { name: 'University selection', icon: 'university', tone: 'green' },
+  { name: 'Admissions assistance', icon: 'admissions', tone: 'gold' },
+  { name: 'Visa guidance', icon: 'visa', tone: 'royal' },
+  { name: 'Scholarship support', icon: 'scholarship', tone: 'rust' },
+  { name: 'Pre-departure guidance', icon: 'departure', tone: 'gold' },
+  { name: 'Career counselling', icon: 'career', tone: 'royal' },
+  { name: 'Finding somewhere to live', icon: 'housing', tone: 'green' },
+  { name: 'Support after you land', icon: 'aftercare', tone: 'rust' },
 ]
 
 export const STEPS = [

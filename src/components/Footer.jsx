@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
-import { WhatsAppIcon } from './icons'
-import { BRAND, CONTACT, FOOTER_LINKS } from '../data/site'
+import { WhatsAppIcon, SOCIAL_ICONS } from './icons'
+import { BRAND, CONTACT, FOOTER_LINKS, SOCIAL } from '../data/site'
 
 function Column({ title, links }) {
   return (
@@ -28,6 +28,30 @@ export default function Footer() {
             <div className="font-display font-semibold text-[15px] text-white">{BRAND.fullName}</div>
           </div>
           <p className="text-[13px] leading-relaxed max-w-sm">{BRAND.blurb}</p>
+
+          {/* Visible social links. These are the same three addresses listed in the sameAs block
+              in index.html, and that is deliberate: a link a person can click is worth more than
+              a line of structured data on its own, and Google treats the two together as a
+              stronger statement that these profiles belong to this business. */}
+          <div className="flex items-center gap-2.5 mt-4">
+            {SOCIAL.map((s) => {
+              const Icon = SOCIAL_ICONS[s.icon]
+              if (!Icon) return null
+              return (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${BRAND.fullName} on ${s.label}`}
+                  title={s.label}
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-[#93A3C2] hover:text-white flex items-center justify-center transition-colors"
+                >
+                  <Icon className="w-[18px] h-[18px]" />
+                </a>
+              )
+            })}
+          </div>
         </div>
 
         <Column title="Quick links" links={FOOTER_LINKS.quick} />
