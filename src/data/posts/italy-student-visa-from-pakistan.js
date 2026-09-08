@@ -131,5 +131,13 @@ export default {
       q: 'Do I need to speak Italian for an English-taught programme?',
       a: 'Not for the visa or for the admission. Italian is not assessed for an English-taught degree. It matters for daily life and for finding part time work, and most universities run free classes for international students, so it is worth starting before you fly rather than after.',
     },
+    {
+      q: 'Will a study gap affect my visa decision?',
+      a: 'Less than most applicants fear, but it is looked at. The consular officer is deciding whether you are a genuine student, and an unexplained few years sits awkwardly next to that. A gap you can account for — work, a course, an illness, a family responsibility — with a letter or certificate to back it is rarely the reason a file fails. Address it in the file rather than waiting to be asked about it at the counter.',
+    },
+    {
+      q: 'When should I start the visa process?',
+      a: 'Earlier than feels necessary. The parts that take the longest are not the visa form: attestation, the Declaration of Value or CIMEA, and the appointment slot itself all run on other people’s timetables, and processing at the Islamabad embassy is slower than most European posts. Missing an intake because a document arrived three weeks late is the most common way a plan fails, and it is entirely avoidable. Work backwards from your intake date, not forwards from today.',
+    },
   ],
 }

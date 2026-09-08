@@ -88,6 +88,30 @@ export const COUNTRIES = {
       // careful reader notices and a competitor screenshots.
       { q: 'How much money do I need to show for the visa?', a: 'The figure commonly used is in the region of €7,000 for an academic year, but confirm the current requirement for your intake with the consulate, because it is reviewed. What matters as much as the amount is that the funds have a visible history and a traceable source. You can show it with your own statements or with a documented sponsor, usually a parent.' },
       { q: 'Is the DSU scholarship really within reach?', a: 'For a lot of students, yes. It looks at family income rather than grades, so students from lower income families often qualify when the paperwork is done properly.' },
+      // The five below were written after reading what the larger Pakistani consultancies answer
+      // and what they skip. Each is something students search for and nobody in this market
+      // answers properly. They are deliberately about process rather than amounts: a process
+      // answer is still true next year, and it shows a search engine we know things others do not.
+      {
+        q: 'Does a study gap stop me from applying to Italy?',
+        a: 'No. A gap is normal in Pakistani academic records and Italian universities are used to seeing them. What matters is that the gap has an account attached to it. A year of work, a language course, a professional certificate, a family situation, an illness — any of these is fine when it is stated plainly and, where you can, evidenced with a letter or a certificate. What reads badly is a gap left unmentioned, because the reader then fills it in themselves. Put it in your motivation letter in one honest sentence rather than hoping nobody notices.',
+      },
+      {
+        q: 'Can I stay in Italy after I graduate?',
+        a: 'There is a route. Italy lets a graduate move from a student permit to a permit to look for work, and then to a work permit once you have a job. The duration and the conditions are set nationally and have changed more than once in recent years, so treat any figure you read anywhere as needing confirmation for the year you finish. The practical point is that you plan for it in your final year rather than your final month, because the application is made from inside Italy before your student permit lapses.',
+      },
+      {
+        q: 'Can I travel to other European countries on an Italian student visa?',
+        a: 'Yes. Once you hold a valid Italian visa and residence permit you can travel in the Schengen area as a visitor, within the usual short stay limits, without applying separately to each country. It is one of the quieter advantages of Italy over the UK, and worth knowing before you compare the two on cost alone.',
+      },
+      {
+        q: 'What do I have to do in my first weeks in Italy?',
+        a: 'Two things, and both are easy to leave too late. You apply for your residence permit, the permesso di soggiorno, within eight working days of arriving — the kit is collected and submitted at a designated post office counter, and you are then given an appointment at the questura for fingerprints. You also need a codice fiscale, the tax code, before you can open a bank account, sign a rental contract or register with a doctor. Neither is difficult. Both cause real problems when a student assumes they can wait until term settles down.',
+      },
+      {
+        q: 'Can I study medicine in Italy in English?',
+        a: 'Yes, several public universities teach medicine in English, and entry is through the IMAT admission test rather than through grades alone. It is competitive and runs on its own timetable, separate from ordinary applications, so it needs planning well ahead. If medicine is the goal, raise IMAT in the first conversation rather than after a general application is already under way.',
+      },
     ],
   },
 

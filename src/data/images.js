@@ -153,10 +153,10 @@ export const IMAGES = {
     sizes: '(min-width: 1024px) 300px, 100vw',
     position: 'center 22%',
   }),
-  founderKashan: own('founder-kashan', 'Kashan Nazeer, founder of VL Study Abroad Consultants, holding a phone at his desk in a white shalwar kameez', {
+  founderKashan: own('founder-kashan', 'Kashan Nazeer, founder of VL Study Abroad Consultants, in a navy suit and tie at the office', {
     widths: FOUNDER_WIDTHS,
     sizes: '(min-width: 1024px) 300px, 100vw',
-    position: 'center 18%',
+    position: 'center 12%',
   }),
 
   // -------------------------------------------------------------------------------------------
