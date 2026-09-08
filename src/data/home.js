@@ -12,16 +12,17 @@ export const TRUST = [
 // `icon` keys map to the drawings in src/components/icons.jsx (SERVICE_ICONS). They used to be
 // single Unicode characters, which rendered in whatever font each device had and so never looked
 // like a matched set — and two of them were plainly wrong, ⌘ (the Mac command key) for housing and
-// ◎ (a circle) for career counselling. `tone` still controls the colour of the tile.
+// ◎ (a circle) for career counselling. Every tile now shares one quiet treatment — see TILE in
+// src/data/site.js for why the four rotating pastel colours were removed.
 export const SERVICES = [
-  { name: 'University selection', icon: 'university', tone: 'green' },
-  { name: 'Admissions assistance', icon: 'admissions', tone: 'gold' },
-  { name: 'Visa guidance', icon: 'visa', tone: 'royal' },
-  { name: 'Scholarship support', icon: 'scholarship', tone: 'rust' },
-  { name: 'Pre-departure guidance', icon: 'departure', tone: 'gold' },
-  { name: 'Career counselling', icon: 'career', tone: 'royal' },
-  { name: 'Finding somewhere to live', icon: 'housing', tone: 'green' },
-  { name: 'Support after you land', icon: 'aftercare', tone: 'rust' },
+  { name: 'University selection', icon: 'university' },
+  { name: 'Admissions assistance', icon: 'admissions' },
+  { name: 'Visa guidance', icon: 'visa' },
+  { name: 'Scholarship support', icon: 'scholarship' },
+  { name: 'Pre-departure guidance', icon: 'departure' },
+  { name: 'Career counselling', icon: 'career' },
+  { name: 'Finding somewhere to live', icon: 'housing' },
+  { name: 'Support after you land', icon: 'aftercare' },
 ]
 
 export const STEPS = [
@@ -46,7 +47,7 @@ export const HOME_UNIS = [
   { name: 'Sorbonne University', flag: '🇫🇷', city: 'Paris', country: 'France', tags: ['Humanities', 'Science', 'Public'], apply: 'Campus France, Oct 2026 to Jan 2027', status: 'Opens Oct', tone: 'neutral' },
   { name: 'Sciences Po', flag: '🇫🇷', city: 'Paris', country: 'France', tags: ['Humanities', 'Business', 'Public'], apply: 'Apply Oct 2026 to Jan 2027', status: 'Opens Oct', tone: 'neutral' },
   { name: 'Université Grenoble Alpes', flag: '🇫🇷', city: 'Grenoble', country: 'France', tags: ['STEM', 'English-taught'], apply: 'Campus France, Nov 2026 to Mar 2027', status: 'Opens Nov', tone: 'neutral' },
-  { name: 'Politecnico di Torino', flag: '🇮🇹', city: 'Turin', country: 'Italy', tags: ['Engineering', 'STEM', 'Spring intake'], apply: 'Closing now for February 2027', status: 'Closing soon', tone: 'rust' },
+  { name: 'Politecnico di Torino', flag: '🇮🇹', city: 'Turin', country: 'Italy', tags: ['Engineering', 'STEM', 'Spring intake'], apply: 'Closing now for February 2027', status: 'Closing soon' },
 ]
 
 // These three are the fully funded routes, the ones that cover tuition and living costs rather

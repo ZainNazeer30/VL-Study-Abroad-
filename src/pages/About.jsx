@@ -3,7 +3,7 @@ import Img from '../components/Img'
 import { PersonAvatar } from '../components/artwork'
 import { Eyebrow, Container } from '../components/ui'
 import { SERVICE_ICONS } from '../components/icons'
-import { TONES } from '../data/site'
+import { TILE } from '../data/site'
 import { IMAGES } from '../data/images'
 import { useSeo, graph, absolute } from '../hooks/useSeo'
 import { Avatar } from '../components/ui'
@@ -81,7 +81,7 @@ export default function About() {
               const Icon = SERVICE_ICONS[v.icon]
               return (
                 <div key={i} className="flex gap-3.5 bg-[#F9FBFE] border border-[#ECF0F7] rounded-[14px] p-4">
-                  <div className={`w-[34px] h-[34px] rounded-[10px] ${TONES[v.tone].bg} ${TONES[v.tone].fg} flex items-center justify-center shrink-0`}>
+                  <div className={`w-[34px] h-[34px] rounded-[10px] ${TILE.bg} ${TILE.fg} flex items-center justify-center shrink-0`}>
                     {Icon ? <Icon className="w-[18px] h-[18px]" /> : null}
                   </div>
                   <div>

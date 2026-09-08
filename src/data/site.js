@@ -92,13 +92,23 @@ export const FOOTER_LINKS = {
 }
 
 // Soft background + text colour pairs used by icons, badges and pills.
-export const TONES = {
-  royal: { bg: 'bg-royal-soft', fg: 'text-royal' },
-  green: { bg: 'bg-green-soft', fg: 'text-green' },
-  gold: { bg: 'bg-[#FBF7EC]', fg: 'text-gold-ink' },
-  rust: { bg: 'bg-rust-soft', fg: 'text-rust' },
-}
+// One treatment for every decorative icon tile on the site.
+//
+// This used to be four: a pale blue tile with blue icon, a pale green with green, a pale gold
+// with gold, a pale rust with rust, rotated down a grid of services with nothing choosing which
+// tile got which colour. Rotating pastel tints behind saturated icons is one of the most
+// recognisable signatures of a generated template, and it is what a visitor reads as "this site
+// was not designed". No brand uses four accent colours decoratively; a designer picks one and
+// spends the others on meaning.
+//
+// So decoration is now quiet and colour is reserved for two jobs that need it: STATUS below,
+// where green and rust genuinely say open and closing, and the gold in the logo and the primary
+// button, which is the brand. If you want an icon tile to stand out, that is a sign it belongs in
+// a different section, not a different colour.
+export const TILE = { bg: 'bg-tile', fg: 'text-navy' }
 
+// Kept, and still four colours, because here the colour carries information: a student scanning
+// the universities table reads rust as "this is closing" without stopping to read the words.
 export const STATUS = {
   green: { bg: 'bg-green-soft', fg: 'text-green' },
   rust: { bg: 'bg-rust-soft', fg: 'text-rust' },

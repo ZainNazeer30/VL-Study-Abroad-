@@ -8,7 +8,7 @@ import { Eyebrow, H2, Container } from '../components/ui'
 import { Field, SelectField, Honeypot } from '../components/Field'
 import { useLeadForm, PHONE_HINT } from '../hooks/useLeadForm'
 import { IMAGES } from '../data/images'
-import { CONTACT, TONES, STATUS } from '../data/site'
+import { CONTACT, TILE, STATUS } from '../data/site'
 import { POSTS } from '../data/blog'
 import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
 import {
@@ -168,7 +168,7 @@ export default function Home() {
               const Icon = SERVICE_ICONS[s.icon]
               return (
                 <div key={i} className="bg-[#F9FBFE] border border-[#ECF0F7] rounded-[14px] p-3.5 lg:p-5 flex flex-col gap-2.5">
-                  <div className={`w-8 h-8 lg:w-10 lg:h-10 rounded-[9px] ${TONES[s.tone].bg} ${TONES[s.tone].fg} flex items-center justify-center`}>
+                  <div className={`w-8 h-8 lg:w-10 lg:h-10 rounded-[9px] ${TILE.bg} ${TILE.fg} flex items-center justify-center`}>
                     {Icon ? <Icon className="w-[17px] h-[17px] lg:w-5 lg:h-5" /> : null}
                   </div>
                   <div className="font-display font-medium text-[13px] lg:text-[14px] text-navy leading-snug">{s.name}</div>
