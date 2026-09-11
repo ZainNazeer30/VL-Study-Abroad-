@@ -1,12 +1,17 @@
 // Small shared building blocks used across pages.
 
-export function Eyebrow({ children, className = 'text-royal' }) {
-  return (
-    <div className={`text-[11px] font-semibold tracking-[0.14em] uppercase mb-1.5 ${className}`}>
-      {children}
-    </div>
-  )
-}
+// The Eyebrow component that used to live here has been removed.
+//
+// It rendered a small tracked-out ALL-CAPS label above a heading — "WHAT WE DO", "UNIVERSITIES",
+// "FAQ" — and it was used above nine headings on the home page alone. Two problems. Every one of
+// them restated the heading directly beneath it, so it carried no information: "UNIVERSITIES" sat
+// on top of "A few popular universities". And a tracked-out caps label above every section is
+// template chrome that turns up on generated pages regardless of what the page is about, which is
+// exactly what makes a site look as though nobody designed it.
+//
+// The headings are good on their own. If a section ever genuinely needs a label above it, write
+// it in sentence case as part of that section rather than reviving a component that invites one
+// above everything.
 
 export function H2({ children, className = '' }) {
   return (

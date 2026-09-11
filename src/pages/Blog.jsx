@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Img from '../components/Img'
-import { Container, Eyebrow } from '../components/ui'
+import { Container } from '../components/ui'
 import { IMAGES } from '../data/images'
 import { POSTS, BLOG_CATEGORIES, formatPostDate } from '../data/blog'
 import { CONTACT } from '../data/site'
@@ -43,7 +43,6 @@ export default function Blog() {
     <div>
       <section className="px-5 sm:px-8 lg:px-12 pt-6 pb-6 lg:pt-12 lg:pb-8 bg-gradient-to-b from-[#F6F9FE] to-white">
         <Container className="lg:max-w-3xl">
-          <Eyebrow>Guides</Eyebrow>
           <h1 className="font-display font-bold text-[27px] sm:text-[34px] lg:text-[38px] leading-tight text-navy m-0 mb-3">
             Straight answers on studying in Italy and France
           </h1>
@@ -144,7 +143,7 @@ function LeadCard({ post }) {
           {post.title}
         </h2>
         <p className="text-[14px] leading-relaxed text-slate m-0 mb-3">{post.excerpt}</p>
-        <span className="font-semibold text-[13.5px] text-royal">Read the guide →</span>
+        <span className="font-semibold text-[13.5px] text-royal">Read the guide</span>
       </div>
     </Link>
   )

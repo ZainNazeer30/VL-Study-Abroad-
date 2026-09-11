@@ -4,7 +4,7 @@ import Faq from '../components/Faq'
 import Img from '../components/Img'
 import { PersonAvatar } from '../components/artwork'
 import { SERVICE_ICONS } from '../components/icons'
-import { Eyebrow, H2, Container } from '../components/ui'
+import { H2, Container } from '../components/ui'
 import { Field, SelectField, Honeypot } from '../components/Field'
 import { useLeadForm, PHONE_HINT } from '../hooks/useLeadForm'
 import { IMAGES } from '../data/images'
@@ -133,7 +133,6 @@ export default function Home() {
       {/* Destinations */}
       <section className="px-5 sm:px-8 lg:px-12 pt-8 lg:pt-14 pb-2">
         <Container>
-          <Eyebrow>Destinations</Eyebrow>
           <H2 className="mb-4 lg:mb-6">Pick where you want to study</H2>
           <div className="flex flex-col md:grid md:grid-cols-2 gap-3.5 md:gap-6">
             <DestinationCard
@@ -161,7 +160,6 @@ export default function Home() {
       {/* Services */}
       <section className="px-5 sm:px-8 lg:px-12 pt-9 lg:pt-14 pb-2">
         <Container>
-          <Eyebrow>What we do</Eyebrow>
           <H2 className="mb-4 lg:mb-6">Every part of the move, handled</H2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 lg:gap-4">
             {SERVICES.map((s, i) => {
@@ -182,7 +180,6 @@ export default function Home() {
       {/* How it works */}
       <section className="mt-9 lg:mt-14 px-5 sm:px-8 lg:px-12 pt-8 pb-9 lg:py-16 bg-navy">
         <Container className="lg:max-w-3xl">
-          <Eyebrow className="text-[#8FA8E8]">How it works</Eyebrow>
           <h2 className="font-display font-semibold text-[22px] sm:text-[26px] text-white m-0 mb-5 lg:mb-8">Five steps to your place in Europe</h2>
           <div className="flex flex-col">
             {STEPS.map((st, i) => {
@@ -215,8 +212,7 @@ export default function Home() {
       {/* Featured universities */}
       <section className="px-5 sm:px-8 lg:px-12 pt-9 lg:pt-16 pb-2">
         <Container>
-          <Eyebrow>Universities</Eyebrow>
-          <H2 className="mb-3.5 lg:mb-6">A few of popular universities</H2>
+          <H2 className="mb-3.5 lg:mb-6">A few popular universities</H2>
           <div className="flex gap-2 overflow-x-auto pb-3 no-scrollbar">
             {HOME_FILTERS.map((f) => {
               const active = f === filter
@@ -260,7 +256,7 @@ export default function Home() {
                     <span className="font-display font-semibold text-[13px] text-navy">{u.apply}</span>
                   </div>
                   <Link to="/universities" className="font-semibold text-[13px] text-royal">
-                    View details →
+                    View details
                   </Link>
                 </div>
               </div>
@@ -283,7 +279,6 @@ export default function Home() {
       {/* Scholarships */}
       <section className="px-5 sm:px-8 lg:px-12 pt-9 lg:pt-16 pb-2">
         <Container>
-          <Eyebrow className="text-gold-ink">Fully funded scholarships</Eyebrow>
           <H2 className="mb-2">The scholarships that cover the whole cost</H2>
           <p className="text-[13.5px] leading-relaxed mb-4 lg:mb-6 max-w-2xl">
             These three are fully funded, meaning tuition and living costs, not just a fee cut. We check these first
@@ -323,7 +318,6 @@ export default function Home() {
       {/* Why us */}
       <section className="px-5 sm:px-8 lg:px-12 pt-9 lg:pt-16 pb-2">
         <Container>
-          <Eyebrow>Why VL</Eyebrow>
           <H2 className="mb-4 lg:mb-6">Guidance you can count on</H2>
           <div className="flex flex-col md:grid md:grid-cols-2 md:gap-x-10">
             {WHY_US.map((w, i) => (
@@ -359,7 +353,6 @@ export default function Home() {
       {/* Success stories */}
       <section className="pt-9 lg:pt-16 pb-2">
         <Container className="px-5 sm:px-8 lg:px-12">
-          <Eyebrow>Success stories</Eyebrow>
           <H2 className="mb-4 lg:mb-6">Students already out there</H2>
         </Container>
         <div className="flex gap-3 overflow-x-auto md:overflow-visible md:grid md:grid-cols-3 px-5 sm:px-8 lg:px-12 max-w-6xl mx-auto pt-1 pb-3 no-scrollbar md:gap-4">
@@ -451,7 +444,6 @@ export default function Home() {
       {/* FAQ */}
       <section className="px-5 sm:px-8 lg:px-12 pt-9 lg:pt-16 pb-2">
         <Container className="lg:max-w-3xl">
-          <Eyebrow>FAQ</Eyebrow>
           <H2 className="mb-3.5 lg:mb-6">Questions students ask us</H2>
           <Faq id="home" items={HOME_FAQS} defaultOpen={0} />
         </Container>
@@ -462,7 +454,6 @@ export default function Home() {
           internal links to work out which of your pages are the important ones. */}
       <section className="px-5 sm:px-8 lg:px-12 pt-9 lg:pt-16 pb-2">
         <Container>
-          <Eyebrow>Guides</Eyebrow>
           <H2 className="mb-2">Read before you apply</H2>
           <p className="text-[13.5px] leading-relaxed mb-4 lg:mb-6 max-w-2xl">
             Written for students applying from Pakistan, so they name IBCC, HEC, MOFA, Universitaly and Campus France

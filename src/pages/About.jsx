@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import Img from '../components/Img'
 import { PersonAvatar } from '../components/artwork'
-import { Eyebrow, Container } from '../components/ui'
+import { Container } from '../components/ui'
 import { SERVICE_ICONS } from '../components/icons'
 import { TILE } from '../data/site'
 import { IMAGES } from '../data/images'
@@ -42,7 +42,6 @@ export default function About() {
     <div>
       <section className="px-5 sm:px-8 lg:px-12 pt-7 pb-6 lg:py-14 bg-gradient-to-b from-[#F6F9FE] to-white">
         <Container className="lg:max-w-3xl">
-          <Eyebrow>About us</Eyebrow>
           <h1 className="font-display font-bold text-[27px] sm:text-[34px] leading-tight text-navy m-0 mb-3">
             We help students get into European universities
           </h1>

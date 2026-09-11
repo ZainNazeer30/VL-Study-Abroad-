@@ -178,7 +178,7 @@ export default function Country({ which }) {
             ))}
           </div>
           <Link to="/scholarships" className="block text-center mt-3 font-semibold text-[13.5px] text-royal">
-            See all scholarships →
+            See all scholarships
           </Link>
         </Container>
       </section>

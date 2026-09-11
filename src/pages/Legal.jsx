@@ -93,7 +93,7 @@ export default function Legal({ which }) {
               . We answer every message about data or fees personally.
             </p>
             <Link to="/contact" className="text-[13.5px] font-semibold text-royal">
-              Contact us →
+              Contact us
             </Link>
           </div>
         </Container>
