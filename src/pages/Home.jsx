@@ -342,7 +342,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/60 to-navy/15" />
         <Container className="relative h-full px-5 sm:px-8 lg:px-12 flex flex-col justify-center">
           <p className="font-display font-semibold text-[18px] sm:text-[24px] lg:text-[30px] text-white leading-snug m-0 max-w-lg">
-            Three years, dozens of students, two countries we know properly.
+            Three years in the sector, 20+ students placed, two countries we know properly.
           </p>
           <p className="text-[13px] sm:text-[14.5px] text-[#D3DCEE] mt-2 m-0 max-w-md">
             Every one of them started with a single message asking whether it was even possible.

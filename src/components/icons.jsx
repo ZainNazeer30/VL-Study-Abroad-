@@ -147,6 +147,20 @@ export const SERVICE_ICONS = {
       <circle cx="12" cy="10.2" r="2.8" />
     </Svg>
   ),
+  // A clock, for office hours (contact page).
+  clock: ({ className }) => (
+    <Svg className={className}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7.2V12l3.2 1.9" />
+    </Svg>
+  ),
+  // An envelope, for email (contact page).
+  mail: ({ className }) => (
+    <Svg className={className}>
+      <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+      <path d="m3 7 8.1 5.6a1.6 1.6 0 0 0 1.8 0L21 7" />
+    </Svg>
+  ),
 }
 
 export function WhatsAppIcon({ className = 'w-6 h-6' }) {

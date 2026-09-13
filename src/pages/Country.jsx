@@ -4,6 +4,7 @@ import { Container } from '../components/ui'
 import { Field, Honeypot } from '../components/Field'
 import { useLeadForm, PHONE_HINT } from '../hooks/useLeadForm'
 import { COUNTRIES } from '../data/countries'
+import { GUIDE_PDFS } from '../data/site'
 import { IMAGES } from '../data/images'
 import { POST_BY_SLUG } from '../data/blog'
 import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
@@ -28,6 +29,7 @@ export default function Country({ which }) {
   // with the words "student visa" in it tells a search engine which of the two pages is the real
   // answer for that search. Without it, this page and the article compete with each other.
   const visaGuide = guides[0]
+  const guidePdf = GUIDE_PDFS[which]
 
   useSeo(
     `Study in ${c.name} from Pakistan`,
@@ -204,7 +206,7 @@ export default function Country({ which }) {
           <h2 className="font-display font-semibold text-[21px] sm:text-[26px] text-navy m-0 mb-1">Student visa process</h2>
           <p className="text-[13.5px] leading-normal m-0 mb-3">{c.visaIntro}</p>
           {visaGuide && (
-            <p className="text-[13.5px] leading-normal m-0 mb-4.5">
+            <p className="text-[13.5px] leading-normal m-0 mb-3">
               <Link
                 to={`/blog/${visaGuide.slug}`}
                 className="font-semibold text-royal underline underline-offset-2"
@@ -213,6 +215,22 @@ export default function Country({ which }) {
               </Link>{' '}
               — the documents, the bank statement, and the questions asked at the appointment.
             </p>
+          )}
+          {/* The same guide as a PDF. A student comparing countries on a phone at midnight will
+              often save a file to read later rather than read it now, and a downloaded checklist
+              with our address on every page keeps working long after the tab is closed. */}
+          {guidePdf && (
+            <a
+              href={guidePdf.file}
+              download
+              className="flex justify-between items-center gap-3 border border-line rounded-[14px] px-4 py-3 mb-4.5 hover:border-royal-soft transition-colors"
+            >
+              <span className="min-w-0">
+                <span className="block text-[13px] font-semibold text-navy">Download the checklist</span>
+                <span className="block text-[12px] leading-snug text-mist mt-0.5">{guidePdf.blurb}</span>
+              </span>
+              <span className="text-royal text-[12.5px] font-semibold whitespace-nowrap shrink-0">PDF · {guidePdf.pages}</span>
+            </a>
           )}
           <div className="flex flex-col">
             {c.timeline.map((tl, i) => {

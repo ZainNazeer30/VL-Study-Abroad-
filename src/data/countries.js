@@ -86,7 +86,7 @@ export const COUNTRIES = {
       // src/data/posts/italy-student-visa-from-pakistan.js. If you update one, update the other:
       // two different numbers for the same requirement on the same site is the kind of thing a
       // careful reader notices and a competitor screenshots.
-      { q: 'How much money do I need to show for the visa?', a: 'The figure commonly used is in the region of €7,000 for an academic year, but confirm the current requirement for your intake with the consulate, because it is reviewed. What matters as much as the amount is that the funds have a visible history and a traceable source. You can show it with your own statements or with a documented sponsor, usually a parent.' },
+      { q: 'How much money do I need to show for the visa?', a: '€10,179.85 for the academic year. That is the reference figure in the MUR and MAECI circular covering 2026/2027 and 2027/2028, and it replaced €6,947.33, so anything you read written before 2026 is likely to understate it by about a third. Consulates can ask for more than the national floor, so confirm the Islamabad checklist for your intake. What matters as much as the amount is that the funds have a visible history and a traceable source, shown through your own statements or a documented sponsor, usually a parent.' },
       { q: 'Is the DSU scholarship really within reach?', a: 'For a lot of students, yes. It looks at family income rather than grades, so students from lower income families often qualify when the paperwork is done properly.' },
       // The five below were written after reading what the larger Pakistani consultancies answer
       // and what they skip. Each is something students search for and nobody in this market

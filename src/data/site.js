@@ -14,6 +14,14 @@ export const CONTACT = {
   website: 'www.vlstudy.online',
   websiteUrl: 'https://www.vlstudy.online',
   phone: '+92 321 5208625',
+  // Office hours, shown on the contact page and repeated in the schema in index.html so they can
+  // appear beside the business in search. Keep the two in step: hoursText is what a person reads,
+  // hoursOpens and hoursCloses are the 24 hour values Google needs.
+  hoursText: '10:00 am to 4:30 pm, Monday to Saturday',
+  hoursShort: '10:00 am – 4:30 pm',
+  hoursOpens: '10:00',
+  hoursCloses: '16:30',
+  hoursDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
   // Real number, in international format with no spaces or symbols, used to build the wa.me link below.
   whatsapp: 'https://wa.me/923215208625',
 }
@@ -106,6 +114,32 @@ export const FOOTER_LINKS = {
 // button, which is the brand. If you want an icon tile to stand out, that is a sign it belongs in
 // a different section, not a different colour.
 export const TILE = { bg: 'bg-tile', fg: 'text-navy' }
+
+// The downloadable PDFs in public/guides, keyed so any page can pull the right one.
+//
+// They live here rather than inside the contact page because a download is most useful at the
+// moment someone is reading about that country, not on the page they visit last. Each file is
+// built from the same facts as the article of the same name.
+export const GUIDE_PDFS = {
+  italy: {
+    title: 'The Italy student visa from Pakistan',
+    blurb: 'Funds, the Declaration of Value, the Islamabad appointment and a document checklist.',
+    file: '/guides/italy-student-visa-guide.pdf',
+    pages: '2 pages',
+  },
+  france: {
+    title: 'The France student visa from Pakistan',
+    blurb: 'Campus France, the interview, the file and a document checklist.',
+    file: '/guides/france-student-visa-guide.pdf',
+    pages: '2 pages',
+  },
+  scholarships: {
+    title: 'Scholarships in Italy and France',
+    blurb: 'DSU, Eiffel, and which ones Pakistani students can actually apply for.',
+    file: '/guides/scholarships-italy-france-guide.pdf',
+    pages: '2 pages',
+  },
+}
 
 // Kept, and still four colours, because here the colour carries information: a student scanning
 // the universities table reads rust as "this is closing" without stopping to read the words.

@@ -2,9 +2,10 @@
 
 export const ABOUT_STATS = [
   { v: '3+', l: 'years of experience' },
-  { v: '30+', l: 'students placed' },
-  { v: '96%', l: 'visa success rate' },
-  { v: '2', l: 'countries we know well' },
+  // 20+, not 30+. The figure a visitor can check against your LinkedIn and your case load is
+  // worth more than a bigger one they cannot.
+  { v: '20+', l: 'students placed' },
+  { v: '2', l: 'countries, covered properly' },
 ]
 
 export const ABOUT_VALUES = [
@@ -42,7 +43,13 @@ export const FOUNDERS = [
     initials: 'KN',
     tone: 'royal',
     image: 'founderKashan',
-    linkedin: 'https://www.linkedin.com/in/kashan-nazeer-a72475369/',
+    // Taken from Kashan's own LinkedIn profile export. The site previously pointed at
+    // /in/kashan-nazeer-a72475369 with a hyphen between the two names, which is not the address
+    // LinkedIn issued and almost certainly returned nothing. It mattered more than a normal
+    // broken link: this URL is printed under every article as the author's profile and is handed
+    // to Google as a sameAs claim, so a dead one undercut the exact trust the About page is for.
+    // If the vanity URL is ever shortened to /in/kashannazeer, change it here and nowhere else.
+    linkedin: 'https://www.linkedin.com/in/kashannazeer-a72475369',
     bio: [
       'Kashan has spent more than three years working directly with students to simplify the study abroad journey, through counselling, university selection, admissions support and planning the year properly rather than reactively.',
       'He handles most of the counselling side of VL: working out what a student can realistically get into, which funding routes are open to them, and what their documents need before anything is submitted.',

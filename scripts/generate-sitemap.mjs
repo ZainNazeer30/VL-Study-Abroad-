@@ -39,7 +39,22 @@ const posts = [...blog.matchAll(/slug:\s*'([^']+)'[\s\S]*?updated:\s*'([\d-]+)'/
   changefreq: 'monthly',
 }))
 
-const urls = [...PAGES.map((p) => ({ ...p, lastmod: p.updated })), ...posts]
+// The downloadable guides in public/guides. Google indexes PDFs like any other document, so a
+// guide left out of the sitemap is a page that can rank sitting there unannounced. Each one is
+// generated from the article of the same name, so they share its lastmod.
+const GUIDE_PDFS = [
+  { path: '/guides/italy-student-visa-guide.pdf', from: 'italy-student-visa-from-pakistan' },
+  { path: '/guides/france-student-visa-guide.pdf', from: 'france-student-visa-from-pakistan' },
+  { path: '/guides/scholarships-italy-france-guide.pdf', from: 'fully-funded-scholarships-for-pakistani-students' },
+]
+const guides = GUIDE_PDFS.map((g) => ({
+  path: g.path,
+  lastmod: (posts.find((p) => p.path === `/blog/${g.from}`) || {}).lastmod || PAGES[0].updated,
+  priority: '0.6',
+  changefreq: 'yearly',
+}))
+
+const urls = [...PAGES.map((p) => ({ ...p, lastmod: p.updated })), ...posts, ...guides]
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -57,4 +72,4 @@ ${urls
 `
 
 writeFileSync(new URL('../public/sitemap.xml', import.meta.url), xml)
-console.log(`sitemap.xml written with ${urls.length} addresses (${posts.length} articles)`)
+console.log(`sitemap.xml written with ${urls.length} addresses (${posts.length} articles, ${guides.length} guides)`)

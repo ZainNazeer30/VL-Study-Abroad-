@@ -44,7 +44,7 @@ export default {
 
     { h2: 'The money question, properly' },
     {
-      p: 'Italy expects evidence that you can support yourself for the academic year. The figure commonly used is in the region of €7,000 for a year, but treat any number you read anywhere, including here, as something to confirm against the current consulate guidance for your intake, because it is reviewed periodically.',
+      p: 'Italy expects evidence that you can support yourself for the academic year, and this is the number that changed. The MUR and MAECI circular covering academic years 2026/2027 and 2027/2028 sets the reference figure at €10,179.85 for the year, up from €6,947.33. That is a rise of roughly 46 per cent in a single step. Anyone still preparing against the old figure of about €7,000 is showing around two thirds of what is now asked for. Individual consulates can ask for more than the national floor, so confirm the current checklist for Islamabad before you book, and note the date you checked.',
     },
     {
       p: 'Far more important than the number is the shape of the account. What a consular officer is looking for:',
@@ -92,7 +92,7 @@ export default {
   faqs: [
     {
       q: 'How much bank statement is required for an Italy student visa from Pakistan?',
-      a: 'The figure commonly used is around €7,000 for an academic year, but confirm the current requirement for your intake with the consulate, because it is reviewed. What matters as much as the amount is that the funds have a visible history and a traceable source rather than appearing shortly before the appointment.',
+      a: 'The reference figure for academic years 2026/2027 and 2027/2028 is €10,179.85 for the year, set by the MUR and MAECI circular. It replaced a figure of €6,947.33, so guidance written before 2026 understates it badly. Consulates can ask for more than the national floor, so check the Islamabad checklist for your intake. What matters as much as the amount is that the funds have a visible history and a traceable source rather than appearing shortly before the appointment.',
     },
     {
       q: 'How long does an Italian student visa take from Pakistan?',
@@ -130,6 +130,10 @@ export default {
     {
       q: 'Do I need to speak Italian for an English-taught programme?',
       a: 'Not for the visa or for the admission. Italian is not assessed for an English-taught degree. It matters for daily life and for finding part time work, and most universities run free classes for international students, so it is worth starting before you fly rather than after.',
+    },
+    {
+      q: 'Is there a deadline for the Italy student visa application itself?',
+      a: 'Yes, and it is separate from your university deadline, which is where people get caught. The MUR circular sets a cut-off for filing the visa application for bachelor’s, master’s and academic diploma programmes: 30 November 2026 for the 2026/2027 academic year, and 31 October 2027 for 2027/2028. Master’s, PhD, Erasmus and single-course programmes are not fixed to that date, but must still be filed before teaching starts. Work backwards from the cut-off, not from the day your admission letter arrives.',
     },
     {
       q: 'Will a study gap affect my visa decision?',

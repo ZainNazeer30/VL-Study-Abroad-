@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react'
-import { CONTACT } from '../data/site'
+import { CONTACT, TILE, SOCIAL, GUIDE_PDFS } from '../data/site'
 import { Container } from '../components/ui'
 import { Field, Honeypot } from '../components/Field'
 import { nextWorkingDays } from '../lib/nextWeekdays'
 import { useLeadForm, PHONE_HINT } from '../hooks/useLeadForm'
-import { WhatsAppIcon } from '../components/icons'
+import { WhatsAppIcon, LinkedInIcon, SERVICE_ICONS } from '../components/icons'
 import { Link } from 'react-router-dom'
 import Faq from '../components/Faq'
 import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
@@ -36,12 +36,7 @@ const CONTACT_FAQS = [
   },
 ]
 
-const GUIDES = [
-  'The full guide to studying in Italy, 2026 to 2027',
-  'The full guide to studying in France, 2026 to 2027',
-  'Scholarship checklist for DSU and Eiffel',
-]
-
+const GUIDES = [GUIDE_PDFS.italy, GUIDE_PDFS.france, GUIDE_PDFS.scholarships]
 export default function Contact() {
   useSeo(
     'Book a Free Study Abroad Consultation',
@@ -198,19 +193,40 @@ export default function Contact() {
               </span>
             </a>
             <a href={`mailto:${CONTACT.email}`} className="flex gap-3.5 items-center border border-line rounded-[14px] px-4 py-3.5">
-              <span className="w-[38px] h-[38px] rounded-[11px] bg-royal-soft text-royal flex items-center justify-center text-[16px] shrink-0">✉</span>
+              <span className={`w-[38px] h-[38px] rounded-[11px] ${TILE.bg} ${TILE.fg} flex items-center justify-center shrink-0`}>
+                <SERVICE_ICONS.mail className="w-[19px] h-[19px]" />
+              </span>
               <span>
                 <span className="block font-display font-semibold text-[14px] text-navy">{CONTACT.email}</span>
                 <span className="block text-[12.5px] text-ink">We reply within 24 hours</span>
               </span>
             </a>
-            <div className="flex gap-3.5 items-center border border-line rounded-[14px] px-4 py-3.5 sm:col-span-2">
-              <span className="w-[38px] h-[38px] rounded-[11px] bg-[#FBF7EC] text-gold-ink flex items-center justify-center text-[16px] shrink-0">⏰</span>
+            <div className="flex gap-3.5 items-center border border-line rounded-[14px] px-4 py-3.5">
+              <span className={`w-[38px] h-[38px] rounded-[11px] ${TILE.bg} ${TILE.fg} flex items-center justify-center shrink-0`}>
+                <SERVICE_ICONS.clock className="w-[19px] h-[19px]" />
+              </span>
               <span>
-                <span className="block font-display font-semibold text-[14px] text-navy">We work entirely online, 24 hours a day</span>
-                <span className="block text-[12.5px] text-ink">There is no office to travel to. Wherever you are in Pakistan, message us any time and a real counsellor will get back to you.</span>
+                <span className="block font-display font-semibold text-[14px] text-navy">{CONTACT.hoursShort}</span>
+                <span className="block text-[12.5px] text-ink">{CONTACT.hoursText.split(', ')[1]}. Message any time and we reply in working hours.</span>
               </span>
             </div>
+            {/* LinkedIn sits here rather than only in the footer because it is where this business
+                is actually most active, and a student deciding whether to trust a consultancy will
+                often look at the company page before they look at anything else. */}
+            <a
+              href={SOCIAL.find((x) => x.icon === 'linkedin').href}
+              target="_blank"
+              rel="noreferrer"
+              className="flex gap-3.5 items-center border border-line rounded-[14px] px-4 py-3.5"
+            >
+              <span className={`w-[38px] h-[38px] rounded-[11px] ${TILE.bg} ${TILE.fg} flex items-center justify-center shrink-0`}>
+                <LinkedInIcon className="w-[18px] h-[18px]" />
+              </span>
+              <span>
+                <span className="block font-display font-semibold text-[14px] text-navy">Follow us on LinkedIn</span>
+                <span className="block text-[12.5px] text-ink">Where we post visa changes and deadlines first</span>
+              </span>
+            </a>
           </div>
         </Container>
       </section>
@@ -260,12 +276,24 @@ export default function Contact() {
       {/* Guides */}
       <section className="px-5 sm:px-8 lg:px-12 pt-8 lg:pt-14 pb-9 lg:pb-16">
         <Container className="lg:max-w-2xl">
-          <h2 className="font-display font-semibold text-[19px] sm:text-[22px] text-navy m-0 mb-3.5">Free study guides</h2>
+          <h2 className="font-display font-semibold text-[19px] sm:text-[22px] text-navy m-0 mb-1.5">Free study guides</h2>
+          <p className="text-[13.5px] leading-relaxed m-0 mb-3.5">Written by us, updated as the rules change. No email address needed, no form to fill in. Download and read them whenever suits you.</p>
           <div className="flex flex-col gap-2">
             {GUIDES.map((g, i) => (
-              <a key={i} href={CONTACT.whatsapp} target="_blank" rel="noreferrer" className="flex justify-between items-center gap-2.5 bg-[#F9FBFE] border border-[#ECF0F7] rounded-xl px-4 py-3.5">
-                <span className="text-[13.5px] font-medium text-navy">{g}</span>
-                <span className="text-royal text-[13px] font-semibold whitespace-nowrap">Get PDF</span>
+              <a
+                key={i}
+                href={g.file}
+                download
+                className="flex justify-between items-start gap-3 bg-[#F9FBFE] border border-[#ECF0F7] rounded-xl px-4 py-3.5 hover:border-royal-soft transition-colors"
+              >
+                <span className="min-w-0">
+                  <span className="block text-[13.5px] font-medium text-navy">{g.title}</span>
+                  <span className="block text-[12.5px] leading-snug text-mist mt-0.5">{g.blurb}</span>
+                </span>
+                <span className="text-right shrink-0">
+                  <span className="block text-royal text-[13px] font-semibold whitespace-nowrap">Download PDF</span>
+                  <span className="block text-[11.5px] text-mist mt-0.5">{g.pages}</span>
+                </span>
               </a>
             ))}
           </div>

@@ -198,7 +198,7 @@ faqs: [
 faqs: [
       {
         q: 'How much bank statement is required for an Italy student visa from Pakistan?',
-        a: 'The figure commonly used is around €7,000 for an academic year, but confirm the current requirement for your intake with the consulate, because it is reviewed. What matters as much as the amount is that the funds have a visible history and a traceable source rather than appearing shortly before the appointment.',
+        a: 'The reference figure for academic years 2026/2027 and 2027/2028 is €10,179.85, set by the MUR and MAECI circular. It replaced €6,947.33, so guidance written before 2026 understates it by about a third. What matters as much as the amount is that the funds have a visible history and a traceable source rather than appearing shortly before the appointment.',
       },
       {
         q: 'How long does an Italian student visa take from Pakistan?',

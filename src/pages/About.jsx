@@ -54,7 +54,7 @@ export default function About() {
       </section>
 
       <div className="px-5 sm:px-8 lg:px-12">
-        <Container className="grid grid-cols-2 sm:grid-cols-4 gap-2 lg:gap-4 lg:max-w-3xl">
+        <Container className="grid grid-cols-3 gap-2 lg:gap-4 lg:max-w-3xl">
           {ABOUT_STATS.map((k, i) => (
             <div key={i} className="bg-navy rounded-[13px] px-2.5 py-3.5 lg:py-5 text-center">
               <div className="font-display font-bold text-[18px] lg:text-[22px] text-gold">{k.v}</div>
