@@ -78,6 +78,16 @@ export function absolute(url) {
   return url.startsWith('http') ? url : `${ORIGIN}${url.startsWith('/') ? '' : '/'}${url}`
 }
 
+// Where the prerender step picks up what each page wants in its head.
+//
+// The effect below writes the tags straight into the document, which is exactly right in a
+// browser and useless at build time, because effects do not run during a server render. So when
+// there is no document — that is, when scripts/prerender.mjs is rendering the page in Node — the
+// same values are recorded here instead, and the prerender step writes them into the HTML file.
+//
+// One render, one page, so a single slot is enough. The browser never touches this.
+export const ssrHead = { current: null }
+
 export function useSeo(title, description, options = {}) {
   const {
     path, image, type = 'website', jsonLd, noindex = false, bare = false,
@@ -85,6 +95,17 @@ export function useSeo(title, description, options = {}) {
     published, modified, author, section, imageAlt,
   } = options
   const jsonLdKey = jsonLd ? JSON.stringify(jsonLd) : ''
+
+  if (typeof document === 'undefined') {
+    ssrHead.current = {
+      title: title ? (bare ? title : `${title} | ${TITLE_SUFFIX}`) : SITE_NAME,
+      description,
+      url: absolute(path || '/'),
+      image: absolute(image) || DEFAULT_IMAGE,
+      type, noindex, jsonLd: jsonLdKey,
+      published, modified, author, section, imageAlt,
+    }
+  }
 
   useEffect(() => {
     const fullTitle = title ? (bare ? title : `${title} | ${TITLE_SUFFIX}`) : SITE_NAME

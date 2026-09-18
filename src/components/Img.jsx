@@ -42,7 +42,7 @@ export default function Img({ image, className = '', loading = 'lazy', fetchPrio
       sizes={usingFallback ? undefined : image.sizes}
       alt={image.alt || ''}
       loading={loading}
-      fetchpriority={fetchPriority}
+      fetchPriority={fetchPriority}
       decoding="async"
       onLoad={() => setLoaded(true)}
       onError={() => {

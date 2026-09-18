@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/generate-sitemap.mjs && vite build && node scripts/prerender.mjs",
+    "build": "node scripts/generate-sitemap.mjs && vite build && npm run build:ssr && node scripts/prerender.mjs",
     "lint": "oxlint",
     "preview": "vite preview",
     "sitemap": "node scripts/generate-sitemap.mjs",
@@ -14,7 +14,7 @@
     "check-images": "node scripts/check-images.mjs",
     "build:fast": "node scripts/generate-sitemap.mjs && vite build",
     "prerender": "node scripts/prerender.mjs",
-    "build:host": "npx --yes playwright install chromium && npm run build"
+    "build:ssr": "vite build --ssr src/entry-server.jsx --outDir dist-ssr"
   },
   "dependencies": {
     "nodemailer": "^9.0.5",

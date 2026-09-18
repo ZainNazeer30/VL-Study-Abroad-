@@ -21,6 +21,18 @@ const NotFound = lazy(() => import('./pages/NotFound'))
 export default function App() {
   return (
     <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
+  )
+}
+
+// The route table on its own, without a router around it.
+//
+// The browser wraps this in BrowserRouter above. The prerender step at build time wraps the same
+// table in a StaticRouter instead, so the HTML it writes out comes from these exact routes rather
+// than a second copy that could drift out of step with them.
+export function AppRoutes() {
+  return (
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
@@ -38,7 +50,6 @@ export default function App() {
           <Route path="*" element={<L><NotFound /></L>} />
         </Route>
       </Routes>
-    </BrowserRouter>
   )
 }
 
