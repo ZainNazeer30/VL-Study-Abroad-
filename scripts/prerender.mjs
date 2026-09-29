@@ -40,7 +40,9 @@ const blogSource = readFileSync(new URL('../src/data/blog.js', import.meta.url),
 const slugs = [...blogSource.matchAll(/slug:\s*'([^']+)'/g)].map((m) => m[1])
 
 const ROUTES = [
-  '/', '/italy', '/france', '/universities', '/scholarships', '/blog',
+  '/', '/italy', '/france', '/universities',
+  '/universities/bachelors', '/universities/masters',
+  '/scholarships', '/blog',
   '/about', '/contact', '/apply', '/privacy', '/terms',
   ...slugs.map((s) => `/blog/${s}`),
 ]

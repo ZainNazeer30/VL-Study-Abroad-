@@ -39,19 +39,20 @@ export const FOUNDERS = [
     name: 'Kashan Nazeer',
     role: 'Consultant and Founder',
     // The one line version used under an article headline, where there is no room for the bio.
-    credential: 'Founder of VL Study Abroad. Three years advising Pakistani students on admissions, funding and visa files for Italy and France.',
+    credential: 'Founder of VL Study Abroad. Three years in Pakistan\u2019s visa and education sector, advising students on admissions, funding and visa files for Italy and France.',
     initials: 'KN',
     tone: 'royal',
     image: 'founderKashan',
-    // Taken from Kashan's own LinkedIn profile export. The site previously pointed at
-    // /in/kashan-nazeer-a72475369 with a hyphen between the two names, which is not the address
-    // LinkedIn issued and almost certainly returned nothing. It mattered more than a normal
-    // broken link: this URL is printed under every article as the author's profile and is handed
-    // to Google as a sameAs claim, so a dead one undercut the exact trust the About page is for.
-    // If the vanity URL is ever shortened to /in/kashannazeer, change it here and nowhere else.
-    linkedin: 'https://www.linkedin.com/in/kashannazeer-a72475369',
+    // Verified against the live profile in the browser address bar, not against the PDF export.
+    // The hyphen matters: /in/kashan-nazeer-a72475369 is the real address.
+    //
+    // This was briefly changed to /in/kashannazeer-a72475369 because LinkedIn's own PDF export
+    // prints the URL without the hyphen — PDF text extraction drops it. The export was wrong and
+    // the original was right. Check a LinkedIn URL by opening the profile and reading the address
+    // bar; never trust a URL copied out of a PDF.
+    linkedin: 'https://www.linkedin.com/in/kashan-nazeer-a72475369',
     bio: [
-      'Kashan has spent more than three years working directly with students to simplify the study abroad journey, through counselling, university selection, admissions support and planning the year properly rather than reactively.',
+      'Kashan has spent three years in Pakistan\u2019s visa and education sector, the last of them running VL, working directly with students on counselling, university selection, admissions support and planning the year properly rather than reactively.',
       'He handles most of the counselling side of VL: working out what a student can realistically get into, which funding routes are open to them, and what their documents need before anything is submitted.',
     ],
     quote:

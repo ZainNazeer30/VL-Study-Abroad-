@@ -23,6 +23,8 @@ const PAGES = [
   { path: '/scholarships', priority: '0.9', changefreq: 'monthly', updated: '2026-08-26' },
   { path: '/blog', priority: '0.8', changefreq: 'weekly', updated: '2026-08-04' },
   { path: '/universities', priority: '0.8', changefreq: 'monthly', updated: '2026-08-26' },
+  { path: '/universities/bachelors', priority: '0.8', changefreq: 'monthly', updated: '2026-09-29' },
+  { path: '/universities/masters', priority: '0.8', changefreq: 'monthly', updated: '2026-09-29' },
   { path: '/apply', priority: '0.7', changefreq: 'yearly', updated: '2026-08-26' },
   { path: '/contact', priority: '0.7', changefreq: 'yearly', updated: '2026-08-26' },
   { path: '/about', priority: '0.6', changefreq: 'yearly', updated: '2026-08-26' },

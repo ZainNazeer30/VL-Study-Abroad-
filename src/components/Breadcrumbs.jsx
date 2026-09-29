@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { POST_BY_SLUG } from '../data/blog'
 import { absolute } from '../hooks/useSeo'
@@ -52,6 +51,14 @@ const LABELS = {
   '/terms': 'Terms of Use',
 }
 
+// Pages that sit under another page rather than beside it, so their trail is three deep. Listed
+// here rather than worked out from the address, because a slash in an address does not reliably
+// mean one page is beneath another.
+const NESTED = {
+  '/universities/bachelors': { parent: '/universities', name: 'Bachelor degrees' },
+  '/universities/masters': { parent: '/universities', name: 'Master degrees' },
+}
+
 function trailFor(pathname) {
   const home = { name: 'Home', path: '/' }
 
@@ -63,6 +70,11 @@ function trailFor(pathname) {
     return [home, { name: 'Guides', path: '/blog' }, { name: post.seoTitle || post.title, path: pathname }]
   }
 
+  const nested = NESTED[pathname]
+  if (nested) {
+    return [home, { name: LABELS[nested.parent], path: nested.parent }, { name: nested.name, path: pathname }]
+  }
+
   const label = LABELS[pathname]
   if (!label) return null
   return [home, { name: label, path: pathname }]
@@ -72,41 +84,41 @@ export default function Breadcrumbs() {
   const { pathname } = useLocation()
   const trail = trailFor(pathname)
 
-  // The structured data half. Written as its own script tag rather than folded into each page's
-  // jsonLd, so adding a page never means remembering to add a breadcrumb block to it. Removed on
-  // navigation for the same reason useSeo removes its own: in a single page app nothing reloads,
-  // so a block left behind would describe the previous page.
-  useEffect(() => {
-    document.querySelectorAll('script[data-seo="breadcrumb"]').forEach((n) => n.remove())
-    if (!trail) return
-
-    const script = document.createElement('script')
-    script.type = 'application/ld+json'
-    script.setAttribute('data-seo', 'breadcrumb')
-    script.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: trail.map((item, i) => ({
-        '@type': 'ListItem',
-        position: i + 1,
-        name: item.name,
-        item: absolute(item.path),
-      })),
-    })
-    document.head.appendChild(script)
-
-    return () => {
-      document.querySelectorAll('script[data-seo="breadcrumb"]').forEach((n) => n.remove())
-    }
-  }, [trail && trail.map((i) => i.path).join('|')]) // eslint-disable-line react-hooks/exhaustive-deps
-
   if (!trail) return null
+
+  // The structured data half, rendered as part of the page rather than pushed into <head> by an
+  // effect.
+  //
+  // It used to be an effect, and that quietly cost the site every breadcrumb it should have had.
+  // Effects do not run during a server render, so the prerendered HTML — the thing a crawler
+  // actually reads — went out with the visible trail on it and no markup behind it. The trail
+  // only appeared once a browser had run the page, which is the one audience that did not need
+  // it.
+  //
+  // As JSX it is in the HTML from the start, and React takes it away on navigation by itself, so
+  // the stale-block problem the effect was written to solve cannot happen either. JSON-LD is read
+  // wherever it sits in the document, so being in the body rather than the head costs nothing.
+  const jsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: trail.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      item: absolute(item.path),
+    })),
+  })
 
   return (
     <nav
       aria-label="Breadcrumb"
       className={`px-5 sm:px-8 lg:px-12 pt-3.5 ${TINTS[pathname] || DEFAULT_TINT}`}
     >
+      <script
+        type="application/ld+json"
+        data-seo="breadcrumb"
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
+      />
       <div className="max-w-7xl mx-auto">
         <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-1 m-0 p-0 list-none text-[12px] text-mist">
           {trail.map((item, i) => {

@@ -12,7 +12,7 @@ import { ABOUT_STATS, ABOUT_VALUES, ABOUT_STORIES, FOUNDERS } from '../data/abou
 export default function About() {
   useSeo(
     'About Us: Italy and France Specialists',
-    'Meet Kashan and Umer. Three years getting Pakistani students into universities in Italy and France, with fully funded scholarships and a strong visa record.',
+    'Meet Kashan and Umer. Three years in Pakistan\u2019s visa and education sector, focused entirely on Italy and France since 2025.',
     {
       path: '/about',
       image: IMAGES.aboutTeam.src,
@@ -48,7 +48,7 @@ export default function About() {
           <p className="text-[14.5px] sm:text-[15.5px] leading-relaxed m-0">
             We started VL to make studying in Italy and France a real option for students from every background and
             budget. We chose to know two countries really well, rather than know twenty just a little, and we have
-            spent more than three years building that knowledge.
+            spent three years in the sector building that knowledge.
           </p>
         </Container>
       </section>

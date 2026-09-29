@@ -6,7 +6,7 @@ export const BRAND = {
   suffix: 'Consultants',
   fullName: 'VL Study Abroad Consultants',
   blurb:
-    'For more than three years we have helped students find their place at universities across Italy and France, from the first conversation to the day they arrive.',
+    'Three years in Pakistan\u2019s visa and education sector, and VL Study Abroad since 2025, helping students find their place at universities across Italy and France.',
 }
 
 export const CONTACT = {
@@ -66,7 +66,19 @@ export const NAV_ITEMS = [
   { label: 'Home', to: '/' },
   { label: 'Study in Italy', to: '/italy' },
   { label: 'Study in France', to: '/france' },
-  { label: 'Universities', to: '/universities' },
+  // `children` turns this into a dropdown. Universities stays a real page and a real link — the
+  // submenu is a shortcut to the two level pages beneath it, not a replacement for it. A student
+  // usually knows whether they want a Bachelor or a Master before they know which university, so
+  // offering both from the menu saves a hop.
+  {
+    label: 'Universities',
+    to: '/universities',
+    children: [
+      { label: 'All universities', to: '/universities' },
+      { label: 'Bachelor degrees', to: '/universities/bachelors' },
+      { label: 'Master degrees', to: '/universities/masters' },
+    ],
+  },
   { label: 'Scholarships', to: '/scholarships' },
   { label: 'Guides', to: '/blog' },
   { label: 'About Us', to: '/about' },
@@ -79,6 +91,8 @@ export const FOOTER_LINKS = {
     { label: 'Study in Italy', to: '/italy' },
     { label: 'Study in France', to: '/france' },
     { label: 'Universities', to: '/universities' },
+    { label: 'Bachelor degrees', to: '/universities/bachelors' },
+    { label: 'Master degrees', to: '/universities/masters' },
     { label: 'Scholarships', to: '/scholarships' },
     { label: 'Guides and answers', to: '/blog' },
   ],

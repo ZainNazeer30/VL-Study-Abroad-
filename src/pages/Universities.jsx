@@ -71,8 +71,8 @@ const COLUMNS = [
 
 export default function Universities() {
   useSeo(
-    'Universities in Italy and France for Pakistani Students',
-    'Compare universities in Italy and France: entry requirements, the CGPA you need, IELTS and MOI rules, intake dates and application deadlines for students applying from Pakistan.',
+    'Universities in Italy and France',
+    'Universities in Italy and France that accept Pakistani students. Entry grades, IELTS or MOI, intake dates and application deadlines, side by side.',
     {
       path: '/universities',
       image: IMAGES.universitiesHero.src,
@@ -168,6 +168,30 @@ export default function Universities() {
             >
               Get a shortlist for your profile
             </Link>
+
+            {/* The two level pages. A student almost always knows whether they want a Bachelor or
+                a Master before they know which university, and the two routes out of Pakistan are
+                different enough that sending them straight to the right one saves a wasted read. */}
+            <div className="flex flex-col sm:flex-row gap-2.5 mt-4">
+              <Link
+                to="/universities/bachelors"
+                className="flex-1 border border-line rounded-[14px] px-4 py-3 bg-white hover:border-royal-soft transition-colors"
+              >
+                <span className="block font-display font-semibold text-[14px] text-navy">Bachelor degrees</span>
+                <span className="block text-[12.5px] leading-snug text-mist mt-0.5">
+                  From FSc or A Levels, with IBCC and the TOLC test
+                </span>
+              </Link>
+              <Link
+                to="/universities/masters"
+                className="flex-1 border border-line rounded-[14px] px-4 py-3 bg-white hover:border-royal-soft transition-colors"
+              >
+                <span className="block font-display font-semibold text-[14px] text-navy">Master degrees</span>
+                <span className="block text-[12.5px] leading-snug text-mist mt-0.5">
+                  From a Bachelor, with HEC and CIMEA or a Declaration of Value
+                </span>
+              </Link>
+            </div>
           </div>
           <div className="rounded-[18px] overflow-hidden w-full aspect-[16/10] lg:flex-1 mt-5 lg:mt-0">
             <Img image={IMAGES.universitiesHero} loading="eager" fetchPriority="high" className="w-full h-full" />
