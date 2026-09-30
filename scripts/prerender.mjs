@@ -23,7 +23,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const DIST = fileURLToPath(new URL('../dist', import.meta.url))
 const SERVER_ENTRY = fileURLToPath(new URL('../dist-ssr/entry-server.js', import.meta.url))
@@ -47,7 +47,7 @@ const ROUTES = [
   ...slugs.map((s) => `/blog/${s}`),
 ]
 
-const { render } = await import(SERVER_ENTRY)
+const { render } = await import(pathToFileURL(SERVER_ENTRY).href)
 const template = readFileSync(join(DIST, 'index.html'), 'utf8')
 
 const esc = (s) =>

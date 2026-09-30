@@ -39,17 +39,19 @@ export default function About() {
     }
   )
   return (
-    <div>
-      <section className="px-5 sm:px-8 lg:px-12 pt-7 pb-6 lg:py-14 bg-gradient-to-b from-[#F6F9FE] to-white">
-        <Container className="lg:max-w-3xl">
-          <h1 className="font-display font-bold text-[27px] sm:text-[34px] leading-tight text-navy m-0 mb-3">
-            We help students get into European universities
-          </h1>
-          <p className="text-[14.5px] sm:text-[15.5px] leading-relaxed m-0">
+    <div className="site-page">
+      <section className="page-hero">
+        <Container className="page-hero-inner lg:max-w-6xl">
+          <div className="page-hero-copy">
+            <div className="eyebrow">About VL Study</div>
+            <h1 className="page-hero-title">A small consultancy built around personal guidance</h1>
+          <p className="page-hero-text">
             We started VL to make studying in Italy and France a real option for students from every background and
             budget. We chose to know two countries really well, rather than know twenty just a little, and we have
             spent three years in the sector building that knowledge.
           </p>
+          </div>
+          <div className="page-hero-media"><Img image={IMAGES.aboutTeam} loading="eager" fetchPriority="high" className="w-full h-full" /></div>
         </Container>
       </section>
 
@@ -61,14 +63,6 @@ export default function About() {
               <div className="text-[10.5px] leading-tight text-[#AAB8D4] mt-0.5">{k.l}</div>
             </div>
           ))}
-        </Container>
-      </div>
-
-      <div className="px-5 sm:px-8 lg:px-12 pt-6">
-        <Container className="lg:max-w-3xl">
-          <div className="rounded-[18px] overflow-hidden h-[190px] sm:h-[260px]">
-            <Img image={IMAGES.aboutTeam} className="w-full h-full" />
-          </div>
         </Container>
       </div>
 

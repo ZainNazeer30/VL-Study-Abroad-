@@ -4,6 +4,8 @@ import { Container } from '../components/ui'
 import { Field, SelectField, Honeypot } from '../components/Field'
 import { useLeadForm, PHONE_HINT } from '../hooks/useLeadForm'
 import { useSeo } from '../hooks/useSeo'
+import Img from '../components/Img'
+import { IMAGES } from '../data/images'
 
 const STEP_LABELS = ['Step 1 of 3, about you', 'Step 2 of 3, your education', 'Step 3 of 3, your study plans']
 
@@ -42,11 +44,16 @@ export default function Apply() {
   const goBack = () => setStep(step - 1)
 
   return (
-    <div>
-      <section className="px-5 sm:px-8 lg:px-12 pt-6 pb-4.5 lg:pt-12 lg:pb-6 bg-gradient-to-b from-[#F6F9FE] to-white">
-        <Container className="lg:max-w-2xl">
-          <h1 className="font-display font-bold text-[25px] sm:text-[30px] text-navy m-0 mb-1.5">Start your application</h1>
-          <p className="text-[13.5px] leading-relaxed m-0">It takes about three minutes, and a counsellor reads every application personally.</p>
+    <div className="site-page">
+      <section className="page-hero page-hero-compact">
+        <Container className="page-hero-inner lg:max-w-6xl">
+          <div className="page-hero-copy">
+            <div className="eyebrow">Free profile review</div>
+            <h1 className="page-hero-title">Start your application in about three minutes</h1>
+            <p className="page-hero-text">Tell us where you are today. A counsellor will review your profile and help you understand the next practical steps.</p>
+            <div className="hero-proof"><span>✓ Personal review</span><span>✓ Scholarship matching</span><span>✓ Clear next steps</span></div>
+          </div>
+          <div className="page-hero-media"><Img image={IMAGES.applyHero} loading="eager" fetchPriority="high" className="w-full h-full" /></div>
         </Container>
       </section>
 

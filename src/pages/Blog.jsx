@@ -40,17 +40,19 @@ export default function Blog() {
   )
 
   return (
-    <div>
-      <section className="px-5 sm:px-8 lg:px-12 pt-6 pb-6 lg:pt-12 lg:pb-8 bg-gradient-to-b from-[#F6F9FE] to-white">
-        <Container className="lg:max-w-3xl">
-          <h1 className="font-display font-bold text-[27px] sm:text-[34px] lg:text-[38px] leading-tight text-navy m-0 mb-3">
-            Straight answers on studying in Italy and France
-          </h1>
-          <p className="text-[14.5px] sm:text-[15.5px] leading-relaxed m-0 max-w-2xl">
+    <div className="site-page">
+      <section className="page-hero">
+        <Container className="page-hero-inner lg:max-w-6xl">
+          <div className="page-hero-copy">
+            <div className="eyebrow">Guides for Pakistani students</div>
+            <h1 className="page-hero-title">Straight answers before you spend money or submit an application</h1>
+          <p className="page-hero-text">
             Everything here is written for a student applying from Pakistan, so it names IBCC, HEC, MOFA, Campus France
             and the embassies in Islamabad rather than talking in general international terms. These are the questions
             students actually ask us on the first call.
           </p>
+          </div>
+          <div className="page-hero-media"><Img image={IMAGES.blogHero} loading="eager" fetchPriority="high" className="w-full h-full" /></div>
         </Container>
       </section>
 

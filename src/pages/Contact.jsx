@@ -6,6 +6,8 @@ import { nextWorkingDays } from '../lib/nextWeekdays'
 import { useLeadForm, PHONE_HINT } from '../hooks/useLeadForm'
 import { WhatsAppIcon, LinkedInIcon, SERVICE_ICONS } from '../components/icons'
 import { Link } from 'react-router-dom'
+import Img from '../components/Img'
+import { IMAGES } from '../data/images'
 import Faq from '../components/Faq'
 import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
 
@@ -79,10 +81,21 @@ export default function Contact() {
     day >= 0 && slot >= 0 ? `${DAYS[day].dow} ${DAYS[day].num} ${DAYS[day].month} at ${SLOTS[slot]}` : ''
 
   return (
-    <div>
-      <section className="px-5 sm:px-8 lg:px-12 pt-6 pb-5 lg:pt-12 lg:pb-8 bg-gradient-to-b from-[#F6F9FE] to-white">
+    <div className="site-page">
+      <section className="page-hero">
+        <Container className="page-hero-inner lg:max-w-6xl">
+          <div className="page-hero-copy">
+            <div className="eyebrow">Free consultation</div>
+            <h1 className="page-hero-title">Talk to someone who will actually look at your profile</h1>
+            <p className="page-hero-text">Pick a day and time, tell us your academic background, and we will use the call to discuss realistic university, scholarship and visa routes.</p>
+            <div className="hero-proof"><span>✓ 30-minute call</span><span>✓ No obligation</span><span>✓ Pakistan-focused guidance</span></div>
+          </div>
+          <div className="page-hero-media"><Img image={IMAGES.contactHero} loading="eager" fetchPriority="high" className="w-full h-full" /></div>
+        </Container>
+      </section>
+
+      <section className="px-5 sm:px-8 lg:px-12 pt-8 pb-5 lg:pt-12 lg:pb-8">
         <Container className="lg:max-w-3xl">
-          <h1 className="font-display font-bold text-[26px] sm:text-[32px] text-navy m-0 mb-2">Book your free consultation</h1>
           <p className="text-[14px] leading-relaxed m-0">Thirty minutes with a counsellor, by call, video or WhatsApp. We work entirely online, so it does not matter where in Pakistan you are. No cost and no obligation.</p>
         </Container>
       </section>

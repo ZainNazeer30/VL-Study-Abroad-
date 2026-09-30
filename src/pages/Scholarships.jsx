@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Img from '../components/Img'
+import { IMAGES } from '../data/images'
 import Faq from '../components/Faq'
 import { Container } from '../components/ui'
 import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
@@ -104,23 +106,24 @@ export default function Scholarships() {
     .sort((a, b) => (b.fullyFunded ? 1 : 0) - (a.fullyFunded ? 1 : 0))
 
   return (
-    <div>
-      <section className="px-5 sm:px-8 lg:px-12 pt-6 pb-5 lg:pt-12 lg:pb-8 bg-gradient-to-b from-[#FBF7EC] to-white">
-        <Container className="lg:max-w-3xl">
-          <div className="inline-flex items-center gap-1.5 bg-white border border-[#EFE6CC] text-gold-ink font-semibold text-[11px] tracking-[0.08em] uppercase px-3 py-1.5 rounded-full mb-3.5">
-            ✦ Fully funded scholarships
+    <div className="site-page">
+      <section className="page-hero page-hero-gold">
+        <Container className="page-hero-inner lg:max-w-6xl">
+          <div className="page-hero-copy">
+            <div className="eyebrow eyebrow-gold">✦ Scholarship opportunities</div>
+            <h1 className="page-hero-title">Find funding that can make Italy or France possible</h1>
+            <p className="page-hero-text">Compare scholarship routes, understand what each one actually covers, and use the checker to narrow your options before you apply.</p>
+            <div className="flex flex-col sm:flex-row gap-2.5 mt-5">
+              <a href="#checker" className="btn-primary">Check my scholarship options</a>
+              <Link to="/apply" className="btn-secondary">Get a personal shortlist</Link>
+            </div>
           </div>
-          <h1 className="font-display font-bold text-[26px] sm:text-[32px] text-navy m-0 mb-2 leading-tight">Find a scholarship that actually covers your costs</h1>
-          <p className="text-[14px] leading-relaxed m-0">
-            Most students who come to us want one thing first: a route that is genuinely fully funded, tuition and
-            living costs both, not just a discount. We check that before anything else, and we are upfront below
-            about which scholarships really do that and which only reduce your fees.
-          </p>
+          <div className="page-hero-media"><Img image={IMAGES.scholarshipsHero} loading="eager" fetchPriority="high" className="w-full h-full" /></div>
         </Container>
       </section>
 
       {/* Eligibility checker */}
-      <section className="px-5 sm:px-8 lg:px-12 mt-2.5">
+      <section id="checker" className="px-5 sm:px-8 lg:px-12 mt-6">
         <Container className="lg:max-w-xl">
           <div className="rounded-[20px] bg-navy p-[22px_20px] lg:p-8">
             <h2 className="font-display font-semibold text-[18px] text-white m-0 mb-1">Scholarship checker</h2>

@@ -124,6 +124,10 @@ Unsplash, referenced by exact photo ID so the same image comes back every time.
 | Guide: France student visa | `photo-1774526993562-abc3f2afac0f` | `photo-1650211233816-53d4e13a8817` |
 | Guide: without IELTS | `photo-1758270704787-615782711641` | `photo-1758270704384-9df36d94a29d` |
 | Guide: intake deadlines | `photo-1776536025707-9a0a915f85a5` | `photo-1567760855784-589f09ed5dc6` |
+| Scholarships page hero | `photo-1523240795612-9a054b0db644` | `photo-1523050854058-8df90110c9f1` |
+| Contact page hero | `photo-1516321318423-f06f85e504b3` | `photo-1521737711867-e3b97375f902` |
+| Application page hero | `photo-1562774053-701939374585` | `photo-1498243691581-b145c3f54a5a` |
+| Blog page hero | `photo-1541339907198-e08756dedf3f` | `photo-1519452575417-564c1401ecc0` |
 
 Every ID here is distinct, including the fallbacks, so nothing repeats. A fallback is only ever
 shown if the main photo fails to load, which is why a visitor never sees a broken image icon.

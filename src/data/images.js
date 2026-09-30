@@ -99,6 +99,29 @@ export const IMAGES = {
     sizes: '100vw',
   }),
 
+  // Supporting editorial photography for secondary conversion pages. These are real-world
+  // university/student photographs from Unsplash, used as visual context rather than decoration.
+  scholarshipsHero: {
+    src: u('photo-1523240795612-9a054b0db644'),
+    fallback: u('photo-1523050854058-8df90110c9f1'),
+    alt: 'University students walking together across campus',
+  },
+  contactHero: {
+    src: u('photo-1516321318423-f06f85e504b3'),
+    fallback: u('photo-1521737711867-e3b97375f902'),
+    alt: 'Students and an advisor discussing university plans together',
+  },
+  applyHero: {
+    src: u('photo-1562774053-701939374585'),
+    fallback: u('photo-1498243691581-b145c3f54a5a'),
+    alt: 'European university campus building',
+  },
+  blogHero: {
+    src: u('photo-1541339907198-e08756dedf3f'),
+    fallback: u('photo-1519452575417-564c1401ecc0'),
+    alt: 'Graduating students celebrating on a university campus',
+  },
+
   // -------------------------------------------------------------------------------------------
   // STUDY IN ITALY AND STUDY IN FRANCE
   // -------------------------------------------------------------------------------------------

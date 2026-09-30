@@ -59,7 +59,7 @@ export default function Level({ which }) {
   })
 
   return (
-    <div>
+    <div className="site-page">
       <section className="px-5 sm:px-8 lg:px-12 pt-6 pb-6 lg:py-14 bg-gradient-to-b from-[#F6F9FE] to-white">
         <Container className="lg:flex lg:items-center lg:gap-12">
           <div className="lg:flex-1">
