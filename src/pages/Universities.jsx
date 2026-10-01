@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Img from '../components/Img'
 import { inputClass, Container } from '../components/ui'
@@ -10,6 +10,10 @@ import { useSeo, graph, faqSchema, absolute } from '../hooks/useSeo'
 const selectClass = 'flex-1 min-w-0 px-3 py-3 rounded-[11px] border border-field text-[13px] bg-white text-ink outline-none focus:border-royal'
 
 const emptyFilters = { query: '', country: '', level: '', subject: '', english: '', intake: '' }
+
+function slugify(value) {
+  return value.toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+}
 
 // The English filter is here rather than a tuition filter because it is the question that
 // actually decides whether a Pakistani student can apply this year or has to wait for a test
@@ -125,6 +129,9 @@ export default function Universities() {
   )
   const [f, setF] = useState(emptyFilters)
   const [openId, setOpenId] = useState(-1)
+  const [compare, setCompare] = useState([])
+  const [profile, setProfile] = useState({ country: '', level: '', subject: '', english: '' })
+  const [profileResult, setProfileResult] = useState(null)
 
   const setField = (k) => (e) => {
     setF((s) => ({ ...s, [k]: e.target.value }))
@@ -133,6 +140,15 @@ export default function Universities() {
   const clearAll = () => {
     setF(emptyFilters)
     setOpenId(-1)
+  }
+
+  const toggleCompare = (u) => {
+    setCompare((current) => current.some((x) => x.name === u.name) ? current.filter((x) => x.name !== u.name) : current.length < 3 ? [...current, u] : current)
+  }
+
+  const runProfileMatch = () => {
+    const scored = UNIVERSITIES.map((u) => ({ u, score: (profile.country && u.country === profile.country ? 2 : profile.country ? 0 : 1) + (profile.level && u.lvl.includes(profile.level) ? 2 : profile.level ? 0 : 1) + (profile.subject && u.subjects.includes(profile.subject) ? 2 : profile.subject ? 0 : 1) + (profile.english === 'MOI' && u.moiAccepted ? 2 : profile.english === 'IELTS' && !u.moiAccepted ? 2 : !profile.english ? 1 : 0) })).sort((a,b) => b.score - a.score).slice(0, 5)
+    setProfileResult(scored.map(({ u }) => u))
   }
 
   const results = UNIVERSITIES.map((u, i) => ({ ...u, id: i })).filter((u) => {
@@ -195,6 +211,51 @@ export default function Universities() {
           </div>
           <div className="rounded-[18px] overflow-hidden w-full aspect-[16/10] lg:flex-1 mt-5 lg:mt-0">
             <Img image={IMAGES.universitiesHero} loading="eager" fetchPriority="high" className="w-full h-full" />
+          </div>
+        </Container>
+      </section>
+
+      <section className="px-5 sm:px-8 lg:px-12 pt-2 pb-8 lg:pb-10">
+        <Container>
+          <div className="rounded-[20px] border border-[#DDE5F2] bg-[#F7F9FD] p-5 lg:p-7">
+            <div className="grid lg:grid-cols-[.8fr_1.2fr] gap-6 items-center">
+              <div>
+                <div className="text-[10.5px] font-semibold uppercase tracking-[.1em] text-royal mb-1.5">New: profile matcher</div>
+                <h2 className="font-display font-semibold text-[22px] text-navy m-0 mb-2">Tell us what you want. We’ll narrow the list.</h2>
+                <p className="text-[13px] leading-relaxed text-slate m-0">Use four quick answers to find universities that match your destination, degree, subject and English route.</p>
+              </div>
+              <div>
+                <div className="grid sm:grid-cols-2 gap-2.5">
+                  <select aria-label="Preferred country" value={profile.country} onChange={(e) => setProfile((p) => ({...p, country:e.target.value}))} className={selectClass}><option value="">Country</option><option>Italy</option><option>France</option></select>
+                  <select aria-label="Degree level" value={profile.level} onChange={(e) => setProfile((p) => ({...p, level:e.target.value}))} className={selectClass}><option value="">Degree</option><option>Bachelor</option><option>Master</option></select>
+                  <select aria-label="Subject" value={profile.subject} onChange={(e) => setProfile((p) => ({...p, subject:e.target.value}))} className={selectClass}><option value="">Subject</option>{SUBJECTS.map((x) => <option key={x}>{x}</option>)}</select>
+                  <select aria-label="English route" value={profile.english} onChange={(e) => setProfile((p) => ({...p, english:e.target.value}))} className={selectClass}><option value="">English route</option><option value="MOI">I have an MOI letter</option><option value="IELTS">I have IELTS/TOEFL</option></select>
+                </div>
+                <button type="button" onClick={runProfileMatch} className="mt-2.5 w-full bg-navy text-white font-display font-semibold text-[13.5px] py-3 rounded-[11px] cursor-pointer">Find matching universities</button>
+              </div>
+            </div>
+            {profileResult && <div className="mt-5 border-t border-[#DDE5F2] pt-4">
+              <div className="flex items-center justify-between gap-3 mb-2"><div className="font-display font-semibold text-[14px] text-navy">Your starting shortlist</div><Link to="/apply" className="text-royal font-display font-semibold text-[12px]">Get a counsellor review →</Link></div>
+              <div className="flex flex-wrap gap-2">{profileResult.map((u) => <Link key={u.name} to={`/universities/${slugify(u.name)}`} className="bg-white border border-line rounded-xl px-3 py-2 text-[12px] text-navy font-medium">{u.flag} {u.name}</Link>)}</div>
+            </div>}
+          </div>
+        </Container>
+      </section>
+
+      <section className="px-5 sm:px-8 lg:px-12 pt-2 pb-5">
+        <Container>
+          <div className="rounded-2xl border border-[#DDE5F2] bg-white shadow-[0_6px_16px_rgba(10,30,60,0.04)] p-4 sm:p-5">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div>
+                <div className="text-[10.5px] font-semibold uppercase tracking-[.1em] text-royal mb-1">Application deadline tracker</div>
+                <h2 className="font-display font-semibold text-[18px] text-navy m-0">Start with the universities whose window matters now.</h2>
+                <p className="text-[12.5px] text-slate leading-relaxed m-0 mt-1">Dates are indicative and programme-specific. Always confirm the final deadline on the university portal.</p>
+              </div>
+              <div className="flex gap-2 shrink-0">
+                <button type="button" onClick={() => setF((s) => ({ ...s, intake: 'February 2027' }))} className="px-3 py-2 rounded-lg border border-[#D6DEEC] bg-white text-navy text-[12px] font-semibold cursor-pointer">February 2027</button>
+                <button type="button" onClick={() => setF((s) => ({ ...s, intake: 'September 2027' }))} className="px-3 py-2 rounded-lg bg-navy text-white text-[12px] font-semibold cursor-pointer">September 2027</button>
+              </div>
+            </div>
           </div>
         </Container>
       </section>
@@ -300,6 +361,9 @@ export default function Universities() {
                   </dl>
 
                   <div className="flex gap-2">
+                    <button type="button" onClick={() => toggleCompare(u)} className={`border font-display font-semibold text-[12px] px-3 py-2.5 rounded-[10px] cursor-pointer ${compare.some((x) => x.name === u.name) ? 'border-royal bg-royal-soft text-royal' : 'border-[#D6DEEC] bg-white text-navy'}`}>
+                      {compare.some((x) => x.name === u.name) ? '✓ Compare' : 'Compare'}
+                    </button>
                     <button
                       type="button"
                       onClick={() => setOpenId(open ? -1 : u.id)}
@@ -308,6 +372,7 @@ export default function Universities() {
                     >
                       {open ? 'Hide details' : 'View details'}
                     </button>
+                    <Link to={`/universities/${slugify(u.name)}`} className="flex-1 text-center border border-royal-soft text-royal font-display font-semibold text-[13px] px-3 py-2.5 rounded-[10px]">Details</Link>
                     <a
                       href={u.official}
                       target="_blank"
@@ -360,7 +425,7 @@ export default function Universities() {
                 <tbody>
                   {results.map((u, i) => {
                     const open = openId === u.id
-                    return <Row key={u.id} u={u} i={i} open={open} onToggle={() => setOpenId(open ? -1 : u.id)} />
+                    return <Row key={u.id} u={u} i={i} open={open} onToggle={() => setOpenId(open ? -1 : u.id)} compared={compare.some((x) => x.name === u.name)} onCompare={() => toggleCompare(u)} />
                   })}
                 </tbody>
               </table>
@@ -388,6 +453,14 @@ export default function Universities() {
           </p>
         </Container>
       </section>
+
+      {compare.length > 0 && (
+        <div className="fixed bottom-4 left-4 right-4 z-40 lg:left-auto lg:right-6 lg:w-[420px] bg-white border border-[#D8E2F2] rounded-2xl shadow-[0_18px_50px_rgba(10,30,60,.18)] p-4">
+          <div className="flex items-center justify-between gap-3 mb-2"><div><div className="font-display font-semibold text-[14px] text-navy">Compare shortlist</div><div className="text-[11px] text-mist">Up to 3 universities</div></div><button type="button" onClick={() => setCompare([])} className="text-[11px] text-slate cursor-pointer bg-transparent border-0">Clear</button></div>
+          <div className="grid grid-cols-3 gap-2">{compare.map((u) => <div key={u.name} className="bg-[#F7F9FD] rounded-xl p-2.5"><div className="text-[11px] font-semibold text-navy leading-tight">{u.name}</div><div className="text-[10px] text-mist mt-1">{u.country} · {u.intake}</div><div className="text-[10px] text-slate mt-1">{u.english}</div></div>)}</div>
+          <Link to="/apply" className="block text-center mt-3 bg-navy text-white font-display font-semibold text-[12.5px] py-2.5 rounded-[10px]">Get this shortlist reviewed</Link>
+        </div>
+      )}
 
       {/* Written content below the table. A page that is only a filter and a list gives a search
           engine almost nothing to read, and gives a student nothing to decide with. */}
@@ -552,7 +625,7 @@ export default function Universities() {
 // One university as a table row, plus the expanded detail row beneath it when opened. The detail
 // lives in a second <tr> spanning every column rather than inside a cell, because a paragraph
 // inside one narrow cell would stretch that column and shift the whole table sideways.
-function Row({ u, i, open, onToggle }) {
+function Row({ u, i, open, onToggle, compared, onCompare }) {
   return (
     <>
       <tr className={`border-t border-line ${i % 2 === 1 ? 'bg-[#FAFCFE]' : 'bg-white'}`}>
@@ -595,6 +668,8 @@ function Row({ u, i, open, onToggle }) {
             <Link to={`/blog/${u.guide}`} className="text-[12.5px] text-royal font-medium whitespace-nowrap">
               Guide
             </Link>
+            <Link to={`/universities/${slugify(u.name)}`} className="text-[12.5px] text-royal font-medium whitespace-nowrap">Details</Link>
+            <button type="button" onClick={onCompare} className={`border-0 font-display font-semibold text-[11px] px-2.5 py-1.5 rounded-lg cursor-pointer whitespace-nowrap ${compared ? 'bg-royal text-white' : 'bg-[#F4F7FC] text-navy'}`}>{compared ? '✓ Comparing' : '+ Compare'}</button>
             <button
               type="button"
               onClick={onToggle}

@@ -56,7 +56,15 @@ const guides = GUIDE_PDFS.map((g) => ({
   changefreq: 'yearly',
 }))
 
-const urls = [...PAGES.map((p) => ({ ...p, lastmod: p.updated })), ...posts, ...guides]
+const universities = readFileSync(new URL('../src/data/universities.js', import.meta.url), 'utf8')
+const universitySlugs = [...universities.matchAll(/name:\s*(['"])(.*?)\1/g)].map((m) => ({
+  path: `/universities/${m[2].toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`,
+  lastmod: '2026-10-01',
+  priority: '0.7',
+  changefreq: 'monthly',
+}))
+
+const urls = [...PAGES.map((p) => ({ ...p, lastmod: p.updated })), ...universitySlugs, ...posts, ...guides]
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -74,4 +82,4 @@ ${urls
 `
 
 writeFileSync(new URL('../public/sitemap.xml', import.meta.url), xml)
-console.log(`sitemap.xml written with ${urls.length} addresses (${posts.length} articles, ${guides.length} guides)`)
+console.log(`sitemap.xml written with ${urls.length} addresses (${universitySlugs.length} university pages, ${posts.length} articles, ${guides.length} guides)`)

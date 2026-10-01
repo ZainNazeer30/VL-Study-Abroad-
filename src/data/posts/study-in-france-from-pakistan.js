@@ -1,0 +1,28 @@
+export default {
+  body: [
+    { p: 'France has a clear application system for students living in Pakistan, but the sequence matters. For most degree students, Etudes en France is part of the route before the long-stay student visa.' },
+    { h2: 'Start with the programme' },
+    { p: 'Choose a recognised programme and confirm its language, academic prerequisites, tuition treatment and application route. Public universities, specialist institutions and private schools can have very different costs and procedures.' },
+    { h2: 'Etudes en France from Pakistan' },
+    { p: 'Campus France Pakistan says that, as a general rule, students in Pakistan applying for higher education in France should use the Etudes en France platform, subject to the published exceptions. The process can cover the application stage and the academic interview before the visa stage.' },
+    { source: { label: 'Campus France Pakistan: Etudes en France application rules', url: 'https://www.pakistan.campusfrance.org/eef-application-rules' } },
+    { h2: 'The 2027–2028 candidature calendar' },
+    { p: 'For the 2027–2028 catalogue route, Campus France Pakistan currently lists applications from 1 October 2026 to 18 November 2026, followed by Campus France review from December 2026 to March 2027 and university review from March to April 2027. These dates apply to that campaign and should be checked again before you submit.' },
+    { source: { label: 'Campus France Pakistan: 2027–2028 candidature campaign', url: 'https://www.pakistan.campusfrance.org/apply-to-french-higher-education-institutions-through-etudes-en-france-candidature-campaign' } },
+    { h2: 'What happens after admission?' },
+    { ol: ['Complete the required Etudes en France steps and receive the relevant Campus France confirmation.', 'Prepare the France-Visas application and the supporting financial and academic documents.', 'Book the visa appointment through the current official appointment route.', 'Attend the appointment with the complete file.', 'After the visa decision, prepare accommodation, travel and arrival documents.'] },
+    { h2: 'How much money do you need?' },
+    { p: 'Do not build a budget from tuition alone. Include accommodation, food, transport, insurance, visa and the first month’s deposit. Campus France Pakistan currently states that from 1 August 2026 the minimum proof of financial resources for a French student visa is €877.50 per month. Always re-check the current official requirement when your application is submitted.' },
+    { source: { label: 'Campus France Pakistan: student FAQ and financial requirement', url: 'https://www.pakistan.campusfrance.org/frequently-asked-questions-students' } },
+    { h2: 'Scholarships' },
+    { p: 'France has government, university and other scholarship routes. The France Excellence Eiffel scholarship is one of the best-known government programmes for Master and doctoral candidates, but it is not a direct student application: French higher-education institutions submit the candidates.' },
+    { cta: { to: '/blog/eiffel-scholarship-france-for-pakistani-students', text: 'Read the Eiffel scholarship guide →', after: 'for the nomination process and current benefits.' } },
+    { h2: 'A useful first step' },
+    { p: 'If you are applying from Pakistan, prepare a one-page profile before you start: qualification, grades, subject, English/French level, preferred intake, budget and target degree. That makes programme selection much faster and prevents you from applying to programmes that do not match your academic background.' },
+  ],
+  faqs: [
+    { q: 'Is Etudes en France required for Pakistani students?', a: 'For most Pakistani residents applying for higher education programmes longer than three months, Campus France Pakistan says it is required, subject to stated exceptions.' },
+    { q: 'Can I study in France in English?', a: 'Yes. English-taught programmes are available, particularly at Master level. Confirm the programme language with the institution.' },
+    { q: 'What is the current financial proof figure for a French student visa from Pakistan?', a: 'Campus France Pakistan currently states €877.50 per month from 1 August 2026. Check the official page again when you submit because requirements can change.' },
+  ],
+}

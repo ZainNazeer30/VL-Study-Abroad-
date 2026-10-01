@@ -38,12 +38,17 @@ if (!existsSync(SERVER_ENTRY)) {
 // so a new article is prerendered without touching this file.
 const blogSource = readFileSync(new URL('../src/data/blog.js', import.meta.url), 'utf8')
 const slugs = [...blogSource.matchAll(/slug:\s*'([^']+)'/g)].map((m) => m[1])
+const universitySource = readFileSync(new URL('../src/data/universities.js', import.meta.url), 'utf8')
+const universitySlugs = [...universitySource.matchAll(/name:\s*(['"])(.*?)\1/g)].map((m) =>
+  m[2].toLowerCase().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+)
 
 const ROUTES = [
   '/', '/italy', '/france', '/universities',
   '/universities/bachelors', '/universities/masters',
   '/scholarships', '/blog',
   '/about', '/contact', '/apply', '/privacy', '/terms',
+  ...universitySlugs.map((s) => `/universities/${s}`),
   ...slugs.map((s) => `/blog/${s}`),
 ]
 

@@ -13,6 +13,11 @@ import p_hec_ibcc_mofa_attestation_order from './posts/hec-ibcc-mofa-attestation
 import p_intake_deadlines_italy_france from './posts/intake-deadlines-italy-france'
 import p_italy_student_visa_from_pakistan from './posts/italy-student-visa-from-pakistan'
 import p_study_without_ielts from './posts/study-without-ielts'
+import p_study_in_italy_from_pakistan from './posts/study-in-italy-from-pakistan'
+import p_study_in_france_from_pakistan from './posts/study-in-france-from-pakistan'
+import p_dsu_scholarship_italy_for_pakistani_students from './posts/dsu-scholarship-italy-for-pakistani-students'
+import p_eiffel_scholarship_france_for_pakistani_students from './posts/eiffel-scholarship-france-for-pakistani-students'
+import p_italy_vs_france_for_pakistani_students from './posts/italy-vs-france-for-pakistani-students'
 
 export const BODY_BY_SLUG = {
   'apply-to-italy-and-france-from-pakistan': p_apply_to_italy_and_france_from_pakistan,
@@ -24,4 +29,9 @@ export const BODY_BY_SLUG = {
   'intake-deadlines-italy-france': p_intake_deadlines_italy_france,
   'italy-student-visa-from-pakistan': p_italy_student_visa_from_pakistan,
   'study-without-ielts': p_study_without_ielts,
+  'study-in-italy-from-pakistan': p_study_in_italy_from_pakistan,
+  'study-in-france-from-pakistan': p_study_in_france_from_pakistan,
+  'dsu-scholarship-italy-for-pakistani-students': p_dsu_scholarship_italy_for_pakistani_students,
+  'eiffel-scholarship-france-for-pakistani-students': p_eiffel_scholarship_france_for_pakistani_students,
+  'italy-vs-france-for-pakistani-students': p_italy_vs_france_for_pakistani_students,
 }

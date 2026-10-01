@@ -49,6 +49,20 @@ const source = files.filter((f) => !f.endsWith('images.js')).map((f) => readFile
 
 const problems = []
 
+// Remote editorial photos used outside the central registry (for example individual university
+// detail pages) are included too. This keeps the one-photo-one-place rule global, not just for the
+// shared IMAGES registry.
+const remotePhotos = new Map()
+for (const f of files) {
+  const text = readFileSync(f, 'utf8')
+  for (const m of text.matchAll(/images\.unsplash\.com\/(photo-[0-9]+)/g)) {
+    const id = m[1]
+    if (remotePhotos.has(id) && remotePhotos.get(id) !== f) {
+      problems.push(`remote photo "${id}" is used in both ${remotePhotos.get(id).replace(root + '/', '')} and ${f.replace(root + '/', '')}`)
+    } else remotePhotos.set(id, f)
+  }
+}
+
 // 1. The same photograph behind two entries.
 const seen = new Map()
 for (const { key, photos } of entries) {

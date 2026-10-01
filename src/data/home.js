@@ -54,8 +54,8 @@ export const HOME_UNIS = [
 // than just cutting the fee. Most students who come to us ask about these first, so they lead
 // the homepage scholarships section.
 export const HOME_SCHOLARSHIPS = [
-  { flag: '🇮🇹', country: 'Italy', name: 'DSU regional scholarship', deadline: 'Aug 2027', fullyFunded: true, benefit: 'Up to €7,000 a year plus a tuition waiver, housing and meal support.', eligibility: 'Based on family income (ISEE). Most international students qualify.' },
-  { flag: '🇫🇷', country: 'France', name: 'Eiffel Excellence scholarship', deadline: 'Jan 2027', fullyFunded: true, benefit: '€1,181 a month plus travel, insurance and activities.', eligibility: 'A strong academic record, under 25 for a Master or 30 for a PhD.' },
+  { flag: '🇮🇹', country: 'Italy', name: 'DSU regional scholarship', deadline: 'Aug 2027', fullyFunded: true, benefit: 'A regional award that can include a maintenance grant, tuition relief, subsidised housing and meals, depending on the local call.', eligibility: 'Based on family income (ISEE). Most international students qualify.' },
+  { flag: '🇫🇷', country: 'France', name: 'Eiffel Excellence scholarship', deadline: 'Jan 2027', fullyFunded: true, benefit: '€1,200 a month at Master level from January 2026, plus travel, insurance, housing-search support and cultural services.', eligibility: 'For Master and Doctoral study in eligible fields; the French institution must nominate the student.' },
   { flag: '🇮🇹', country: 'Italy', name: 'Invest Your Talent in Italy', deadline: 'Feb 2027', fullyFunded: true, benefit: '€900 a month plus tuition support, for Master students in fields like engineering or design.', eligibility: 'Open to citizens of selected countries with strong grades.' },
 ]
 

@@ -1,211 +1,84 @@
-# Ranking for "study in Italy from Pakistan"
+# VL Study SEO and quality plan
 
-You want the site to come up when a Pakistani student searches about applying to Italy or France.
-This file has two halves: what is already built into the site, and what only you can do.
+## What is now implemented
 
-The honest framing first. Search rankings are not something a website can be configured into.
-Everything technical on this site is now done properly, and technical SEO is table stakes: it
-stops you being held back, it does not by itself put you first. What decides the rest is content
-that answers real questions and other websites linking to you, and those take months. A realistic
-expectation is small movements within 4 to 8 weeks, meaningful movement on the long specific
-searches in 3 to 6 months, and competition for the big head terms like "study abroad consultants
-in Pakistan" measured in years. Anyone quoting you a faster number is guessing or lying.
+- One canonical URL per page, page-specific title and description, Open Graph/Twitter metadata.
+- SSR/prerendered HTML for the routes in the sitemap so important content is present before client navigation.
+- XML sitemap generated from static pages, articles and downloadable guides.
+- `robots.txt` points crawlers to the sitemap.
+- Organization/EducationalOrganization, WebSite, WebPage, BlogPosting and BreadcrumbList structured data where appropriate.
+- Named authors and visible author profiles on articles.
+- 14 long-form guides covering Italy, France, scholarships, visas, documents, cost and application questions.
+- Internal links between country pages, scholarship pages, university pages and articles.
+- Official-source links on new high-intent guides.
+- Responsive image srcsets/WebP for local photography and lazy loading below-the-fold images.
+- A human-led homepage with real founder photography, clear contact options and less generic stock-card treatment.
+- Shared form validation, timeout handling, server-side allow-listing and rate limiting.
 
-The good news: the long specific searches are where the students who actually convert are. A
-student typing "how much bank statement required for italy student visa from pakistan" is far
-closer to booking a call than one typing "study abroad".
+## What cannot be guaranteed
 
----
+No code change can guarantee a first-place Google ranking. Search visibility depends on relevance, competition, site history, backlinks, user demand, crawl/indexing, content quality and many other signals. The objective here is to make the site technically crawlable, genuinely useful for Pakistani students and authoritative within the Italy/France study-abroad niche.
 
-## Part 1: what is already built in
+## Publishing checklist
 
-### Technical
+1. Deploy the production build.
+2. In Google Search Console, verify `https://www.vlstudy.online/`.
+3. Submit `https://www.vlstudy.online/sitemap.xml`.
+4. Inspect the homepage, Italy page, France page, Scholarships page and each new guide.
+5. Request indexing for the most important new URLs after deployment.
+6. Monitor Performance queries and pages weekly.
+7. Update scholarship deadlines and visa requirements from official sources whenever a new intake opens.
+8. Add genuine student stories, photographs and case studies with permission. Do not invent testimonials, scholarship outcomes or placement numbers.
+9. Earn relevant links from universities, alumni/student communities, Pakistani education publications and genuine partner organisations rather than buying bulk links.
 
-- **Every page has its own title, description and canonical address.** Set in each page file
-  through `useSeo(...)`, in `src/hooks/useSeo.js`. Titles are all under 60 characters and
-  descriptions under 160, which is what actually shows in a result.
-- **Structured data on every page.** Organisation and website details site wide, including the
-  four services you sell, both founders and the free consultation. Then on each page: a page
-  type, a `BreadcrumbList`, `FAQPage` on the home page, both country pages, the contact page and
-  the scholarships page, an `ItemList` naming all eleven universities on the universities page
-  and all thirteen schemes on the scholarships page, and `BlogPosting` plus `FAQPage` on every
-  article. Two of these have a visible payoff. The FAQ blocks make you eligible for the
-  expandable question boxes, which take several times the space of a plain blue link. The
-  breadcrumb block is what puts `vlstudy.online › Guides › Italy student visa` under your result
-  on a phone instead of a truncated web address.
-- **A named person behind every guide.** Each article names Kashan or Umer as its author, in the
-  visible byline, in a bio box at the foot of the article, and as a `Person` in the structured
-  data with a link to their LinkedIn profile. Google's quality guidelines lean hard on who is
-  behind a page and whether they have real experience in the subject. An article signed by an
-  organisation asserts nothing; one signed by a named consultant you can look up is the whole
-  point. **Keep the attribution true.** If Umer writes the next guide, set `author: 'umer'` on it.
-- **A sitemap that cannot go stale.** `npm run build` regenerates `public/sitemap.xml` from the
-  actual routes and articles, so adding an article automatically adds it to the sitemap.
-- **A real 404 page,** marked `noindex`. Previously any wrong address quietly showed the home
-  page, which makes Google think you have hundreds of duplicate copies of it. That actively hurt
-  you and is now fixed.
-- **Images at four sizes each, in webp and jpg.** A phone downloads roughly a tenth of what a
-  desktop does. The home page hero is preloaded, so it starts downloading with the stylesheet
-  rather than after it. Measured locally, the largest element on the home page paints in about a
-  third of a second on a phone sized screen.
-- **Every image has alt text** describing what it shows.
-- **One `h1` per page, with `h2` and `h3` beneath it** in the right order. Unglamorous and still
-  one of the clearest signals of what a page is about.
-- **Internal links everywhere.** The home page links to the guides, each country page links to
-  the guides that matter for that country, each article links to three related articles, and the
-  footer carries the five most important guides on every page. Search engines use internal links
-  to work out which of your pages you consider important.
-- **Cache headers** so photos and scripts are cached for a year while the HTML never is.
-- **One address, not two.** `vlstudy.online` now redirects permanently to `www.vlstudy.online`.
-  Before this, both served the same pages, and any link anyone built to the bare domain counted
-  towards a duplicate copy of the site rather than towards the real one.
-- **Fonts that do not block the page.** The Google Fonts stylesheet used to stop the browser
-  drawing anything until it had opened a connection to a second company's server and waited for
-  the file. On mobile data that is a few hundred milliseconds of blank screen on every page, and
-  it lands on two of the three scores Google grades a page on.
-- **Privacy and terms pages,** which are part of what Google's quality guidelines describe as
-  trust signals for a business handling people's details.
+## Content strategy
 
-### Content
+Build topical depth around three hubs:
 
-Nine articles, roughly 10,000 words, each targeting a real search:
+### Italy
+- Study in Italy from Pakistan
+- Italian universities and programmes
+- DSU/right-to-study scholarships
+- Italy student visa
+- Universitaly
+- HEC/IBCC/MOFA documents
+- Costs and city comparisons
 
-| Article | Written to catch searches like |
-|---|---|
-| Apply to Italy or France from Pakistan | "how to apply for study in italy from pakistan" |
-| HEC, IBCC and MOFA attestation order | "hec attestation for study abroad", "ibcc equivalence" |
-| Fully funded scholarships in Italy and France | "fully funded scholarship for pakistani students" |
-| Italy student visa from Pakistan | "italy student visa bank statement", "declaration of value" |
-| France student visa and Campus France | "campus france pakistan", "france study visa requirements" |
-| Cost of studying in Italy and France | "cost of studying in italy for pakistani students" |
-| Study without IELTS | "study in italy without ielts", "medium of instruction letter" |
-| Choosing a university | "best universities in italy for pakistani students" |
-| Intake deadlines | "italy university deadline", "september intake 2027" |
+### France
+- Study in France from Pakistan
+- French universities and programmes
+- Etudes en France / Campus France Pakistan
+- Eiffel and other funding routes
+- France student visa
+- Costs and city comparisons
 
----
+### Comparison and decision content
+- Italy vs France
+- Bachelor vs Master routes
+- English-taught programmes
+- Study without IELTS where a university accepts alternative English evidence
+- Application calendars
+- Document checklists
 
-## Part 2: what only you can do
+Each page should answer a distinct search intent and link to the relevant hub pages. Avoid making multiple pages that repeat the same text with different keywords.
 
-This part matters more than everything above. In rough order of impact.
+## New student-acquisition functionality
 
-### 1. Google Business Profile (do this first, it is the biggest single win)
+- University profile matcher: four questions produce a starting shortlist from the university database.
+- University compare tray: visitors can compare up to three universities and request a human review.
+- Individual university landing pages: each university now has its own crawlable URL with requirements, intake, English route, official admissions link and a profile-check CTA.
+- Scholarship checker remains on the scholarships hub and prioritises funding routes before generic consultancy CTAs.
+- First-year budget planner on the homepage gives an illustrative starting estimate and routes students to an actual profile-based cost check.
+- Every university detail page has a unique editorial image. The image audit is enforced so the same photograph is not reused for two content entries.
 
-Free, takes an afternoon, and for a local service business it usually outranks everything else
-you could do in the first month. Go to `google.com/business` and create a profile for VL Study
-Abroad Consultants.
+## Competitive pattern review
 
-- Category: "Educational consultant" or "Study abroad consultant".
-- You work online with no public office, so choose **service area business** when it asks, and
-  set the service area to Pakistan. Google will ask for an address to verify you are real; you
-  can enter it and then tick the box that hides it from the public. Do not invent an address and
-  do not list a co-working space you do not actually sit in, because a failed verification is
-  slow and unpleasant to undo.
-- Add your phone number and `https://www.vlstudy.online`.
-- Add real photographs. The two founder portraits now on the About page are the right ones to
-  use, along with anything real from your working day. Do not use stock photos of an office.
-- Post an update every week or two. The guides on this site are ready made posts.
+A review of current Pakistan-facing study-abroad sites found several useful patterns worth adopting without copying their claims or branding:
 
-Then ask every student you have successfully placed to leave a review. Reviews are the thing
-that moves a local profile, and past clients say yes far more often than you expect if you simply
-ask. Ten honest reviews will do more for you in month one than any amount of keyword work.
+- StudyAbroad.pk wins breadth through destination/city directories and long-form informational content.
+- OneLink emphasises a one-window Italy workflow covering scholarship, admission, documents and visa/tax support.
+- ZAMIST puts individual visa cases and real student-file evidence near the top of the funnel.
+- KS Abroad Studies exposes a structured Italy portal with university counts, programme counts, deadlines and official links.
+- Aptitude Consultants leans heavily on founder-led credibility, first-hand scholarship experience and practical application documents.
 
-### 2. Google Search Console
-
-At `search.google.com/search-console`:
-
-- Confirm the property for `https://www.vlstudy.online` is verified.
-- Submit `https://www.vlstudy.online/sitemap.xml` under Sitemaps. Do this again after adding
-  articles.
-- Use "URL Inspection", paste each new article address, and click "Request indexing". This gets
-  a new page looked at in days rather than weeks.
-- Check the **Performance** report once a month. The "Queries" tab shows the actual phrases
-  people typed to find you. That list is the single best source of ideas for your next article:
-  anything you appear for on page two is a page worth improving.
-
-Also add Bing Webmaster Tools. It takes ten minutes and it imports everything from Search Console.
-
-### 3. Write one article a month
-
-Answer one real question a student asked you that week. That is the whole method. Do not write
-for Google; write the answer you would give on WhatsApp, then tidy it up.
-
-Ideas, all real searches with no good Pakistani specific answer online:
-
-- What a motivation letter for an Italian university should actually say (with an example)
-- What Pakistani students get wrong in the Campus France interview
-- Studying in Italy with a 2.5 CGPA: what is actually possible
-- Milan versus Bologna versus Padua for a Pakistani student on a budget
-- How to get a Medium of Instruction letter from a Pakistani university
-- What to pack, and what to buy after you land
-- Getting a residence permit in Italy in your first eight days
-- Sending money from Pakistan to Europe as a student
-- Finding halal food and a prayer space as a student in Italy and France
-
-`src/data/blog.js` has the instructions at the top. Copy an existing article block, change the
-fields, run `npm run build`, and the sitemap updates itself.
-
-### 4. Get other websites to link to you
-
-This is the hardest part and the one that separates page one from page three. Nothing artificial:
-paid link schemes are detectable and get sites penalised. What works:
-
-- **Your own social accounts.** Facebook, Instagram, LinkedIn, TikTok and YouTube, each with the
-  website address filled in. Then actually post the guides.
-- **Pakistani student communities.** Facebook groups for study abroad aspirants, Reddit threads,
-  university forums. Answer the question properly in the comment and link the guide as the longer
-  version. Do not drop bare links; you will be removed and it does not work anyway.
-- **Directories.** Pakistani business directories, education directories, your chamber of
-  commerce.
-- **Your students.** A student who blogs or posts about their journey and mentions who helped
-  them is worth more than any directory.
-- **Local press and college talks.** A single mention from a Pakistani news site or a college
-  website is worth dozens of directory listings.
-
-### 5. Put your real numbers into the site
-
-Two placeholders are worth filling in:
-
-- `sameAs` in the structured data in `index.html` is still an empty list. Put your Facebook,
-  Instagram, LinkedIn, TikTok and YouTube addresses in it, one line each. It is how Google
-  connects this site to those profiles and treats them as one business rather than five
-  unrelated pages. This is the cheapest signal left on the list and it is the only thing in this
-  document that takes ten minutes.
-- Do not add a street address. You work online, and the structured data now says so: the
-  organisation is an `EducationalOrganization` serving Pakistan rather than a local business
-  with premises. Claiming an address you do not work from is the kind of thing that fails a
-  Google Business Profile verification.
-
-### 6. Keep the guides current
-
-Every article shows a "last updated" date, and Google reads it. When tuition changes, or a
-deadline shifts, or a scholarship amount is revised, update the article and change its `updated`
-field. A guide refreshed every year holds its ranking. One left untouched for three years slowly
-loses it.
-
----
-
-## What not to do
-
-- **Do not buy backlinks or use an "SEO package" that promises page one.** These are almost
-  always link schemes, and the penalty when it is detected takes longer to recover from than
-  the ranking took to gain.
-- **Do not stuff keywords.** Writing "study abroad consultants in Pakistan" fourteen times reads
-  badly to a human and does nothing for a machine that has understood language for a decade.
-- **Do not copy content from other consultancies.** Google suppresses the copy, not the original.
-- **Do not make up FAQ answers to get the FAQ boxes.** The structured data on this site only
-  contains questions actually answered on the page, which is Google's rule. Breaking it can get
-  the whole site's rich results removed.
-- **Do not change an article's `slug` after it is published.** Any link pointing at the old
-  address breaks and the ranking goes with it.
-
----
-
-## Checking your own work
-
-Three free tools, all worth running after any change:
-
-- **Rich Results Test** (`search.google.com/test/rich-results`): paste a page address and it
-  tells you whether the structured data is valid and which rich results you qualify for.
-- **PageSpeed Insights** (`pagespeed.web.dev`): run the home page and one article. Look at the
-  mobile score, not the desktop one.
-- **Search Console Performance**: the truth about what you actually rank for, updated daily.
+VL Study now combines the strongest non-claim-based parts of those patterns: a searchable university directory, individual university pages, a scholarship checker, a budget tool, practical guides and stronger human/counsellor positioning. Any future visa-success, placement or scholarship figures should only be added when VL has evidence and permission to publish them.

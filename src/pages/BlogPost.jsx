@@ -9,7 +9,7 @@ import { BODY_BY_SLUG } from '../data/postBodies'
 import { CONTACT } from '../data/site'
 import { AUTHOR_BY_KEY } from '../data/about'
 import { Avatar } from '../components/ui'
-import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
+import { useSeo, graph, absolute } from '../hooks/useSeo'
 
 export default function BlogPost() {
   const { slug } = useParams()
@@ -73,8 +73,7 @@ function Article({ post }) {
           name: 'VL Study Abroad Consultants',
           logo: { '@type': 'ImageObject', url: absolute('/logo.png') },
         },
-      },
-      post.faqs?.length ? faqSchema(post.faqs) : null
+      }
     ),
   })
 

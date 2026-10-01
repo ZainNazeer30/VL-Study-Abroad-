@@ -9,7 +9,7 @@ import { useLeadForm, PHONE_HINT } from '../hooks/useLeadForm'
 import { IMAGES } from '../data/images'
 import { CONTACT, STATUS } from '../data/site'
 import { POSTS } from '../data/blog'
-import { useSeo, faqSchema, graph, absolute } from '../hooks/useSeo'
+import { useSeo, graph, absolute } from '../hooks/useSeo'
 import {
   TRUST,
   SERVICES,
@@ -23,55 +23,16 @@ import {
 } from '../data/home'
 
 const SERVICE_PHOTOS = [
-  {
-    key: 'selection',
-    title: 'Choose the right university',
-    text: 'We compare universities, programs, entry requirements and realistic admission routes for your profile.',
-    image: 'https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=900&h=650&q=82',
-  },
-  {
-    key: 'admissions',
-    title: 'Prepare your application',
-    text: 'Applications, motivation letters, forms and deadlines are checked before anything is submitted.',
-    image: 'https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=900&h=650&q=82',
-  },
-  {
-    key: 'documents',
-    title: 'Handle your documents',
-    text: 'We guide you through IBCC, HEC and MOFA requirements and keep your paperwork in the right order.',
-    image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=900&h=650&q=82',
-  },
-  {
-    key: 'scholarship',
-    title: 'Find scholarship routes',
-    text: 'We look for scholarships and fee-support options that match your academic and financial profile.',
-    image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&h=650&q=82',
-  },
-  {
-    key: 'visa',
-    title: 'Build your visa file',
-    text: 'We review your financial evidence, documents and appointment preparation before submission.',
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=900&h=650&q=82',
-  },
-  {
-    key: 'housing',
-    title: 'Prepare where you will live',
-    text: 'We help you understand university residences, student housing and practical options before you fly.',
-    image: 'https://images.unsplash.com/photo-1560185008-b033106af5c3?auto=format&fit=crop&w=900&h=650&q=82',
-  },
-  {
-    key: 'departure',
-    title: 'Get ready to leave Pakistan',
-    text: 'A practical pre-departure briefing covers travel, documents, arrival and the first days abroad.',
-    image: 'https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=900&h=650&q=82',
-  },
-  {
-    key: 'aftercare',
-    title: 'Support after you land',
-    text: 'Your relationship with us does not end at the airport. We help you understand the next steps after arrival.',
-    image: 'https://images.unsplash.com/photo-1519452575417-564c1401ecc0?auto=format&fit=crop&w=900&h=650&q=82',
-  },
+  { key: 'selection', title: 'Choose the right university', text: 'We compare universities, programmes, entry requirements and realistic admission routes for your profile.', image: 'serviceUniversity' },
+  { key: 'admissions', title: 'Prepare your application', text: 'Applications, motivation letters, forms and deadlines are checked before anything is submitted.', image: 'serviceApplication' },
+  { key: 'documents', title: 'Handle your documents', text: 'We guide you through IBCC, HEC and MOFA requirements and keep your paperwork in the right order.', image: 'serviceDocuments' },
+  { key: 'scholarship', title: 'Find scholarship routes', text: 'We look for scholarships and fee-support options that match your academic and financial profile.', image: 'serviceScholarship' },
+  { key: 'visa', title: 'Build your visa file', text: 'We review your financial evidence, documents and appointment preparation before submission.', image: 'serviceVisa' },
+  { key: 'housing', title: 'Prepare where you will live', text: 'We help you understand university residences, student housing and practical options before you fly.', image: 'serviceHousing' },
+  { key: 'departure', title: 'Get ready to leave Pakistan', text: 'A practical pre-departure briefing covers travel, documents, arrival and the first days abroad.', image: 'serviceDeparture' },
+  { key: 'aftercare', title: 'Support after you land', text: 'Your relationship with us does not end at the airport. We help you understand the next steps after arrival.', image: 'serviceArrival' },
 ]
+
 
 function matchesFilter(uni, filter) {
   if (filter === 'All') return true
@@ -97,13 +58,13 @@ export default function Home() {
           about: { '@id': absolute('/#organisation') },
           primaryImageOfPage: absolute(IMAGES.homeHero.src),
           inLanguage: 'en',
-        },
-        faqSchema(HOME_FAQS)
+        }
       ),
     }
   )
 
   const [filter, setFilter] = useState('All')
+  const [budget, setBudget] = useState({ country: 'Italy', city: 'Lower-cost city', scholarship: 'Yes' })
   const {
     values: form, setField, submit, sending, error, done: sent,
   } = useLeadForm('Home eligibility check', {
@@ -119,45 +80,31 @@ export default function Home() {
   return (
     <div className="overflow-hidden">
       {/* Hero */}
-      <section className="relative bg-[#F5F8FE] px-5 sm:px-8 lg:px-12 pt-8 pb-8 lg:pt-14 lg:pb-14">
-        <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[#DDE8FF] blur-3xl opacity-60" />
-        <Container className="relative lg:grid lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:gap-12">
-          <div>
-            <div className="inline-flex items-center gap-2 bg-white border border-[#DCE6F6] text-royal font-semibold text-[11px] tracking-[0.08em] uppercase px-3.5 py-2 rounded-full mb-4 shadow-sm">
+      <section className="relative bg-[#F7F8F5] px-5 sm:px-8 lg:px-12 pt-8 pb-10 lg:pt-14 lg:pb-16">
+        <Container className="relative lg:grid lg:grid-cols-[1.02fr_.98fr] lg:items-center lg:gap-14">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 bg-white border border-[#E2E4DE] text-royal font-semibold text-[11px] tracking-[0.08em] uppercase px-3.5 py-2 rounded-full mb-4 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-green" />
-              Italy & France specialists
+              Study abroad from Pakistan
             </div>
-            <h1 className="font-display font-bold text-[34px] sm:text-[44px] lg:text-[56px] leading-[1.08] text-navy m-0 mb-4 max-w-2xl">
-              Study in Europe with a plan you can actually follow.
+            <h1 className="font-display font-bold text-[34px] sm:text-[44px] lg:text-[55px] leading-[1.08] text-navy m-0 mb-4 max-w-2xl">
+              A real person to guide you from Pakistan to Italy or France.
             </h1>
             <p className="text-[16px] sm:text-[18px] leading-relaxed m-0 mb-6 max-w-xl text-ink">
-              We help students in Pakistan choose universities, find scholarship routes, prepare applications and build their visa file for Italy or France.
+              We help you choose a realistic university, find scholarship options, prepare the paperwork and build your student visa file. You speak to the same counsellor throughout your application.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mb-7">
-              <Link
-                to="/apply"
-                className="bg-navy text-white text-center font-display font-semibold text-[15px] py-4 px-6 rounded-xl shadow-[0_10px_24px_rgba(10,30,60,0.22)]"
-              >
+              <Link to="/apply" className="bg-navy text-white text-center font-display font-semibold text-[15px] py-4 px-6 rounded-xl shadow-[0_10px_24px_rgba(10,30,60,0.18)]">
                 Check my eligibility
               </Link>
-              <a
-                href={CONTACT.whatsapp}
-                target="_blank"
-                rel="noreferrer"
-                className="border-[1.5px] border-[#CBD7EA] text-navy text-center font-display font-semibold text-[15px] py-4 px-6 rounded-xl bg-white"
-              >
-                Chat on WhatsApp
+              <a href={CONTACT.whatsapp} target="_blank" rel="noreferrer" className="border-[1.5px] border-[#CBD2C8] text-navy text-center font-display font-semibold text-[15px] py-4 px-6 rounded-xl bg-white">
+                Talk to a counsellor
               </a>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl">
-              {[
-                ['20+', 'students placed'],
-                ['2', 'countries'],
-                ['1', 'dedicated counsellor'],
-                ['Free', 'first assessment'],
-              ].map(([value, label]) => (
+              {[['20+', 'students placed'], ['2', 'countries'], ['1', 'dedicated counsellor'], ['Free', 'first assessment']].map(([value, label]) => (
                 <div key={label} className="border-l-2 border-gold pl-3">
                   <div className="font-display font-bold text-[18px] text-navy">{value}</div>
                   <div className="text-[11.5px] text-slate">{label}</div>
@@ -166,19 +113,37 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative mt-8 lg:mt-0">
-            <div className="rounded-[24px] overflow-hidden shadow-[0_24px_60px_rgba(10,30,60,0.18)] h-[330px] sm:h-[430px] lg:h-[500px]">
-              <Img image={IMAGES.homeHero} loading="eager" fetchPriority="high" className="w-full h-full" />
+          <div className="relative mt-9 lg:mt-0 min-h-[420px] sm:min-h-[500px]">
+            <div className="absolute inset-x-8 top-0 bottom-12 rounded-[28px] overflow-hidden shadow-[0_24px_60px_rgba(10,30,60,0.15)]">
+              <Img image={IMAGES.homeHero} className="w-full h-full" />
             </div>
-            <div className="absolute left-4 right-4 bottom-4 bg-white/95 backdrop-blur rounded-2xl p-4 shadow-lg">
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <div className="font-display font-semibold text-[13px] text-navy">From Pakistan to your university</div>
-                  <div className="text-[11.5px] text-slate mt-1">Admissions · scholarships · visa · arrival</div>
-                </div>
-                <div className="text-[22px]">🇵🇰 → 🇮🇹 🇫🇷</div>
+            <div className="absolute top-10 right-0 sm:right-2 w-[170px] sm:w-[205px] rounded-[20px] overflow-hidden border-4 border-white shadow-[0_18px_45px_rgba(10,30,60,0.2)] bg-white">
+              <Img image={IMAGES.founderKashan} className="w-full h-[190px] sm:h-[225px]" />
+              <div className="p-3">
+                <div className="font-display font-semibold text-[12.5px] text-navy">Kashan Nazeer</div>
+                <div className="text-[10.5px] text-slate mt-0.5">Founder & counsellor</div>
               </div>
             </div>
+            <div className="absolute left-0 bottom-0 sm:left-2 bg-white rounded-2xl border border-[#E1E4DD] p-4 shadow-[0_14px_35px_rgba(10,30,60,0.12)] max-w-[300px]">
+              <div className="text-[10.5px] font-semibold uppercase tracking-[.1em] text-royal mb-1.5">No call centre</div>
+              <div className="font-display font-semibold text-[14px] text-navy leading-snug">You know who is handling your application.</div>
+              <div className="text-[11.5px] leading-relaxed text-slate mt-1.5">University choice, documents, scholarships and visa preparation in one conversation.</div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Human trust strip */}
+      <section className="px-5 sm:px-8 lg:px-12 py-7 bg-white border-b border-line">
+        <Container>
+          <div className="grid md:grid-cols-[1fr_auto] gap-5 items-center">
+            <div>
+              <div className="text-[11px] font-semibold uppercase tracking-[.12em] text-royal mb-1.5">Why this feels different</div>
+              <p className="text-[14px] leading-relaxed text-ink m-0 max-w-3xl">
+                We are a small consultancy, not a call centre. We focus on Italy and France, explain what a route actually costs, and tell you when a university or scholarship does not fit your profile.
+              </p>
+            </div>
+            <Link to="/about" className="text-royal font-display font-semibold text-[13px] whitespace-nowrap">Meet the team →</Link>
           </div>
         </Container>
       </section>
@@ -243,7 +208,7 @@ export default function Home() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {SERVICE_PHOTOS.map((s, i) => (
               <article key={s.key} className="group relative overflow-hidden rounded-[18px] min-h-[285px] shadow-[0_12px_28px_rgba(10,30,60,0.10)]">
-                <img src={s.image} alt="" loading={i < 4 ? 'eager' : 'lazy'} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <Img image={IMAGES[serviceImageKey(s.image)]} loading={i < 2 ? 'lazy' : 'lazy'} className="absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#06162F] via-[#06162F]/45 to-transparent" />
                 <div className="absolute top-3 left-3 w-9 h-9 rounded-full bg-white/95 flex items-center justify-center font-display font-bold text-[13px] text-navy">
                   {String(i + 1).padStart(2, '0')}
@@ -350,6 +315,22 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* Budget planner */}
+      <section className="px-5 sm:px-8 lg:px-12 pt-14 lg:pt-20">
+        <Container>
+          <div className="rounded-[22px] border border-[#DDE5F2] bg-[#F7F9FD] p-5 lg:p-8">
+            <div className="grid lg:grid-cols-[.9fr_1.1fr] gap-8 items-center">
+              <div>
+                <div className="text-[11px] font-semibold uppercase tracking-[.12em] text-royal mb-2">Budget planner</div>
+                <H2 className="mb-2">Get a rough first-year budget before you book a consultation.</H2>
+                <p className="text-[13.5px] leading-relaxed m-0 text-slate">This is an estimate, not a visa or university quote. It helps you understand the size of the plan before we calculate your actual tuition, scholarship and living costs.</p>
+              </div>
+              <BudgetPlanner budget={budget} setBudget={setBudget} />
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* Why VL */}
       <section className="px-5 sm:px-8 lg:px-12 pt-14 lg:pt-20">
         <Container>
@@ -359,7 +340,7 @@ export default function Home() {
               <H2 className="mb-3">A smaller focus, with more attention on your case.</H2>
               <p className="text-[13.5px] leading-relaxed">We focus on Italy and France rather than trying to be everything to everyone. That lets us build a process around the documents, universities and visa routes our students actually use.</p>
               <div className="mt-5 rounded-2xl overflow-hidden h-[260px]">
-                <Img image={IMAGES.aboutTeam} className="w-full h-full" />
+                <Img image={IMAGES.homeWhy} className="w-full h-full" />
               </div>
             </div>
             <div className="grid sm:grid-cols-2 gap-x-6">
@@ -476,6 +457,33 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* Search-intent content */}
+      <section className="px-5 sm:px-8 lg:px-12 pt-14 lg:pt-20">
+        <Container>
+          <div className="grid lg:grid-cols-[.72fr_1.28fr] gap-8 lg:gap-14 items-start">
+            <div>
+              <div className="text-[11px] font-semibold uppercase tracking-[.12em] text-royal mb-2">Start here</div>
+              <H2 className="mb-2">Study abroad from Pakistan, without guessing your way through it.</H2>
+              <p className="text-[13.5px] leading-relaxed m-0 text-slate">The first decision is not which agent to hire. It is whether Italy or France actually fits your qualification, budget, subject and intake.</p>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                ['Study in Italy from Pakistan', 'Admissions, English-taught programmes, DSU and other funding routes, documents and the Italian student visa.', '/italy'],
+                ['Study in France from Pakistan', 'Campus France, public universities, scholarships, programme selection and the French student visa route.', '/france'],
+                ['Scholarships for Pakistani students', 'Understand the difference between tuition waivers, regional funding and scholarships that include a living allowance.', '/scholarships'],
+                ['Bachelor and Master options', 'Different requirements for FSc/A Levels and Bachelor graduates, including IBCC and HEC document routes.', '/universities/bachelors'],
+              ].map(([title, text, to]) => (
+                <Link key={to} to={to} className="rounded-2xl border border-line bg-[#FBFCFA] p-5 hover:border-[#C8D3E6] transition-colors">
+                  <h3 className="font-display font-semibold text-[15px] text-navy m-0 mb-2">{title}</h3>
+                  <p className="text-[12.5px] leading-relaxed text-slate m-0">{text}</p>
+                  <span className="inline-block mt-3 text-[12px] text-royal font-semibold">Read the guide →</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* Guides */}
       <section className="px-5 sm:px-8 lg:px-12 pt-14 lg:pt-20">
         <Container>
@@ -518,6 +526,38 @@ export default function Home() {
       </section>
     </div>
   )
+}
+
+function BudgetPlanner({ budget, setBudget }) {
+  const base = budget.country === 'Italy' ? (budget.city === 'Paris/Milan' ? 12500 : 9500) : (budget.city === 'Paris/Milan' ? 14500 : 11000)
+  const total = budget.scholarship === 'Yes' ? Math.round(base * 0.72) : base
+  return (
+    <div>
+      <div className="grid sm:grid-cols-3 gap-2.5">
+        <select aria-label="Study country" value={budget.country} onChange={(e) => setBudget((b) => ({ ...b, country: e.target.value }))} className="px-3 py-3 rounded-[11px] border border-field bg-white text-[13px] text-ink outline-none"><option>Italy</option><option>France</option></select>
+        <select aria-label="City cost level" value={budget.city} onChange={(e) => setBudget((b) => ({ ...b, city: e.target.value }))} className="px-3 py-3 rounded-[11px] border border-field bg-white text-[13px] text-ink outline-none"><option>Lower-cost city</option><option>Paris/Milan</option></select>
+        <select aria-label="Scholarship" value={budget.scholarship} onChange={(e) => setBudget((b) => ({ ...b, scholarship: e.target.value }))} className="px-3 py-3 rounded-[11px] border border-field bg-white text-[13px] text-ink outline-none"><option>Yes</option><option>No</option></select>
+      </div>
+      <div className="mt-3 rounded-[15px] bg-navy p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div><div className="text-[10px] uppercase tracking-[.1em] text-[#8FB0FF]">Estimated first year</div><div className="font-display font-semibold text-[24px] text-white">€{total.toLocaleString()}</div></div>
+        <Link to="/apply" className="bg-white text-navy font-display font-semibold text-[12.5px] px-4 py-2.5 rounded-[10px] text-center">Calculate my actual cost →</Link>
+      </div>
+      <div className="text-[10.5px] text-mist mt-2">Illustrative range only. Tuition, housing, scholarship and visa requirements vary by programme and city.</div>
+    </div>
+  )
+}
+
+function serviceImageKey(key) {
+  return {
+    serviceUniversity: 'serviceUniversity',
+    serviceApplication: 'serviceApplication',
+    serviceDocuments: 'serviceDocuments',
+    serviceScholarship: 'serviceScholarship',
+    serviceVisa: 'serviceVisa',
+    serviceHousing: 'serviceHousing',
+    serviceDeparture: 'serviceDeparture',
+    serviceArrival: 'serviceArrival',
+  }[key] || 'serviceUniversity'
 }
 
 function DestinationCard({ image, flag, label, title, text, to, cta }) {

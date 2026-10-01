@@ -6,7 +6,7 @@ const SITE_NAME = 'VL Study Abroad Consultants'
 // spent on the words the student actually searched for.
 const TITLE_SUFFIX = 'VL Study Abroad'
 const ORIGIN = 'https://www.vlstudy.online'
-const DEFAULT_IMAGE = `${ORIGIN}/img/hero-students-1600.jpg`
+const DEFAULT_IMAGE = `${ORIGIN}/img/graduate-campus-path-1600.jpg`
 
 // ---------------------------------------------------------------------------------------------
 // Everything a search engine reads about a single page, set in one call.

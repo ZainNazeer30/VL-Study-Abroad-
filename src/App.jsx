@@ -9,6 +9,7 @@ import Home from './pages/Home'
 // and making it wait for a second request would slow down the one that matters most.
 const Country = lazy(() => import('./pages/Country'))
 const Universities = lazy(() => import('./pages/Universities'))
+const UniversityDetail = lazy(() => import('./pages/UniversityDetail'))
 const Level = lazy(() => import('./pages/Level'))
 const Scholarships = lazy(() => import('./pages/Scholarships'))
 const About = lazy(() => import('./pages/About'))
@@ -42,6 +43,7 @@ export function AppRoutes() {
           <Route path="/universities" element={<L><Universities /></L>} />
           {/* Bachelor and Master sit under the universities list rather than at the top level,
               because the address itself should say they are part of it. */}
+          <Route path="/universities/:slug" element={<L><UniversityDetail /></L>} />
           <Route path="/universities/bachelors" element={<L><Level which="bachelor" /></L>} />
           <Route path="/universities/masters" element={<L><Level which="master" /></L>} />
           <Route path="/scholarships" element={<L><Scholarships /></L>} />

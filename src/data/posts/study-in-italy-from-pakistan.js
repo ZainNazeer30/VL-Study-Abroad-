@@ -1,0 +1,26 @@
+export default {
+  body: [
+    { p: 'If you are sitting in Pakistan trying to work out whether Italy is realistic, start with the programme, not the visa. Your qualification, subject, budget and target intake determine almost everything that follows.' },
+    { h2: 'Who can study in Italy from Pakistan?' },
+    { p: 'Italian universities accept international students at Bachelor, Master and doctoral level. For a Bachelor, your school qualification and the university’s subject requirements matter. For a Master, universities normally assess your previous degree, subject match and academic record. English-taught programmes are available, but the choice is much wider at Master level.' },
+    { h2: 'The application route' },
+    { ol: ['Shortlist programmes from official university pages and check entry requirements.', 'Prepare academic documents and the required IBCC or HEC attestation route.', 'Apply to the university before its programme deadline.', 'After admission, complete the relevant international-student pre-enrolment steps, including Universitaly where required.', 'Prepare the Italian student visa file and book the appointment through the official process.', 'After arrival, complete enrolment and residence formalities.'] },
+    { h2: 'Scholarships can change the budget completely' },
+    { p: 'Do not treat “scholarship” as one product. Regional right-to-study schemes such as DSU are different from university merit awards and from Italian government scholarships. Regional benefits depend on the region and its annual call, and economic documentation can be a major part of the application.' },
+    { cta: { to: '/blog/dsu-scholarship-italy-for-pakistani-students', text: 'Read our DSU scholarship guide →', after: 'before you build your budget around a scholarship.' } },
+    { h2: 'Documents Pakistani students should plan early' },
+    { ul: ['Passport and academic certificates', 'IBCC attestation for school-level documents where required', 'HEC attestation for degree documents where required', 'MOFA attestation and any embassy or university legalisation required for the specific route', 'English-language proof if the programme asks for it', 'CV and motivation letter for programmes that require them', 'Financial and sponsor documents for the visa stage'] },
+    { h2: 'What Universitaly does not mean' },
+    { p: 'Universitaly is not the university admission decision and it is not a guarantee of a visa. The Italian authorities explicitly state that the final visa decision belongs to the diplomatic-consular representation. Treat pre-enrolment as one step in a larger process.' },
+    { source: { label: 'Universitaly: procedures for international students, 2026/27 and 2027/28', url: 'https://www.universitaly.it/it/studenti-stranieri' } },
+    { h2: 'How much money should you plan for?' },
+    { p: 'Build the budget in four parts: tuition, accommodation, daily living and one-off application costs. Then model the scholarship separately. A low tuition figure is not enough if the city has expensive housing. This is why we compare actual programmes and cities rather than quoting one “Italy cost” for everyone.' },
+    { h2: 'A practical starting point' },
+    { p: 'If you send us your qualification, marks or CGPA, subject, English level and approximate budget, we can turn this into a shortlist. The useful question is not “Can I go to Italy?” but “Which Italian programmes fit my profile and budget?”' },
+  ],
+  faqs: [
+    { q: 'Can Pakistani students study in Italy in English?', a: 'Yes. English-taught programmes exist, especially at Master level. Check the official programme page for the language and entry requirements.' },
+    { q: 'Do I need IELTS for Italy?', a: 'Not for every programme. The university decides which proof of English it accepts.' },
+    { q: 'Is a visa guaranteed after university admission?', a: 'No. Universitaly and admission documents support the visa process, but the final visa decision belongs to the competent diplomatic-consular authority.' },
+  ],
+}

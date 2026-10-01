@@ -88,6 +88,13 @@ export default function PostBody({ blocks }) {
               {b.cta.after ? ` ${b.cta.after}` : null}
             </p>
           )
+        if (b.source)
+          return (
+            <div key={i} className="my-5 rounded-[14px] border border-[#DDE5F2] bg-[#F7F9FC] px-4 py-3.5">
+              <div className="text-[10.5px] font-semibold uppercase tracking-[.08em] text-royal mb-1">Official source</div>
+              <a href={b.source.url} target="_blank" rel="noreferrer" className="text-[13.5px] leading-relaxed text-navy underline underline-offset-2 font-medium">{b.source.label}</a>
+            </div>
+          )
         if (b.table)
           return (
             <div key={i} className="my-4 -mx-5 sm:mx-0 overflow-x-auto">

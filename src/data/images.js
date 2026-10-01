@@ -74,7 +74,7 @@ export const IMAGES = {
   // being. That is the register the established consultancies use on their own front pages,
   // because a student choosing who to trust with two years of their life responds to a person,
   // not to a ceremony photographed from the back of a hall.
-  homeHero: own('hero-students', 'Three graduates in caps and gowns smiling and taking a selfie together on campus', {
+  homeHero: own('graduate-campus-path', 'Graduate standing on a university campus path in cap and gown', {
     widths: WIDE,
     sizes: '(min-width: 1024px) 50vw, 100vw',
   }),
@@ -91,6 +91,7 @@ export const IMAGES = {
     fallback: u('photo-1524396309943-e03f5249f002'),
     alt: 'Paris from the air at golden hour with the Eiffel Tower and Les Invalides',
   },
+  homeWhy: { src: u('photo-1524178232363-1fb2b075b655'), alt: 'Students listening in a university classroom' },
 
   // Wide band above the success stories. Caps in the air at sunset over a city skyline: the
   // moment the whole process is for.
@@ -121,6 +122,18 @@ export const IMAGES = {
     fallback: u('photo-1519452575417-564c1401ecc0'),
     alt: 'Graduating students celebrating on a university campus',
   },
+
+
+  // Home service cards: one photograph per service. These are deliberately separate from every
+  // other page image so the same picture never appears twice across the site.
+  serviceUniversity: { src: u('photo-1500534623283-312aade485b7'), alt: 'University campus building with students outside' },
+  serviceApplication: { src: u('photo-1456324504439-367cee3b3c32'), alt: 'Student preparing an application at a desk' },
+  serviceDocuments: { src: u('photo-1554224155-8d04cb21cd6c'), alt: 'Documents and paperwork arranged on a desk' },
+  serviceScholarship: { src: u('photo-1491438590914-bc09fcaaf77a'), alt: 'International students talking together on campus' },
+  serviceVisa: { src: u('photo-1450101499163-c8848c66ca85'), alt: 'Student reviewing important documents and forms' },
+  serviceHousing: { src: u('photo-1560185008-b033106af5c3'), alt: 'Student accommodation room prepared for a new arrival' },
+  serviceDeparture: { src: u('photo-1436491865332-7a61a109cc05'), alt: 'Traveller preparing luggage for an international journey' },
+  serviceArrival: { src: u('photo-1529156069898-49953e39b3ac'), alt: 'Friends meeting and talking after arriving in a new city' },
 
   // -------------------------------------------------------------------------------------------
   // STUDY IN ITALY AND STUDY IN FRANCE
@@ -157,9 +170,13 @@ export const IMAGES = {
   // screen size. A graduate rather than a building, deliberately: this is the page where a
   // student is picking a university, and the picture should show the thing they are picking it
   // for. See LICENCES-AND-CONTENT.md for the licence.
-  universitiesHero: own('graduate-campus-path', 'A graduate in a red cap and gown standing on a path between university buildings on a green campus', {
-    widths: WIDE,
+  universitiesHero: own('museum-hall', 'Students and visitors inside a historic European university hall', {
+    // museum-hall is a portrait source (480/768/1200/1800), not a WIDE source.
+    // Using WIDE here generated non-existent 640/1024/1600/2000 files in srcset,
+    // so Chrome selected a missing WebP candidate and the hero appeared as an empty box.
+    widths: WIDTHS,
     sizes: '(min-width: 1024px) 50vw, 100vw',
+    position: 'center 35%',
   }),
 
   aboutTeam: own('graduates-raising-caps', 'International graduates in gowns raising their caps outside their university', {
@@ -204,23 +221,35 @@ export const IMAGES = {
     fallback: u('photo-1704151101872-6888b508cf7c'),
     alt: 'A university building with stone columns and a gated entrance',
   },
+  // New evergreen search guides reuse the site's strongest existing photography. Keeping them local avoids another network request.
+  italyGuide: own('campus-courtyard-gothic', 'Historic university campus courtyard used as editorial photography for the Italy study guide', { sizes: '(min-width: 768px) 50vw, 100vw' }),
+  franceGuide: { src: u('photo-1513635269975-59663e0ac1ad'), alt: 'Students walking through a historic French university district' },
+  scholarshipGuide: {
+    src: u('photo-1535982330050-f1c2fb1c5b3c'),
+    fallback: u('photo-1523580846011-d3a5bc25702b'),
+    alt: 'International students studying together on campus',
+  },
+
   blogFranceVisa: {
     src: u('photo-1774526993562-abc3f2afac0f'),
     fallback: u('photo-1650211233816-53d4e13a8817'),
     alt: 'The Sorbonne in Paris with French flags above the entrance',
   },
-  blogCost: own('museum-hall', 'The great hall of a European museum full of visitors', {
-    sizes: '(min-width: 768px) 50vw, 100vw',
-    position: 'center 40%',
-  }),
+  blogCost: {
+    src: u('photo-1509062522246-3755977927d7'),
+    fallback: u('photo-1577896851231-70ef18881754'),
+    alt: 'Students walking between university buildings',
+  },
   blogIelts: {
     src: u('photo-1758270704787-615782711641'),
     fallback: u('photo-1758270704384-9df36d94a29d'),
     alt: 'Students talking and studying together in a university lecture hall',
   },
-  blogChoosing: own('campus-courtyard-gothic', 'The stone courtyard and clock tower of a European university', {
-    sizes: '(min-width: 768px) 50vw, 100vw',
-  }),
+  blogChoosing: {
+    src: u('photo-1564981797816-1043664bf78d'),
+    fallback: u('photo-1592280771190-3e2e4d571952'),
+    alt: 'Students walking through a European university courtyard',
+  },
   blogDeadlines: {
     src: u('photo-1776536025707-9a0a915f85a5'),
     fallback: u('photo-1567760855784-589f09ed5dc6'),
