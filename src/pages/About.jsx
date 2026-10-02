@@ -138,10 +138,10 @@ export default function About() {
           <div className="rounded-[20px] bg-gradient-to-br from-navy to-navy-soft p-[28px_22px] lg:p-12 text-center">
             <h2 className="font-display font-semibold text-[20px] lg:text-[26px] text-white m-0 mb-2">Your story could be next</h2>
             <p className="text-[13.5px] lg:text-[15px] leading-relaxed text-[#AAB8D4] m-0 mb-4.5 max-w-md mx-auto">
-              Start with a free consultation and get honest advice about your real options.
+              Start by telling us about your plans and we will explain the relevant next steps.
             </p>
             <Link to="/contact" className="inline-block bg-white text-navy font-display font-semibold text-[15px] py-3.5 px-8 rounded-xl">
-              Book a free consultation
+              Contact the team
             </Link>
           </div>
         </Container>

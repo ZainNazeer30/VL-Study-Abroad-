@@ -17,20 +17,20 @@ export default function BottomBar() {
         <WhatsAppIcon className="w-7 h-7" />
       </a>
 
-      {/* Sticky action bar. Mobile only, since the desktop nav already has an Apply Now button
+      {/* Sticky action bar. Mobile only, since the desktop nav already has an Contact the team button
           and the footer carries the rest of the contact options. */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-[61] bg-white/95 backdrop-blur border-t border-[#EEF1F6] px-4 pt-3 pb-[calc(12px_+_env(safe-area-inset-bottom))] flex gap-2.5">
         <Link
           to="/contact"
           className="flex-1 text-center border-[1.5px] border-navy text-navy font-display font-semibold text-[14px] px-2 py-3 rounded-xl hover:bg-navy hover:text-white transition-colors"
         >
-          Free Consultation
+          Contact the team
         </Link>
         <Link
           to="/apply"
           className="flex-1 text-center bg-royal text-white font-display font-semibold text-[14px] px-2 py-3 rounded-xl shadow-[0_6px_16px_rgba(43,92,230,0.3)] hover:bg-navy transition-colors"
         >
-          Apply Now
+          Contact the team
         </Link>
       </div>
     </>

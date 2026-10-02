@@ -162,7 +162,7 @@ export default function Nav() {
           className="bg-royal text-white font-semibold text-[13px] px-3.5 py-2 rounded-[10px] hover:bg-navy transition-colors whitespace-nowrap"
           onClick={() => setOpen(false)}
         >
-          Apply Now
+          Contact the team
         </Link>
 
         {/* Hamburger, hidden from md up since the full menu is inline */}

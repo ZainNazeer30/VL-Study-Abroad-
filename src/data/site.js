@@ -60,7 +60,7 @@ export const FORMS = {
   endpoint: '',
 }
 
-// The top menu. "Apply" is deliberately not in this list: the Apply Now button sits beside the
+// The top menu. "Apply" is deliberately not in this list: the Contact the team button sits beside the
 // menu on every screen size, so listing it twice only makes the desktop bar more crowded.
 export const NAV_ITEMS = [
   { label: 'Home', to: '/' },

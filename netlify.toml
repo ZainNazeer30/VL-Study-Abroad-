@@ -23,3 +23,15 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+# Baseline browser security headers. CSP is intentionally not included here because the site uses
+# third-party/inline assets that would need a full nonce/hash policy before enabling it safely.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+

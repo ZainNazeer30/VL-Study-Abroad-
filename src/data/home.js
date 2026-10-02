@@ -6,7 +6,7 @@ export const TRUST = [
   'HEC, IBCC and MOFA attestation help',
   'Focused on Italy and France',
   'Full visa file support',
-  'One counsellor who knows your case',
+  'A dedicated team for your application',
 ]
 
 // `icon` keys map to the drawings in src/components/icons.jsx (SERVICE_ICONS). They used to be
@@ -26,11 +26,11 @@ export const SERVICES = [
 ]
 
 export const STEPS = [
-  { n: '1', name: 'Free first chat', desc: 'Talk to a counsellor about your goals and budget, and get an honest read on your options. On WhatsApp or a call, whichever suits you.' },
+  { n: '1', name: 'Initial discussion', desc: 'Talk to a counsellor about your goals and budget, and get an honest read on your options. On WhatsApp or a call, whichever suits you.' },
   { n: '2', name: 'We look at your profile', desc: 'We match your Matric, FSc or Bachelor results, your English level and your budget to universities you can realistically get into.' },
   { n: '3', name: 'Documents and attestation', desc: 'We tell you exactly what needs IBCC, HEC and MOFA attestation, in what order, so nothing is rejected later for a missing stamp.' },
-  { n: '4', name: 'We apply for you', desc: 'We prepare your motivation letters and forms, handle Universitaly for Italy or Campus France for France, and submit everything.' },
-  { n: '5', name: 'Visa file and interview', desc: 'We build the visa file, check your bank statement and funds proof, book the Islamabad appointment and prepare you for the interview.' },
+  { n: '4', name: 'Application submission', desc: 'We prepare your motivation letters and forms, handle Universitaly for Italy or Campus France for France, and submit everything.' },
+  { n: '5', name: 'Visa file and interview', desc: 'We prepare the visa file, check your bank statement and funds proof, book the Islamabad appointment and prepare you for the interview.' },
   { n: '6', name: 'Travel and enrol', desc: 'A briefing before you fly, help finding housing, and support through your residence permit once you land.' },
 ]
 
@@ -60,10 +60,10 @@ export const HOME_SCHOLARSHIPS = [
 ]
 
 export const WHY_US = [
-  { name: 'We lead with fully funded options', desc: 'Before we look at anything else, we check what you could get for free or close to it, and only move on once that is covered.' },
+  { name: 'We check funding options carefully', desc: 'We check relevant scholarship and fee-support routes alongside university options, rather than treating funding as an afterthought.' },
   { name: 'We know the Pakistani paperwork', desc: 'IBCC for your Matric and FSc, HEC for your degree, then MOFA. We know the order, the timings and what the consulates in Islamabad actually accept.' },
   { name: 'Three years in the sector, Italy and France since 2025', desc: 'We worked in Pakistani visa consultancy before VL, and we chose these two countries deliberately rather than adding them to a list.' },
-  { name: 'One counsellor, start to finish', desc: 'The same person handles your case from the first call to your arrival, so nothing gets lost.' },
+  { name: 'A team working on your application', desc: 'The team keeps the academic, document and visa parts of your case connected, so important details are not lost between stages.' },
   { name: 'Clear and honest', desc: 'You see the real costs and timelines up front. No hidden fees and no promises we cannot keep.' },
   { name: 'Track your applications', desc: 'You can check where every application stands whenever you want.' },
   { name: 'We only do Italy and France', desc: 'Because we focus on two countries, we know their systems inside out.' },

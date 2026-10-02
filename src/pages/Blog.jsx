@@ -108,7 +108,7 @@ export default function Blog() {
             </p>
             <div className="flex flex-col sm:flex-row gap-2.5 sm:justify-center sm:max-w-md mx-auto">
               <Link to="/contact" className="bg-white text-navy font-display font-semibold text-[15px] py-3.5 px-6 rounded-xl sm:flex-1">
-                Book a free consultation
+                Contact the team
               </Link>
               <a
                 href={CONTACT.whatsapp}

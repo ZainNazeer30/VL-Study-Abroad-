@@ -331,7 +331,7 @@ export default function Country({ which }) {
                   disabled={sending}
                   className="bg-royal text-white font-display font-semibold text-[15px] py-3.5 rounded-xl cursor-pointer shadow-[0_8px_20px_rgba(43,92,230,0.28)] disabled:opacity-60 disabled:cursor-wait"
                 >
-                  {sending ? 'Sending…' : 'Book my free call'}
+                  {sending ? 'Sending…' : 'Contact the team'}
                 </button>
                 <div role="alert" aria-live="polite" className="text-[12.5px] text-rust text-center min-h-[1.2em]">
                   {error}

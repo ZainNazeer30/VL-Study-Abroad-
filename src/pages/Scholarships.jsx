@@ -51,7 +51,7 @@ function buildResult({ country, level, grade }) {
 export default function Scholarships() {
   useSeo(
     'Fully Funded Scholarships in Italy, France',
-    'Which Italy and France scholarships are genuinely fully funded, which only cut your fees, and a free check of what you qualify for from Pakistan.',
+    'Which Italy and France scholarships are genuinely fully funded, which only cut your fees, and how the main options apply to students from Pakistan.',
     {
       path: '/scholarships',
       image: '/img/graduation-caps-throw-1200.jpg',
@@ -275,9 +275,9 @@ export default function Scholarships() {
 
           <div className="mt-5.5 border border-dashed border-[#D6DEEC] rounded-2xl p-[18px] text-center lg:max-w-xl lg:mx-auto">
             <div className="font-display font-semibold text-[14.5px] text-navy mb-1">Not sure which one fits you?</div>
-            <div className="text-[13px] leading-normal mb-3">We match every student to all the scholarships they qualify for as part of the free consultation, and we always check the fully funded ones first.</div>
+            <div className="text-[13px] leading-normal mb-3">We review the scholarship routes relevant to each student and explain which ones fit the academic and financial profile.</div>
             <Link to="/contact" className="inline-block bg-royal text-white font-display font-semibold text-[13.5px] px-5 py-3 rounded-[11px]">
-              Book a free consultation
+              Contact the team
             </Link>
           </div>
         </Container>
@@ -527,7 +527,7 @@ export default function Scholarships() {
             </p>
             <div className="flex flex-col sm:flex-row gap-2.5 sm:justify-center sm:max-w-md mx-auto">
               <Link to="/contact" className="bg-white text-navy font-display font-semibold text-[15px] py-3.5 px-6 rounded-xl sm:flex-1">
-                Book a free check
+                Contact the team
               </Link>
               <Link
                 to="/apply"

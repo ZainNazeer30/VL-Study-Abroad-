@@ -11,7 +11,7 @@ const STEP_LABELS = ['Step 1 of 3, about you', 'Step 2 of 3, your education', 'S
 
 const NEXT_STEPS = [
   { mark: '1', label: 'A counsellor reviews your profile within 24 hours' },
-  { mark: '2', label: 'A free call where we build your university shortlist' },
+  { mark: '2', label: 'An initial discussion about your university options' },
   { mark: '3', label: 'A document checklist and scholarship matching' },
   { mark: '4', label: 'Applications submitted and tracked in one place' },
 ]

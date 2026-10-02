@@ -42,7 +42,7 @@ const GUIDES = [GUIDE_PDFS.italy, GUIDE_PDFS.france, GUIDE_PDFS.scholarships]
 export default function Contact() {
   useSeo(
     'Book a Free Study Abroad Consultation',
-    'Book a free 30 minute call on WhatsApp about studying in Italy or France: your options, fully funded scholarships and your visa file. Anywhere in Pakistan.',
+    'Speak with our team on WhatsApp about studying in Italy or France, your options, scholarships and the visa process. Anywhere in Pakistan.',
     {
       path: '/contact',
       jsonLd: graph(
@@ -85,7 +85,7 @@ export default function Contact() {
       <section className="page-hero">
         <Container className="page-hero-inner lg:max-w-6xl">
           <div className="page-hero-copy">
-            <div className="eyebrow">Free consultation</div>
+            <div className="eyebrow">Speak with our team</div>
             <h1 className="page-hero-title">Talk to someone who will actually look at your profile</h1>
             <p className="page-hero-text">Pick a day and time, tell us your academic background, and we will use the call to discuss realistic university, scholarship and visa routes.</p>
             <div className="hero-proof"><span>✓ 30-minute call</span><span>✓ No obligation</span><span>✓ Pakistan-focused guidance</span></div>
@@ -251,7 +251,7 @@ export default function Contact() {
             What the first conversation covers
           </h2>
           <p className="text-[14.5px] leading-[1.75] m-0 mb-3">
-            It is a conversation, not a sales call. In about half an hour we go through where you actually stand: what
+            In about half an hour we go through where you actually stand: what
             your marks open in Italy and France, what your family budget realistically covers once housing is counted,
             and whether a fully funded route such as the regional DSU scholarships in Italy or the Eiffel Excellence
             scholarship in France is a genuine possibility for your profile.
