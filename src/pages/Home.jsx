@@ -88,10 +88,10 @@ export default function Home() {
               Study abroad from Pakistan
             </div>
             <h1 className="font-display font-bold text-[34px] sm:text-[44px] lg:text-[55px] leading-[1.08] text-navy m-0 mb-4 max-w-2xl">
-              A real person to guide you from Pakistan to Italy or France.
+              Study in Italy or France from Pakistan, with a clearer plan.
             </h1>
             <p className="text-[16px] sm:text-[18px] leading-relaxed m-0 mb-6 max-w-xl text-ink">
-              We help you choose a realistic university, find scholarship options, prepare the paperwork and build your student visa file. You speak to the same counsellor throughout your application.
+              Research universities, compare scholarships, understand the costs and prepare your application with people who know the Pakistan-to-Europe process.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mb-7">
@@ -104,7 +104,7 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl">
-              {[['20+', 'students placed'], ['2', 'countries'], ['1', 'dedicated counsellor'], ['Free', 'first assessment']].map(([value, label]) => (
+              {[['2', 'focused destinations'], ['University', 'search & compare'], ['Scholarship', 'research tools'], ['Free', 'first assessment']].map(([value, label]) => (
                 <div key={label} className="border-l-2 border-gold pl-3">
                   <div className="font-display font-bold text-[18px] text-navy">{value}</div>
                   <div className="text-[11.5px] text-slate">{label}</div>
@@ -114,20 +114,30 @@ export default function Home() {
           </div>
 
           <div className="relative mt-9 lg:mt-0 min-h-[420px] sm:min-h-[500px]">
-            <div className="absolute inset-x-8 top-0 bottom-12 rounded-[28px] overflow-hidden shadow-[0_24px_60px_rgba(10,30,60,0.15)]">
+            <div className="absolute inset-x-4 sm:inset-x-8 top-0 bottom-10 rounded-[30px] overflow-hidden shadow-[0_28px_70px_rgba(10,30,60,0.16)]">
               <Img image={IMAGES.homeHero} className="w-full h-full" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#06162F]/70 via-transparent to-transparent" />
             </div>
-            <div className="absolute top-10 right-0 sm:right-2 w-[170px] sm:w-[205px] rounded-[20px] overflow-hidden border-4 border-white shadow-[0_18px_45px_rgba(10,30,60,0.2)] bg-white">
-              <Img image={IMAGES.founderKashan} className="w-full h-[190px] sm:h-[225px]" />
-              <div className="p-3">
-                <div className="font-display font-semibold text-[12.5px] text-navy">Kashan Nazeer</div>
-                <div className="text-[10.5px] text-slate mt-0.5">Founder & counsellor</div>
+            <div className="absolute top-5 left-0 sm:left-2 bg-white/95 backdrop-blur rounded-2xl border border-white p-3.5 shadow-[0_16px_38px_rgba(10,30,60,0.15)]">
+              <div className="text-[10px] font-semibold uppercase tracking-[.1em] text-royal mb-1">Pakistan → Europe</div>
+              <div className="font-display font-semibold text-[14px] text-navy">Italy 🇮🇹 · France 🇫🇷</div>
+            </div>
+            <div className="absolute top-16 right-0 sm:right-2 w-[185px] sm:w-[215px] bg-white rounded-2xl border border-[#E1E4DD] p-4 shadow-[0_18px_45px_rgba(10,30,60,0.16)]">
+              <div className="text-[10px] font-semibold uppercase tracking-[.1em] text-mist mb-2">Start with your profile</div>
+              <div className="space-y-2 text-[11.5px] text-navy">
+                <div className="flex items-center justify-between"><span>Degree</span><span className="font-semibold">Bachelor / Master</span></div>
+                <div className="h-px bg-line" />
+                <div className="flex items-center justify-between"><span>Destination</span><span className="font-semibold">Italy / France</span></div>
+                <div className="h-px bg-line" />
+                <div className="flex items-center justify-between"><span>Scholarships</span><span className="font-semibold text-green">Explore</span></div>
               </div>
             </div>
-            <div className="absolute left-0 bottom-0 sm:left-2 bg-white rounded-2xl border border-[#E1E4DD] p-4 shadow-[0_14px_35px_rgba(10,30,60,0.12)] max-w-[300px]">
-              <div className="text-[10.5px] font-semibold uppercase tracking-[.1em] text-royal mb-1.5">No call centre</div>
-              <div className="font-display font-semibold text-[14px] text-navy leading-snug">You know who is handling your application.</div>
-              <div className="text-[11.5px] leading-relaxed text-slate mt-1.5">University choice, documents, scholarships and visa preparation in one conversation.</div>
+            <div className="absolute left-0 right-4 sm:left-2 sm:right-8 bottom-0 bg-white rounded-2xl border border-[#E1E4DD] p-4 shadow-[0_14px_35px_rgba(10,30,60,0.13)]">
+              <div className="flex flex-wrap gap-2">
+                {['Universities', 'Scholarships', 'Deadlines', 'Costs', 'Documents'].map((item) => (
+                  <span key={item} className="px-2.5 py-1.5 rounded-lg bg-[#F5F7FA] text-[10.5px] font-medium text-navy">{item}</span>
+                ))}
+              </div>
             </div>
           </div>
         </Container>
@@ -158,6 +168,39 @@ export default function Home() {
                 {t}
               </div>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Research tools */}
+      <section className="px-5 sm:px-8 lg:px-12 pt-10 lg:pt-14">
+        <Container>
+          <div className="rounded-[24px] border border-[#DDE5F2] bg-[#F7F9FD] p-5 lg:p-7">
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-5">
+              <div>
+                <div className="text-[11px] font-semibold uppercase tracking-[.12em] text-royal mb-2">Research before you apply</div>
+                <H2 className="mb-1">Useful tools, not just a contact form.</H2>
+                <p className="text-[13.5px] text-slate m-0 max-w-2xl">Explore universities, scholarships, deadlines and costs yourself first. Then come to us when you want a human to review the plan.</p>
+              </div>
+              <Link to="/universities" className="text-royal font-display font-semibold text-[13px] whitespace-nowrap">Explore all tools →</Link>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {[
+                ['/universities', 'University Finder', 'Filter by country, degree, subject, English requirements and intake.'],
+                ['/scholarships', 'Scholarship Finder', 'See major funding routes and what each one actually covers.'],
+                ['/universities', 'Deadline Tracker', 'Check application windows and compare routes before a date passes.'],
+                ['/apply', 'Profile Assessment', 'Share your qualification, budget and target intake for a human review.'],
+              ].map(([to, title, text]) => (
+                <Link key={title} to={to} className="group bg-white border border-line rounded-2xl p-4 hover:border-[#B9C9E3] hover:-translate-y-0.5 transition-all">
+                  <div className="flex items-center justify-between gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF3FA] flex items-center justify-center text-navy font-display font-bold text-[13px]">{title[0]}</div>
+                    <span className="text-royal text-[13px]">↗</span>
+                  </div>
+                  <h3 className="font-display font-semibold text-[14px] text-navy m-0 mb-1.5">{title}</h3>
+                  <p className="text-[11.5px] leading-relaxed text-slate m-0">{text}</p>
+                </Link>
+              ))}
+            </div>
           </div>
         </Container>
       </section>
